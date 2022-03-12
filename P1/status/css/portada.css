@@ -9,6 +9,7 @@
     margin: 0;
     max-height: max-content;
     background-position-x: -100px;
+    word-wrap: break-word;
 
 
 }
