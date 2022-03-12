@@ -64,7 +64,6 @@ ul{
     margin:0;
     top:25%;
     padding: auto;
-
 }
 
 .listamenu{
@@ -85,12 +84,15 @@ li {
     margin-left: 50px;
     margin-right: 30px;
     display: inline;
+
 }
 
 a.enlaces{
     color: aliceblue;
     text-decoration: none;
     background-color: #515253; 
+    border-radius: 5px;
+
 
 }
 
@@ -104,6 +106,7 @@ a.enlaces{
     display: grid;
     padding-top: 10px;
     background-color: #343434;
+    border-radius: 5px;
 
 }
 
@@ -116,7 +119,7 @@ a.enlaces{
     padding: 0;
     margin: 0;
     padding-top: 10px;
-
+    border-radius: 5px;
     margin-left:76%;
     margin-top:10px;
     display: grid;
@@ -137,6 +140,19 @@ a.enlaces{
     background-image: url(../image/logo.jpg);
     background-repeat: no-repeat;
     background-size: 120%;
+}
+
+.box{
+    width:95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #444444;
+    border-radius: 5px;
+ 
+
 }
 
 .a{
@@ -168,6 +184,8 @@ a.enlaces{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 5px;
+
 }
 
 .redes{
@@ -175,6 +193,8 @@ a.enlaces{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 5px;
+
 }
 
 .oferta{
@@ -185,34 +205,47 @@ a.enlaces{
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
-    border:1px;
+    border-top:2px;
     border-color: rgb(0, 0, 0);
-    border-style: solid;
-    display: block;
-    background-color: white; 
+    border-top-style: solid;
+    background-color: #343434; 
+    
 }
 
 
 .ofertajuego{
     width: 65%;
-    display: block;
     margin-left: auto;
+    border-radius: 5px;
     margin-right: auto;
 }
+
 .cartel{
     color: rgb(202, 21, 21);
-    font-size: large;
-    font-weight: bolder;
+    -webkit-text-stroke: 0.6px rgb(255, 255, 255); /* width and color */
+    font-size:30px;
+    font-weight: 900;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(73, 73, 73);
+    width:100%;
+    height:50%;
+
 }
 
 .precio{
     color: rgb(37, 37, 37);
     font-size: large;
     font-weight: bolder;
+    position:relative;
+    padding: 0;
+    margin: 0;
+    top: -12%;
+    background-color: #8a8a8a
+
 }
 
 .tachado{
-    color: rgb(124, 124, 124);
+    color: rgb(82, 82, 82);
     font-size: medium;
     font-weight: bold;
 }
@@ -232,4 +265,13 @@ a.enlaces{
     font-size: small;
     font-weight:lighter;
     padding-left: 10px;
+}
+
+.textooferta{
+    background-color: #616161;
+    padding: auto;
+    margin: auto;
+    width: 70%;
+    
+    height: 23%;
 }
