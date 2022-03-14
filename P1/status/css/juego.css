@@ -6,7 +6,6 @@
     outline-style: solid;
     position: relative;
     max-height: max-content;
-    background-position-x: -5vw;;
     word-wrap:break-word;
 
 
@@ -20,17 +19,14 @@ body{
     width:25%;
     height: 100%;
     background-color: #292929;
-    float:left;
     position:absolute;
 }
 
 .logo{
-    width:auto;
-    margin-top: 10px;
-    height:70%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width:200px;
+    height:auto;
+    object-fit: contain;
+    margin: 2%;
 }
 
 .container-title-menu{
@@ -110,21 +106,73 @@ a.enlaces{
 }
 
 .principal{
-    padding-top: 5%;
-
+    padding-top:2%;
+    float:none;
 }
 
 .descripcion{
     width:74%;
-    margin-bottom: 5%;
-    padding: 2%;
+    margin-bottom: 1%;
+    padding-left: 2%;
+    
 }
 
 .juego{
+    padding-top:100px;
     padding-right: 2%;
     width: 20%;
     border-radius: 5px;
     float: right;
+    transition: transform .2s;
+}
+
+.juego:hover {
+    transform: scale(1.1);
+}
+
+.titulojuego{
+    font-size: 45px;
+    margin: 1%;
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.titulotabla{
+    background-color: rgb(89, 180, 255);
+    font-size: 15px;
+    border-bottom-width: 2px;
+}
+
+
+.imagenes{
+    width: 500px;
+    border-radius: 5px;
+    margin-bottom: 4%;
+    max-width: 80%;
+    min-width: 30%;
+    float:none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cajavideo iframe{
+    max-width: 80%;
+    min-width: none;
+}
+
+.cajavideo{
+    min-width: 24%;
+}
+
+.video{
+    border-radius: 5px;
+    margin-bottom: 5%;
+    max-width: 100%;
+    float:none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bar{
@@ -304,34 +352,7 @@ td{
   #customers tr:nth-child(even){background-color: #ff8383;}
 #customers tr:hover {background-color: rgb(172, 49, 49);}
 
-.titulojuego{
-    font-size: 80%;
-    margin: 1%;
-    font-weight: bold;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+.comentarios{
+    
 }
 
-.titulotabla{
-    background-color: rgb(89, 180, 255);
-    font-size: 15px;
-    border-bottom-width: 2px;
-}
-
-
-.imagenes{
-    width: 65%;
-    border-radius: 5px;
-    margin:auto;
-    display: flex;
-    margin-bottom: 5%;
-}
-
-.video{
-    width:65%;
-    height: 65%;
-    margin:auto;
-    display: flex;
-    border-radius: 5px;
-    margin-bottom: 5%;
-
-}
