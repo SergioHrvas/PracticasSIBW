@@ -1,16 +1,13 @@
 .header{
     width:100%;
-    height: 80px;
-    border:1px;
-    border-color: black;
-    border-style: solid;
-    position: relative;
-    padding: 0;
-    margin: 0;
-    max-height: max-content;
-    background-position-x: -100px;
-    word-wrap: break-word;
-
+    height: auto;
+    outline:1px;
+    outline-color: black;
+    outline-style: solid;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    margin-bottom: 1%;
+    min-height: 5vw;
 
 }
 
@@ -19,71 +16,56 @@ body{
 }
 
 .container-logo{
-    width:25%;
-    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width:100%;
     background-color: #292929;
-    float:left;
-    position:absolute;
 }
 
 .logo{
-    width:auto;
-    margin-top: 10px;
-    height:70%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width:200px;
+    max-width: 100%;    
+    min-width: 100%;
+
 }
 
 .container-title-menu{
-    width:75%;
-    height: 100%;
-    margin-left:25%;
-    display:inline;
-    position:absolute;
     outline: 1px solid black;
+    width:100%;
+    height: 100%;
 }
 
 .titulo{
     text-align: center;
-    font-size:xx-large;
+    font-size:2.7vw;
     color:rgb(0, 0, 0);
     font-family: 'Fredoka';
     font-weight: bold;
-    width:100%;
     height: 50%;
-    padding: 0;
-    margin: 0;
-    position:relative;
     background-color: #989898; 
+}
+
+.menu{
+    height:50%;
+    background-color: #414548; 
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.listamenu{
+    display:inline;
 
 }
 
 ul{
     list-style-type: none;
     overflow: hidden;
-    margin:0;
-    top:25%;
-    padding: auto;
-}
 
-.listamenu{
-    position:absolute;
 
-}
-.menu{
-    width:100%;
-    height:50%;
-    padding: 0;
-    margin: auto;
-    background-color: #414548; 
-    text-align: center;
-    position: relative;
 }
 
 li {
-    margin-left: 50px;
-    margin-right: 30px;
     display: inline;
 
 }
@@ -93,9 +75,19 @@ a.enlaces{
     text-decoration: none;
     background-color: #515253; 
     border-radius: 5px;
-
-
+    font-size: 2vw;
+    color: white;
+    text-align: center;
+    margin-top: 2px;
+    text-decoration: none;
+    float:left;
+    margin-right: 11px;
+    margin-left: 3px;
 }
+
+li a:hover {
+    background-color: rgb(112, 0, 0);
+  }
 
 .content{
     width:75%;
@@ -103,29 +95,14 @@ a.enlaces{
     padding: 0;
     margin: 0;
     float:left;
-    margin-top:10px;
     display: grid;
     padding-top: 10px;
     background-color: #343434;
     border-radius: 5px;
+    grid-template-columns: 33% 33% 33%;
 
 }
 
-.bar{
-    width:24%;
-    height: auto;
-    outline:1px;
-    outline-color: rgb(0, 0, 0);
-    outline-style: solid;
-    padding: 0;
-    margin: 0;
-    padding-top: 10px;
-    border-radius: 5px;
-    margin-left:76%;
-    margin-top:10px;
-    display: grid;
-    background-color: #343434; 
-}
 
 .caja{
     width:95%;
@@ -143,43 +120,6 @@ a.enlaces{
     background-size: 120%;
 }
 
-.box{
-    width:95%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background-color: #444444;
-    border-radius: 5px;
- 
-
-}
-
-.a{
-    grid-area: 1 / 2 / 2 / 3;
-}
-
-.b{
-    grid-area: 2 / 2 / 3 / 3;
-}
-
-.c {
-    grid-area: 2 / 3 / 3 / 4;
-}
-
-.d {
-    grid-area: 1 / 1 / 2 / 2;
-}
-
-.e {
-    grid-area: 2 / 1 / 3 / 2;
-}
-
-.f {
-    grid-area: 1 / 3 / 2 / 4;
-}
-
 .juego{
     width: 40%;
     display: block;
@@ -191,20 +131,66 @@ a.enlaces{
 
 .juego:hover {
     transform: scale(1.1);
+}.bar{
+    width:24%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    margin-top:1%;
+    padding-top: 1%;
+    background-color: #343434; 
+    border-radius: 5px;
+    outline:1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    margin-left:76%;
+}
+
+.redesgrid{
+    width:100%;
+    display: grid;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.box{
+    width:95%;
+    margin: auto;
+    padding: auto;
+    border-radius: 5px;
+    background-color: #444444;
+        margin-bottom: 10px;
+
 }
 
 .redes{
     width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 25%;
+    margin-right: 25%;
     border-radius: 5px;
 
 }
 
+.a {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.b{
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.c {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.d{
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+
 .oferta{
-    width: 100%;
-    grid-area: 3 / 1 / span 3 / span 2;
+    grid-area: 3 / 1 / 3 / 2;
     margin-left: auto;
     margin-right: auto;
     padding-top: 10px;
@@ -214,9 +200,7 @@ a.enlaces{
     border-color: rgb(0, 0, 0);
     border-top-style: solid;
     background-color: #343434; 
-    
 }
-
 
 .ofertajuego{
     width: 65%;
@@ -228,7 +212,7 @@ a.enlaces{
 .cartel{
     color: rgb(202, 21, 21);
     -webkit-text-stroke: 0.6px rgb(255, 255, 255); /* width and color */
-    font-size:30px;
+    font-size:2.4vw;
     font-weight: 900;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(73, 73, 73);
@@ -236,11 +220,12 @@ a.enlaces{
     height:50%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    
 }
 
 .precio{
     color: rgb(37, 37, 37);
-    font-size: large;
+    font-size: 1.8vw ;
     font-weight: bolder;
     position:relative;
     padding: 0;
@@ -252,8 +237,18 @@ a.enlaces{
 
 .tachado{
     color: rgb(82, 82, 82);
-    font-size: medium;
+    font-size: 1.2vw;
     font-weight: bold;
+}
+
+
+.textooferta{
+    background-color: #616161;
+    padding: auto;
+    margin: auto;
+    width: 70%;
+    border-radius: 5px;
+    height: 23%;
 }
 
 .footer{
