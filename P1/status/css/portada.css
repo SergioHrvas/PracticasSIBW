@@ -293,3 +293,7 @@ li a:hover {
     padding: 8px 24px;
     text-decoration: none;
   }
+
+  .footers{
+    margin-left:10%;
+  }
