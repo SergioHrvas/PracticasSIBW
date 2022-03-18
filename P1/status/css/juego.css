@@ -38,15 +38,15 @@ body{
 
 .titulo{
     text-align: center;
-    word-wrap:break-word;
     color:rgb(0, 0, 0);
     font-family: 'Fredoka';
     height: 100%;
     background-color: #989898;
     margin: 0;
     padding: 0;
+    word-break: break-all;
     word-wrap: break-word;
-
+    font-size: 40px;
 }
 
 .tituloweb{
@@ -57,6 +57,8 @@ body{
     font-weight: bolder;
 
 }
+
+
 
 .menu{
     height:100%;
@@ -84,20 +86,18 @@ li {
 }
 
 a.enlaces{
-    color: aliceblue;
     text-decoration: none;
     background-color: #515253; 
     border-radius: 5px;
-    font-size: min(30px, 4.3vw);
+    font-size: 32px;
     color: white;
     text-align: center;
     margin-top: 2px;
-    text-decoration: none;
     float:left;
     margin-right: 11px;
     margin-left: 3px;
-    word-wrap:break-word;
-
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 li a:hover {
@@ -311,20 +311,20 @@ li a:hover {
 
 
 .oferta{
-    grid-area: 3 / 1 / 3 / 2;
-    margin-left: auto;
-    margin-right: auto;
+    height:auto;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 5%;
     text-align: center;
     border-top:2px;
     border-color: rgb(0, 0, 0);
     border-top-style: solid;
     background-color: #343434; 
+    display:block;
 }
 
 .ofertajuego{
-    width: 65%;
+    width: 180px;
+    max-width: 60%;
     margin-left: auto;
     border-radius: 5px;
     margin-right: auto;
@@ -362,6 +362,37 @@ li a:hover {
     font-weight: bold;
 }
 
+.weboficial{
+    padding: 0;
+    margin: 0;
+
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 28px;
+}
+
+.weboficialp{
+    padding: 0;
+    margin: 0;
+
+
+}
+
+.divwebof{
+    padding: auto;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    margin-top: 6%;
+    position:relative;
+    outline:1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    background-color: rgb(86, 86, 86);
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+}
 
 .textooferta{
     background-color: #616161;
@@ -370,6 +401,7 @@ li a:hover {
     width: 70%;
     border-radius: 5px;
     height: 23%;
+    margin-bottom: 10px;
 }
 
 .footer{
