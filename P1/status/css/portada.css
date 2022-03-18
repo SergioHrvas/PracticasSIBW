@@ -44,6 +44,11 @@
     font-size: 40px;
 }
 
+.tituloenlace{
+    text-decoration: none;
+    color:rgb(0, 0, 0);
+}
+
 .tituloweb {
     margin: 0;
     padding: 0;
@@ -83,7 +88,7 @@ a.enlaces {
     word-wrap: break-word;
 }
 
-li a:hover {
+li a.enlaces:hover {
     background-color: rgb(112, 0, 0); /*Para que al pasar el cursor cambie de color*/
 }
 
@@ -355,4 +360,11 @@ body {
 
 .footers {
     margin-left: 10%;
+}
+
+.textofooters {
+    padding: 0;
+    margin: 0;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
 }

@@ -48,6 +48,11 @@ body{
     font-size: 40px;
 }
 
+.tituloenlace{
+    text-decoration: none;
+    color:rgb(0, 0, 0);
+}
+
 .tituloweb{
     margin: 0;
     padding: 0;
@@ -92,7 +97,7 @@ a.enlaces{
     word-wrap: break-word;
 }
 
-li a:hover {
+li a.enlaces:hover {
     background-color: rgb(112, 0, 0);
 }
   
@@ -604,4 +609,9 @@ td{
     margin: auto;
     padding: auto;
     text-align: center;
+}
+
+.textofooters {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
 }
