@@ -5,14 +5,15 @@
     outline: 1px;
     outline-color: black;
     outline-style: solid;
-    display: grid; /* División del logo y del titulo y el menú*/
+    display: grid;
+    /* División del logo y del titulo y el menú*/
     grid-template-columns: 20% 80%;
     margin-bottom: 1%;
 }
 
 /* LOGO */
 .container-logo {
-    padding-top: 10px; 
+    padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
     background-color: #292929;
@@ -44,9 +45,9 @@
     font-size: 40px;
 }
 
-.tituloenlace{
+.enlaceformato {
     text-decoration: none;
-    color:rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
 }
 
 .tituloweb {
@@ -71,7 +72,8 @@ ul {
 }
 
 li {
-    display: inline; /*Para que el menú se muestre en una línea*/
+    display: inline;
+    /*Para que el menú se muestre en una línea*/
 }
 
 a.enlaces {
@@ -89,7 +91,8 @@ a.enlaces {
 }
 
 li a.enlaces:hover {
-    background-color: rgb(112, 0, 0); /*Para que al pasar el cursor cambie de color*/
+    background-color: rgb(112, 0, 0);
+    /*Para que al pasar el cursor cambie de color*/
 }
 
 /* CUERPO */
@@ -129,9 +132,9 @@ body {
     outline-color: black;
     outline-style: solid;
     background-color: #e03a3a;
-    cursor: pointer; /* Para simular un botón real */
+    cursor: pointer;
+    /* Para simular un botón real */
 }
-
 
 .juego {
     width: 95%;
@@ -153,7 +156,8 @@ body {
 }
 
 .juego:hover {
-    transform: scale(1.1); /* Zoom al pasar el ratón */
+    transform: scale(1.1);
+    /* Zoom al pasar el ratón */
 }
 
 /* CONTENIDO FIJO DEL PRODUCTO */
@@ -164,6 +168,25 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     word-break: break-all;
     word-wrap: break-word;
+}
+
+.marca {
+    width: 18%;
+    margin: 0;
+    padding: 0;
+    margin-left: 2%;
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(187, 5, 5);
+    outline: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: groove;
+}
+
+.textomarca {
+    margin: auto;
+    padding: auto;
+    text-align: center;
 }
 
 .descripcion {
@@ -204,7 +227,8 @@ body {
     font-weight: bold;
 }
 
-.dropdown { /* Imagen ampliada */
+.dropdown {
+    /* Imagen ampliada */
     position: absolute;
     display: none;
     width: 800px;
@@ -219,8 +243,8 @@ body {
 }
 
 .imagendiv:hover .dropdown {
-    display: block; /* Para mostrar la imagen ampliada */
-
+    display: block;
+    /* Para mostrar la imagen ampliada */
 }
 
 /* VIDEO */
@@ -281,11 +305,71 @@ td {
 }
 
 #customers tr:nth-child(even) {
-    background-color: #ff8383; /* Alternar color de filas en la tabla */
+    background-color: #ff8383;
+    /* Alternar color de filas en la tabla */
 }
 
 #customers tr:hover {
-    background-color: rgb(172, 49, 49); /* Cambiar color cuando toca el cursor */
+    background-color: rgb(172, 49, 49);
+    /* Cambiar color cuando toca el cursor */
+}
+
+/* CONTACTO */
+.contacto{
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+/* ENLACES EXTERNOS */
+.enlacesexternos {
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: auto;
+    padding-right: auto;
+    margin-bottom: 5%;
+    width: 20%;
+}
+
+.enlaceexterno {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    background-color: #b6b6b6;
+    outline: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+}
+
+.enlaceexternotexto {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 20px;
+}
+
+.enlacetext {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+/* REDES SOCIALES */
+.redessociales {
+    margin: auto;
+    padding: auto;
+    width: min(200px, 40%);
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.redsocial {
+    display: grid;
+}
+
+.iconored {
+    width: 100%;
 }
 
 /* COMENTARIOS */
@@ -348,7 +432,8 @@ td {
     outline: 1px;
     outline-color: rgb(0, 0, 0);
     outline-style: solid;
-    background-color: #8fc0ff; /* Imagen con fondo */
+    background-color: #8fc0ff;
+    /* Imagen con fondo */
 }
 
 .nombreusuario {
@@ -376,7 +461,7 @@ td {
     max-width: 100%;
 }
 
-.teexto {
+.textoopinion {
     padding: 0;
     margin: 0;
     padding-top: 2px;
@@ -407,25 +492,6 @@ td {
     padding-left: 5px;
 }
 
-.marca {
-    width: 18%;
-    margin: 0;
-    padding: 0;
-    margin-left: 2%;
-    border-radius: 3px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(187, 5, 5);
-    outline: 1px;
-    outline-color: rgb(0, 0, 0);
-    outline-style: groove;
-}
-
-.textomarca {
-    margin: auto;
-    padding: auto;
-    text-align: center;
-}
-
 /* BARRA LATERAL */
 .bar {
     width: 24%;
@@ -446,7 +512,8 @@ td {
 /* SECCIÓN REDES */
 .redesgrid {
     width: 100%;
-    display: grid; /*División de las redes sociales*/
+    display: grid;
+    /*División de las redes sociales*/
     height: auto;
     padding: 0;
     margin: 0;
@@ -507,7 +574,8 @@ td {
 
 .cartel {
     color: rgb(202, 21, 21);
-    -webkit-text-stroke: 0.6px rgb(255, 255, 255); /*Borde de letra personalizado*/
+    -webkit-text-stroke: 0.6px rgb(255, 255, 255);
+    /*Borde de letra personalizado*/
     font-size: 2.4vw;
     font-weight: 900;
     font-family: Arial, Helvetica, sans-serif;
