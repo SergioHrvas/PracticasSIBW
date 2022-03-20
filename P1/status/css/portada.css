@@ -12,7 +12,7 @@ header {
 }
 
 /* LOGO */
-.container-logo {
+#container-logo {
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
@@ -20,19 +20,19 @@ header {
     display: grid;
 }
 
-.logo {
+#logo {
     width: 200px;
     max-width: 100%;
     min-width: 100%;
 }
 
-.container-title-menu {
+#container-title-menu {
     outline: 1px solid black;
     display: grid;
 }
 
 /* TITULO */
-.titulo {
+#titulo {
     text-align: center;
     color: rgb(0, 0, 0);
     font-family: 'Fredoka';
@@ -45,12 +45,12 @@ header {
     font-size: 40px;
 }
 
-.enlaceformato {
+#enlaceformato {
     text-decoration: none;
     color: rgb(0, 0, 0);
 }
 
-.tituloweb {
+#tituloweb {
     margin: 0;
     padding: 0;
     font-size: min(48px, 180%);
@@ -58,7 +58,7 @@ header {
 }
 
 /* MENÚ */
-.menu {
+#menu {
     height: 100%;
     background-color: #414548;
     text-align: center;
@@ -66,8 +66,8 @@ header {
     padding: 0;
 }
 
-ul.menu,
-ul.pie {
+ul#menu,
+ul#pie {
     list-style-type: none;
     overflow: hidden;
 }
@@ -105,15 +105,23 @@ body {
 main {
     width: 75%;
     height: auto;
+    background-color: #343434;
+
+    float: left;
+
+    padding-top: 10px;
+    border-radius: 5px;
+
+    /*División del contenido en tres columnas*/
+}
+
+#panel{
+    grid-template-columns: 33% 33% 33%;
+    display: grid;
+    background-color: #343434;
+    width: 100%;
     padding: 0;
     margin: 0;
-    float: left;
-    display: grid;
-    padding-top: 10px;
-    background-color: #343434;
-    border-radius: 5px;
-    grid-template-columns: 33% 33% 33%;
-    /*División del contenido en tres columnas*/
 }
 
 .caja {
@@ -174,14 +182,15 @@ main {
     /*Zoom al pasar el ratón*/
 }
 
-.paginas {
+#paginas {
     display: grid;
-    margin-left: 75%;
+    margin:auto;
+    padding: auto;
     margin-bottom: 20px;
     grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
     /* DIVIDIMOS LOS NÚMEROS DE LAS PÁGINAS A PARTES IGUALES */
-    height: 10%;
-    width: 150%;
+    height: 4%;
+    width: 70%;
 }
 
 .numpag {
@@ -218,7 +227,7 @@ aside {
 }
 
 /* SECCIÓN REDES */
-.redesgrid {
+#redesgrid {
     width: 100%;
     display: grid;
     /*División de las redes sociales*/
@@ -261,7 +270,7 @@ aside {
 
 /* SECCIÓN OFERTAS */
 
-.oferta {
+#oferta {
     height: auto;
     padding-top: 10px;
     padding-bottom: 5%;
@@ -273,7 +282,7 @@ aside {
     display: block;
 }
 
-.ofertajuego {
+#ofertajuego {
     width: 180px;
     max-width: 60%;
     margin-left: auto;
@@ -281,7 +290,7 @@ aside {
     margin-right: auto;
 }
 
-.cartel {
+#cartel {
     color: rgb(202, 21, 21);
     -webkit-text-stroke: 0.6px rgb(255, 255, 255);
     /*Borde de letra personalizado*/
@@ -295,7 +304,7 @@ aside {
     border-top-right-radius: 5px;
 }
 
-.textooferta {
+#textooferta {
     background-color: #616161;
     padding: auto;
     margin: auto;
@@ -304,7 +313,7 @@ aside {
     height: 23%;
 }
 
-.precio {
+#precio {
     color: rgb(37, 37, 37);
     font-size: 1.8vw;
     font-weight: bolder;
@@ -315,7 +324,7 @@ aside {
     background-color: #8a8a8a
 }
 
-.tachado {
+#tachado {
     color: rgb(82, 82, 82);
     font-size: 1.2vw;
     font-weight: bold;
