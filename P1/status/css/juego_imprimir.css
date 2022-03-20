@@ -1,5 +1,5 @@
 /* CABECERA */
-.header {
+header {
     width: 100%;
     height: auto;
     outline: 1px;
@@ -87,7 +87,7 @@ body {
     background-color: #ffffff;
 }
 
-.content {
+main {
     width: 100%;
     padding: 0;
     margin: 0;
@@ -460,7 +460,7 @@ td {
 }
 
 /* BARRA LATERAL */
-.bar {
+aside {
     width: 24%;
     height: auto;
     padding: 0;
@@ -477,7 +477,7 @@ td {
 }
 
 /* FOOTER */
-.footer {
+footer {
     width: 100%;
     height: auto;
     border: 1px;
