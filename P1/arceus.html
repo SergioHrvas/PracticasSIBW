@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <!-- Cabecera -->
     <div class="header">
         <div class="container-logo">
             <img class="logo" src=".\status\image\switch.png">
@@ -22,14 +23,16 @@
             <div class="titulo">
                 <h1 class="tituloweb"><a class="enlaceformato" href=".\portada.html">SWITCHERS</a></h1>
             </div>
-            <div class="menu">
-                <li><a class="enlaces" href=".\portada.html">Inicio</a> </li>
-                <li><a class="enlaces" href=".\contacto.html">Contacto</a> </li>
-                <li><a class="enlaces" href="ruta">Login</a> </li>
-                <li><a class="enlaces" href="ruta">Registro</a> </li>
-            </div>
+            <ul class="menu">
+                <li class="oculto"><a class="enlaces" href=".\portada.html">Inicio</a> </li>
+                <li class="oculto"><a class="enlaces" href=".\contacto.html">Contacto</a> </li>
+                <li class="oculto"><a class="enlaces" href="ruta">Login</a> </li>
+                <li class="oculto"><a class="enlaces" href="ruta">Registro</a> </li>
+            </ul>
         </div>
     </div>
+
+    <!-- Contenido principal -->
     <div class="content">
         <section class="principal">
             <div class="lateraljuego">
@@ -84,11 +87,14 @@
                 <div class="pieimg">Primeras imágenes del juego </div>
             </div>
         </section>
+
+        <!-- Video -->
         <section class="cajavideo"><iframe class="video" width="560" height="315"
                 src="https://www.youtube.com/embed/9RbjFjYgNNg" title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
         </section>
+        <!-- Tabla de información del producto -->
         <section class="tabla">
             <table id="customers">
                 <tr>
@@ -116,21 +122,26 @@
                 </tr>
             </table>
         </section>
+
+        <!-- Sección de contacto de la marca -->
         <section class="contacto">
-        <address>
-            Nintendo Co., Ltd<br>
-            <a class="enlaceformato" href="nintendoespana@nintendo.com">nintendoespana@nintendo.com</a><br>
-            Nintendo Ibérica, C. Estébanez Calderón, 3, 5, 28020 Madrid<br>
-            MADRID, ES<br>
-            +34 917 88 64 00
-          </address>
+            <address>
+                Nintendo Co., Ltd<br>
+                <a class="enlaceformato" href="nintendoespana@nintendo.com">nintendoespana@nintendo.com</a><br>
+                Nintendo Ibérica, C. Estébanez Calderón, 3, 5, 28020 Madrid<br>
+                MADRID, ES<br>
+                +34 917 88 64 00
+            </address>
         </section>
         <section class="enlacesexternos">
             <div class="enlaceexterno">
-                <p class="enlaceexternotexto"><a class="enlacetext" href="https://legends.pokemon.com/es-es/" target="_blank">WEB OFICIAL</a></p>
+                <p class="enlaceexternotexto"><a class="enlacetext" href="https://legends.pokemon.com/es-es/"
+                        target="_blank">WEB OFICIAL</a></p>
             </div>
             <div class="enlaceexterno">
-                <p class="enlaceexternotexto"><a class="enlacetext" href="https://www.nintendo.es/Juegos/Nintendo-Switch/Leyendas-Pokemon-Arceus-1930510.html" target="_blank">MÁS INFO</a></p>
+                <p class="enlaceexternotexto"><a class="enlacetext"
+                        href="https://www.nintendo.es/Juegos/Nintendo-Switch/Leyendas-Pokemon-Arceus-1930510.html"
+                        target="_blank">MÁS INFO</a></p>
             </div>
         </section>
         <section class="redessociales">
@@ -144,6 +155,8 @@
                         src=".\status\image\impresora.png"></a></div>
         </section>
         <hr />
+
+        <!-- Comentarios de los usuarios -->
         <section class="comentarios">
             <h2 class="titulocomentarios">Comentarios</h2>
             <div class="comentario">
@@ -230,9 +243,10 @@
         </div>
     </div>
 
+    <!-- Pie de página -->
     <div class="footer">
-        <br>
-        <ul>
+        <br />
+        <ul class="pie">
             <li class="footers"><a class="textofooters" href="#">Política de cookies</a></li>
             <li class="footers"><a class="textofooters" href="#">Aviso legal</a></li>
             <li class="footers"><a class="textofooters" href="#">Privacidad web</a></li>

@@ -66,12 +66,14 @@
     padding: 0;
 }
 
-ul {
+ul.menu,
+ul.pie {
     list-style-type: none;
     overflow: hidden;
 }
 
-li {
+li.oculto,
+li.footers {
     display: inline;
     /*Para que el menú se muestre en una línea*/
 }
@@ -315,7 +317,7 @@ td {
 }
 
 /* CONTACTO */
-.contacto{
+.contacto {
     text-align: center;
     font-size: 12px;
     margin-bottom: 10px;

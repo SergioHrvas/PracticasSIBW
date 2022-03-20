@@ -72,33 +72,14 @@
     /*Escondemos menú*/
 }
 
-ul {
+ul.pie {
     list-style-type: none;
     overflow: hidden;
 }
 
-li {
+li.footers {
     display: inline;
-}
-
-a.enlaces {
-    text-decoration: none;
-    background-color: #515253;
-    border-radius: 5px;
-    font-size: 32px;
-    color: white;
-    text-align: center;
-    margin-top: 2px;
-    float: left;
-    margin-right: 11px;
-    margin-left: 3px;
-    word-break: break-all;
-    word-wrap: break-word;
-}
-
-li a.enlaces:hover {
-    background-color: rgb(112, 0, 0);
-    /*Para que al pasar el cursor cambie de color*/
+    /*Para que el menú se muestre en una línea*/
 }
 
 /* CUERPO */
@@ -308,7 +289,7 @@ td {
 }
 
 /* CONTACTO */
-.contacto{
+.contacto {
     text-align: center;
     font-size: 12px;
 }
@@ -354,14 +335,6 @@ td {
     width: min(200px, 40%);
     display: none;
     grid-template-columns: 25% 25% 25% 25%;
-}
-
-.redsocial {
-    display: grid;
-}
-
-.iconored {
-    width: 100%;
 }
 
 /* COMENTARIOS*/
@@ -501,139 +474,6 @@ td {
     outline-style: solid;
     margin-left: 76%;
     display: none;
-}
-
-/* SECCIÓN REDES */
-.redesgrid {
-    width: 100%;
-    display: grid;
-    height: auto;
-    padding: 0;
-    margin: 0;
-}
-
-.box {
-    width: 95%;
-    margin: auto;
-    padding: auto;
-    border-radius: 5px;
-    background-color: #444444;
-    margin-bottom: 10px;
-}
-
-.redes {
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
-    border-radius: 5px;
-}
-
-.a {
-    grid-area: 1 / 1 / 2 / 2;
-}
-
-.b {
-    grid-area: 1 / 2 / 2 / 3;
-}
-
-.c {
-    grid-area: 2 / 1 / 3 / 2;
-}
-
-.d {
-    grid-area: 2 / 2 / 3 / 3;
-}
-
-
-.oferta {
-    height: auto;
-    padding-top: 10px;
-    padding-bottom: 5%;
-    text-align: center;
-    border-top: 2px;
-    border-color: rgb(0, 0, 0);
-    border-top-style: solid;
-    background-color: #343434;
-    display: block;
-}
-
-/* SECCIÓN OFERTAS */
-.ofertajuego {
-    width: 180px;
-    max-width: 60%;
-    margin-left: auto;
-    border-radius: 5px;
-    margin-right: auto;
-}
-
-.cartel {
-    color: rgb(202, 21, 21);
-    -webkit-text-stroke: 0.6px rgb(255, 255, 255);
-    /* width and color */
-    font-size: 2.4vw;
-    font-weight: 900;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(73, 73, 73);
-    width: 100%;
-    height: 50%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.textooferta {
-    background-color: #616161;
-    padding: auto;
-    margin: auto;
-    width: 70%;
-    border-radius: 5px;
-    height: 23%;
-    margin-bottom: 10px;
-}
-
-.precio {
-    color: rgb(37, 37, 37);
-    font-size: 1.8vw;
-    font-weight: bolder;
-    position: relative;
-    padding: 0;
-    margin: 0;
-    top: -12%;
-    background-color: #8a8a8a
-}
-
-.tachado {
-    color: rgb(82, 82, 82);
-    font-size: 1.2vw;
-    font-weight: bold;
-}
-
-.weboficial {
-    padding: 0;
-    margin: 0;
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-size: 28px;
-}
-
-.weboficialp {
-    padding: 0;
-    margin: 0;
-}
-
-.divwebof {
-    padding: auto;
-    margin: auto;
-    width: 100%;
-    height: auto;
-    margin-top: 6%;
-    position: relative;
-    outline: 1px;
-    outline-color: rgb(0, 0, 0);
-    outline-style: solid;
-    background-color: rgb(86, 86, 86);
-    overflow: hidden;
-    word-break: break-all;
-    word-wrap: break-word;
 }
 
 /* FOOTER */
