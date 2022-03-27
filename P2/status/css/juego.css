@@ -413,6 +413,10 @@ label{
     margin-bottom: 1%; 
 }
 
+#comentario {
+    width: 100%;
+}
+
 #comentarios {
     margin: 0;
     padding: 0;
@@ -420,6 +424,10 @@ label{
     margin-right: 10px;
     margin-bottom: 10px;
     margin-top: 20px;
+}
+
+#enviar{
+    margin-top: 2%;
 }
 
 .comentario {
@@ -521,6 +529,11 @@ label{
     border-radius: 5px;
 }
 
+.error{
+    background-color: #ff5959;
+    color: rgb(150, 0, 0);
+    font-size: 12px;
+}
 .textoopinion {
     padding: 0;
     margin: 0;

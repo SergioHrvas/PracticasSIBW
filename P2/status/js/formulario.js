@@ -37,10 +37,23 @@ function enviar(){
         item(0).getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
         comentarioclonado.getElementsByClassName("opinion").item(0).innerHTML = comentario;
         comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth()+1} - ${d.getFullYear()} | ${d.getHours()}:${d.getMinutes()} `
-        alert(""+comentarioclonado.children[1].innerHTML);
+        //alert(""+comentarioclonado.children[1].innerHTML);
 
         comentariodiv.insertAdjacentHTML("beforebegin", "<div class=\"comentario\">" + comentarioclonado.innerHTML + "</div>");
-        
+        comentarioclonado = document.getElementsByClassName('comentario').item(0);
+        let opacidad = 0.0;
+        comentarioclonado.style.opacity = opacidad;
+        let id = 0;
+        clearInterval(id);
+        id = setInterval(frame, 10);
+        function frame() {
+            if(opacidad<=1)
+            console.log(opacidad);
+            opacidad += 0.01;
+            comentarioclonado.style.opacity = opacidad;
+
+        }
+
     }
     return false;
 }
@@ -50,19 +63,19 @@ function revisarNombreYApellidos(){
     nombre = document.getElementsByClassName("nombreyape").item(0).value;
     apellidos = document.getElementsByClassName("nombreyape").item(1).value;
     if(nombre.length <= 0){
-        document.getElementById("errornombre").innerHTML = "Debes rellenar el campo 'Nombre'!";
+        document.getElementsByClassName("error").item(0).innerHTML = "Debes rellenar el campo 'Nombre'!";
         nombre_bien = false;
     }
     else{
-        document.getElementById("errornombre").innerHTML = "";
+        document.getElementsByClassName("error").item(0).innerHTML = "";
         nombre_bien = true;
     }
     if(apellidos.length<=0){
-        document.getElementById("errorapellidos").innerHTML = "Debes rellenar el campo 'Apellidos'!";
+        document.getElementsByClassName("error").item(1).innerHTML = "Debes rellenar el campo 'Apellidos'!";
         apellidos_bien = false;
     }
     else{
-        document.getElementById("errorapellidos").innerHTML = "";
+        document.getElementsByClassName("error").item(1).innerHTML = "";
         apellidos_bien = true;
     }
     return false;
@@ -72,16 +85,16 @@ function revisarCorreo(){
     let correo = document.getElementById("correo_electronico").value;
     let re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if(correo.length <= 0){
-        document.getElementById("erroremail").innerHTML = "Debes rellenar el campo 'email'!";
+        document.getElementsByClassName("error").item(2).innerHTML = "Debes rellenar el campo 'email'!";
         correo_bien = false;
     }
     else{
         if(correo.search(re)==-1){
-            document.getElementById("erroremail").innerHTML = "Rellena el campo 'email' correctamente!";
+            document.getElementsByClassName("error").item(2).innerHTML = "Rellena el campo 'email' correctamente!";
             correo_bien = false;
         }
         else
-            document.getElementById("erroremail").innerHTML = "";
+            document.getElementsByClassName("error").item(2).innerHTML = "";
             correo_bien = true;
     }
     return false;
@@ -90,11 +103,11 @@ function revisarCorreo(){
 function revisarComentario(){
     comentario = document.getElementById("comentario").value;
     if(comentario <= 0){
-        document.getElementById("errorcomentario").innerHTML = "Debes rellenar el campo 'Comentarios'!";
+        document.getElementsByClassName("error").item(3).innerHTML = "Debes rellenar el campo 'Comentarios'!";
         comentario_bien = false;
     }
     else{
-        document.getElementById("errorcomentario").innerHTML = "";
+        document.getElementsByClassName("error").item(3).innerHTML = "";
         comentario_bien = true;
     }
     return false;
