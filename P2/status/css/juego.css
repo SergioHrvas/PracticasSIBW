@@ -430,6 +430,16 @@ label{
     margin-top: 2%;
 }
 
+
+#bombillaimg{
+    position: absolute;
+    width: 30px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+
+}
+
 .comentario {
     margin: 0;
     padding: 0;
