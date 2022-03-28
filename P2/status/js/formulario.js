@@ -12,7 +12,7 @@ let nombre, comentario, apellidos;
 let opacidad_form = 0;
 let opacidad_coments = 0;
 let altura = 0, id = 0;
-let modoOscuro = true;
+let modoOscuro = false;
 
 
 
@@ -37,13 +37,13 @@ function mostrarComentarios() {
                 clearInterval(id);
             }
             else {
-                altura += 2;
+                altura += 4;
                 x.style.maxHeight = altura;
-                if (altura >= 530) {
+                if (altura >= 520) {
                     opacidad_form = opacidad_form + 0.1;
                     x.getElementsByClassName("formulario").item(0).style.opacity = opacidad_form;
                 }
-                if (altura >= 850) {
+                if (altura >= 820) {
                     opacidad_coments = opacidad_coments + 0.1;
                     for (let i = 0; i < x.getElementsByClassName("comentario").length; i++)
                         x.getElementsByClassName("comentario").item(i).style.opacity = opacidad_coments;
@@ -203,8 +203,9 @@ function calcularDiaSemana(d) {
 
 
 function cambiarModo(){
+    debugger;
     if(modoOscuro){
-        document.getElementById("bombillaimg").src = "./status/image/on.png";
+        document.getElementById("bombillaimg").src = "./status/image/off.png";
         document.body.style.backgroundColor = "#e60012";
         document.getElementsByTagName("main").item(0).style.backgroundColor = "rgb(148, 148, 148)";
         document.getElementsByTagName("main").item(0).style.color = "black";
@@ -217,7 +218,7 @@ function cambiarModo(){
         }
     }
     else{
-        document.getElementById("bombillaimg").src = "./status/image/off.png";
+        document.getElementById("bombillaimg").src = "./status/image/on.png";
         document.body.style.backgroundColor = "#921d1d";
         document.getElementsByTagName("main").item(0).style.backgroundColor = "#414141";
         document.getElementsByTagName("main").item(0).style.color = "#ffffff";
