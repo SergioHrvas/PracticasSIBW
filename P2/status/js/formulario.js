@@ -38,7 +38,7 @@ function mostrarComentarios() {
         clearInterval(id);
         id = setInterval(frame, 5);
         function frame() {
-            if (altura > 10000) {
+            if (altura > 1000) {
                 x.style.maxHeight = "auto";
                 clearInterval(id);
             }
@@ -108,6 +108,9 @@ function revisarMinutos(d) {
     let minutos;
     if (d.getMinutes() < 10) {
         minutos = `0${d.getMinutes()}`;
+    }
+    else{
+        minutos = d.getMinutes();
     }
     return minutos;
 }
