@@ -39,17 +39,17 @@ function mostrarComentarios() {
         id = setInterval(frame, 5);
         function frame() {
             if (altura > 1000) {
-                x.style.maxHeight = "auto";
+                x.style.maxHeight = "100%";
                 clearInterval(id);
             }
             else {
                 altura += 4;
                 x.style.maxHeight = altura;
-                if (altura >= 520) {
+                if (altura >= 560) {
                     opacidad_form = opacidad_form + 0.1;
                     x.getElementsByClassName("formulario").item(0).style.opacity = opacidad_form;
                 }
-                if (altura >= 820) {
+                if (altura >= 950) {
                     opacidad_coments = opacidad_coments + 0.1;
                     for (let i = 0; i < x.getElementsByClassName("comentario").length; i++)
                         x.getElementsByClassName("comentario").item(i).style.opacity = opacidad_coments;
@@ -82,8 +82,9 @@ function enviar() {
         comentarioclonado.getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
         comentarioclonado.getElementsByClassName("textoopinion").item(0).innerHTML = titulo;
         comentarioclonado.getElementsByClassName("opinion").item(0).innerHTML = comentario;
-        var minutos = revisarMinutos(d);
-        comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${d.getHours()}:${minutos} `
+        var minutos = revisarNumero(d.getMinutes());
+        var horas = revisarNumero(d.getHours());
+        comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${horas}:${minutos} `
         //alert(""+comentarioclonado.children[1].innerHTML);
 
         comentariodiv.insertAdjacentHTML("beforebegin", "<div class=\"comentario\">" + comentarioclonado.innerHTML + "</div>");
@@ -104,13 +105,13 @@ function enviar() {
     }
     return false;
 }
-function revisarMinutos(d) {
+function revisarNumero(d) {
     let minutos;
-    if (d.getMinutes() < 10) {
-        minutos = `0${d.getMinutes()}`;
+    if (d < 10) {
+        minutos = `0${d}`;
     }
     else{
-        minutos = d.getMinutes();
+        minutos = d;
     }
     return minutos;
 }
