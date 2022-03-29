@@ -76,16 +76,14 @@ function enviar() {
     revisarTitulo();
     const d = new Date();
     let dia = calcularDiaSemana(d);
-    console.log(dia);
-    // alert(nombre);
-    //alert(comentario.value);
     if (nombre_bien && apellidos_bien && correo_bien && comentario_bien) {
         var comentariodiv = document.getElementsByClassName('comentario').item(0);
         var comentarioclonado = comentariodiv.cloneNode(true);
         comentarioclonado.getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
         comentarioclonado.getElementsByClassName("textoopinion").item(0).innerHTML = titulo;
         comentarioclonado.getElementsByClassName("opinion").item(0).innerHTML = comentario;
-        comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${d.getHours()}:${d.getMinutes()} `
+        var minutos = revisarMinutos(d);
+        comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${d.getHours()}:${minutos} `
         //alert(""+comentarioclonado.children[1].innerHTML);
 
         comentariodiv.insertAdjacentHTML("beforebegin", "<div class=\"comentario\">" + comentarioclonado.innerHTML + "</div>");
@@ -96,15 +94,22 @@ function enviar() {
         clearInterval(id);
         id = setInterval(frame, 10);
         function frame() {
-            if (opacidad <= 1)
-                // console.log(opacidad);
+            if (opacidad <= 1){
                 opacidad += 0.01;
-            comentarioclonado.style.opacity = opacidad;
+                comentarioclonado.style.opacity = opacidad;
+            }
 
         }
 
     }
     return false;
+}
+function revisarMinutos(d) {
+    let minutos;
+    if (d.getMinutes() < 10) {
+        minutos = `0${d.getMinutes()}`;
+    }
+    return minutos;
 }
 
 function revisarNombreYApellidos() {
@@ -162,7 +167,7 @@ function revisarCorreo() {
 }
 
 function revisarComentario() {
-    let comentario = document.getElementById("comentario").value;
+    comentario = document.getElementById("comentario").value;
 
     if (comentario <= 0) {
         document.getElementsByClassName("error").item(4).innerHTML = "Debes rellenar el campo 'Comentarios'!";
@@ -178,7 +183,7 @@ function revisarComentario() {
 
 
 function censurar() {
-    let comentario = document.getElementById("comentario").value;
+    comentario = document.getElementById("comentario").value;
 
     let censuradas = [];
     censuradas.push("xbox", "playsation", "mierda", "coño", "steam", "polla", "puta", "puto", "maricon", "cabron");
@@ -193,7 +198,7 @@ function censurar() {
 }
 
 function contar() {
-    let comentario = document.getElementById("comentario").value;
+    comentario = document.getElementById("comentario").value;
 
     longitudrestante = longitudmax - comentario.length;
     document.getElementById("contador").innerHTML = longitudrestante;
