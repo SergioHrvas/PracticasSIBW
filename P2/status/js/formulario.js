@@ -1,22 +1,28 @@
 
 document.getElementById("botoncomentarios").addEventListener("click", function () { mostrarComentarios() });
 document.getElementById("enviar").addEventListener("click", function () { enviar() });
-document.getElementById("comentario").addEventListener("keypress", function () { censurar() });
+document.getElementById("comentario").addEventListener("keyup", function () { evaluarComent() });
 document.getElementById("bombilla").addEventListener("click", function () { cambiarModo() });
 
 let nombre_bien = new Boolean("true");
 let apellidos_bien = new Boolean("true");
 let correo_bien = new Boolean("true");
 let comentario_bien = new Boolean("true");
-let nombre, comentario, apellidos;
+let titulo_bien = new Boolean("true");
+let nombre, comentario, apellidos, titulo;
 let opacidad_form = 0;
 let opacidad_coments = 0;
 let altura = 0, id = 0;
 let modoOscuro = false;
+let longitudmax = 1000;
+let longitudrestante = 1000;
 
+evaluarComent();
 
-
-
+function evaluarComent() {
+    censurar();
+    contar();
+}
 
 function mostrarComentarios() {
     var x = document.getElementById("cajacomentarios");
@@ -67,6 +73,7 @@ function enviar() {
     revisarNombreYApellidos();
     revisarCorreo();
     revisarComentario();
+    revisarTitulo();
     const d = new Date();
     let dia = calcularDiaSemana(d);
     console.log(dia);
@@ -75,8 +82,8 @@ function enviar() {
     if (nombre_bien && apellidos_bien && correo_bien && comentario_bien) {
         var comentariodiv = document.getElementsByClassName('comentario').item(0);
         var comentarioclonado = comentariodiv.cloneNode(true);
-        comentarioclonado.getElementsByClassName("cabeceracomentario").item(0).getElementsByClassName("perfil").
-            item(0).getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
+        comentarioclonado.getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
+        comentarioclonado.getElementsByClassName("textoopinion").item(0).innerHTML = titulo;
         comentarioclonado.getElementsByClassName("opinion").item(0).innerHTML = comentario;
         comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${d.getHours()}:${d.getMinutes()} `
         //alert(""+comentarioclonado.children[1].innerHTML);
@@ -90,8 +97,8 @@ function enviar() {
         id = setInterval(frame, 10);
         function frame() {
             if (opacidad <= 1)
-                console.log(opacidad);
-            opacidad += 0.01;
+                // console.log(opacidad);
+                opacidad += 0.01;
             comentarioclonado.style.opacity = opacidad;
 
         }
@@ -99,7 +106,6 @@ function enviar() {
     }
     return false;
 }
-
 
 function revisarNombreYApellidos() {
     nombre = document.getElementsByClassName("nombreyape").item(0).value;
@@ -123,33 +129,47 @@ function revisarNombreYApellidos() {
     return false;
 }
 
+function revisarTitulo() {
+    titulo = document.getElementById("titulocomen").value;
+    if (titulo.length <= 0) {
+        document.getElementsByClassName("error").item(2).innerHTML = "Debes rellenar el campo 'Titulo'!";
+        titulo_bien = false;
+    }
+    else {
+        document.getElementsByClassName("error").item(2).innerHTML = "";
+        titulo_bien = true;
+    }
+    return false;
+}
+
 function revisarCorreo() {
     let correo = document.getElementById("correo_electronico").value;
     let re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (correo.length <= 0) {
-        document.getElementsByClassName("error").item(2).innerHTML = "Debes rellenar el campo 'email'!";
+        document.getElementsByClassName("error").item(3).innerHTML = "Debes rellenar el campo 'email'!";
         correo_bien = false;
     }
     else {
         if (correo.search(re) == -1) {
-            document.getElementsByClassName("error").item(2).innerHTML = "Rellena el campo 'email' correctamente!";
+            document.getElementsByClassName("error").item(3).innerHTML = "Rellena el campo 'email' correctamente!";
             correo_bien = false;
         }
         else
-            document.getElementsByClassName("error").item(2).innerHTML = "";
+            document.getElementsByClassName("error").item(3).innerHTML = "";
         correo_bien = true;
     }
     return false;
 }
 
 function revisarComentario() {
-    comentario = document.getElementById("comentario").value;
+    let comentario = document.getElementById("comentario").value;
+
     if (comentario <= 0) {
-        document.getElementsByClassName("error").item(3).innerHTML = "Debes rellenar el campo 'Comentarios'!";
+        document.getElementsByClassName("error").item(4).innerHTML = "Debes rellenar el campo 'Comentarios'!";
         comentario_bien = false;
     }
     else {
-        document.getElementsByClassName("error").item(3).innerHTML = "";
+        document.getElementsByClassName("error").item(4).innerHTML = "";
         comentario_bien = true;
     }
     return false;
@@ -158,7 +178,8 @@ function revisarComentario() {
 
 
 function censurar() {
-    comentario = document.getElementById("comentario").value;
+    let comentario = document.getElementById("comentario").value;
+
     let censuradas = [];
     censuradas.push("xbox", "playsation", "mierda", "coño", "steam", "polla", "puta", "puto", "maricon", "cabron");
     for (let i = 0; i < censuradas.length; i++) {
@@ -171,12 +192,32 @@ function censurar() {
     return false;
 }
 
+function contar() {
+    let comentario = document.getElementById("comentario").value;
+
+    longitudrestante = longitudmax - comentario.length;
+    document.getElementById("contador").innerHTML = longitudrestante;
+
+    if (longitudrestante > 200) {
+        document.getElementById("contador").style.backgroundColor = "#98ff8f";
+        document.getElementById("contador").style.color = "#085d00";
+    }
+    else if (longitudrestante > 50) {
+        document.getElementById("contador").style.backgroundColor = "#ffc67e";
+        document.getElementById("contador").style.color = "#d84e00";
+    }
+    else {
+        document.getElementById("contador").style.backgroundColor = "#ff6969";
+        document.getElementById("contador").style.color = "#b50000";
+    }
+    return false;
+}
+
 function calcularDiaSemana(d) {
     let dia;
     switch (d.getDay()) {
         case 0:
             dia = "Domingo";
-            console.log("34234");
             break;
         case 1:
             dia = "Lunes";
@@ -202,27 +243,27 @@ function calcularDiaSemana(d) {
 }
 
 
-function cambiarModo(){
+function cambiarModo() {
     debugger;
-    if(modoOscuro){
+    if (modoOscuro) {
         document.getElementById("bombillaimg").src = "./status/image/off.png";
         document.body.style.backgroundColor = "#e60012";
         document.getElementsByTagName("main").item(0).style.backgroundColor = "rgb(148, 148, 148)";
         document.getElementsByTagName("main").item(0).style.color = "black";
         modoOscuro = false;
-        for(let i = 0; i < document.getElementsByClassName("comentario").length; i++ ){
+        for (let i = 0; i < document.getElementsByClassName("comentario").length; i++) {
             document.getElementsByClassName("comentario").item(i).style.backgroundColor = "#b6b6b6";
             document.getElementsByClassName("perfil").item(i).style.backgroundColor = "#ff8f8f";
             document.getElementsByClassName("titulocomentario").item(i).style.backgroundColor = "#c2c2c2"
             document.getElementsByClassName("fecha").item(i).style.color = "#777676";
         }
     }
-    else{
+    else {
         document.getElementById("bombillaimg").src = "./status/image/on.png";
         document.body.style.backgroundColor = "#921d1d";
         document.getElementsByTagName("main").item(0).style.backgroundColor = "#414141";
         document.getElementsByTagName("main").item(0).style.color = "#ffffff";
-        for(let i = 0; i < document.getElementsByClassName("comentario").length; i++ ){
+        for (let i = 0; i < document.getElementsByClassName("comentario").length; i++) {
             document.getElementsByClassName("comentario").item(i).style.backgroundColor = "#606060";
             document.getElementsByClassName("perfil").item(i).style.backgroundColor = "#650000";
             document.getElementsByClassName("titulocomentario").item(i).style.backgroundColor = "#37356c"
