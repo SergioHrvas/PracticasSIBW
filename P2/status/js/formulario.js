@@ -1,29 +1,43 @@
-
+//Añadimos los eventos
 document.getElementById("botoncomentarios").addEventListener("click", function () { mostrarComentarios() });
 document.getElementById("enviar").addEventListener("click", function () { enviar() });
 document.getElementById("comentario").addEventListener("keyup", function () { evaluarComent() });
 document.getElementById("bombilla").addEventListener("click", function () { cambiarModo() });
+document.addEventListener('DOMContentLoaded', function () { juegoRandom() }, false);
 
-let nombre_bien = new Boolean("true");
-let apellidos_bien = new Boolean("true");
-let correo_bien = new Boolean("true");
-let comentario_bien = new Boolean("true");
-let titulo_bien = new Boolean("true");
+//Declaramos variables
+let nombre_bien = new Boolean("true"), apellidos_bien = new Boolean("true"),
+    correo_bien = new Boolean("true"), comentario_bien = new Boolean("true"), titulo_bien = new Boolean("true");
 let nombre, comentario, apellidos, titulo;
-let opacidad_form = 0;
-let opacidad_coments = 0;
+let opacidad_form = 0, opacidad_coments = 0;
 let altura = 0, id = 0;
 let modoOscuro = false;
-let longitudmax = 1000;
-let longitudrestante = 1000;
+let longitudmax = 1000, longitudrestante = 1000;
+let portadas = new Array();
+portadas[0] = "espada.jpg"
+portadas[1] = "kirby.jpg"
+portadas[2] = "splatoon.jpg"
+portadas[3] = "sonic.jpg"
 
-evaluarComent();
+//llamamos a la función para activar el contador de comentarios.
+contar();
 
+//Función que agrupa las dos funciones al escribir comentario
 function evaluarComent() {
     censurar();
     contar();
 }
 
+//Generar juego random en la oferta
+function juegoRandom() {
+    var rand = Math.floor(Math.random() * portadas.length);
+    let juego = portadas[rand];
+    let url = ".\\status\\image\\" + juego;
+    document.getElementById("ofertajuego").src = url;
+    console.log(document.getElementById("ofertajuego").src)
+}
+
+//Mostramos el panel de comentarios
 function mostrarComentarios() {
     var x = document.getElementById("cajacomentarios");
     if (x.style.display !== "block") {
@@ -66,9 +80,9 @@ function mostrarComentarios() {
     }
 
     return false;
-
 };
 
+//Enviamos el formulario y lo insertamos
 function enviar() {
     revisarNombreYApellidos();
     revisarCorreo();
@@ -95,7 +109,7 @@ function enviar() {
         clearInterval(id);
         id = setInterval(frame, 10);
         function frame() {
-            if (opacidad <= 1){
+            if (opacidad <= 1) {
                 opacidad += 0.01;
                 comentarioclonado.style.opacity = opacidad;
             }
@@ -105,17 +119,20 @@ function enviar() {
     }
     return false;
 }
+
+//Revisamos el número para la correcta visualización de las horas y minutos
 function revisarNumero(d) {
     let minutos;
     if (d < 10) {
         minutos = `0${d}`;
     }
-    else{
+    else {
         minutos = d;
     }
     return minutos;
 }
 
+//Revisamos si el nombre y apellidos han sido insertados
 function revisarNombreYApellidos() {
     nombre = document.getElementsByClassName("nombreyape").item(0).value;
     apellidos = document.getElementsByClassName("nombreyape").item(1).value;
@@ -138,6 +155,7 @@ function revisarNombreYApellidos() {
     return false;
 }
 
+//Revisamos si el título ha sido añadido
 function revisarTitulo() {
     titulo = document.getElementById("titulocomen").value;
     if (titulo.length <= 0) {
@@ -151,6 +169,7 @@ function revisarTitulo() {
     return false;
 }
 
+//Revisamos si el formato del correo electrónico es correcto (loquesea@loquesea)
 function revisarCorreo() {
     let correo = document.getElementById("correo_electronico").value;
     let re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -170,6 +189,7 @@ function revisarCorreo() {
     return false;
 }
 
+//Revisamos si el comentario se ha rellenado
 function revisarComentario() {
     comentario = document.getElementById("comentario").value;
 
@@ -184,8 +204,7 @@ function revisarComentario() {
     return false;
 }
 
-
-
+//Censuramos palabras malsonantes
 function censurar() {
     comentario = document.getElementById("comentario").value;
 
@@ -201,9 +220,9 @@ function censurar() {
     return false;
 }
 
+//Contamos los caractéres
 function contar() {
     comentario = document.getElementById("comentario").value;
-
     longitudrestante = longitudmax - comentario.length;
     document.getElementById("contador").innerHTML = longitudrestante;
 
@@ -222,6 +241,7 @@ function contar() {
     return false;
 }
 
+//Calculamos el día de la semana
 function calcularDiaSemana(d) {
     let dia;
     switch (d.getDay()) {
@@ -248,10 +268,9 @@ function calcularDiaSemana(d) {
             break;
     }
     return dia;
-
 }
 
-
+//Cambiamos a modo oscuro o normal
 function cambiarModo() {
     debugger;
     if (modoOscuro) {
@@ -278,8 +297,6 @@ function cambiarModo() {
             document.getElementsByClassName("titulocomentario").item(i).style.backgroundColor = "#37356c"
             document.getElementsByClassName("fecha").item(i).style.color = "white";
         }
-
         modoOscuro = true;
     }
-
 }
