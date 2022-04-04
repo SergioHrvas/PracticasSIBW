@@ -34,7 +34,6 @@ function juegoRandom() {
     let juego = portadas[rand];
     let url = ".\\status\\image\\" + juego;
     document.getElementById("ofertajuego").src = url;
-    console.log(document.getElementById("ofertajuego").src)
 }
 
 //Mostramos el panel de comentarios
