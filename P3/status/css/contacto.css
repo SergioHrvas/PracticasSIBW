@@ -1,0 +1,59 @@
+
+
+main {
+    width: 75%;
+    padding: 0;
+    margin: 0;
+    float: left;
+    background-color: rgb(148, 148, 148);
+    border-radius: 5px;
+    outline: 1px;
+    outline-color: black;
+    outline-style: solid;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+}
+
+/* CONTENIDO FIJO DEL PRODUCTO */
+.tituloseccion {
+    font-size: 45px;
+    margin: 1%;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.descripcion {
+    width: 72%;
+    margin-bottom: 1%;
+    padding-left: 2%;
+}
+
+/* MAPA */
+.mapa {
+    margin: auto;
+    padding: auto;
+    margin-bottom: 2%;
+    width: 92%;
+}
+
+iframe {
+    width: 100%;
+}
+
+/* REDES SOCIALES */
+.redessociales {
+    width: min(120px, 30%);
+    margin-bottom: 2%;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.redsocial {
+    display: grid;
+}
+
+.iconored {
+    width: 100%;
+}

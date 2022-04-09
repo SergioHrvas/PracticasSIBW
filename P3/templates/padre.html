@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <title>SWITCHERS - La mejor tienda de videojuegos de Nintendo Switch!</title>
+
+    <!--favicon-->
+    <link rel="icon" href=".\status\image\favic.ico" type="image/ico" />
+
+    <!--LINKS CSS-->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredoka:wght@500&display=swap">
+    <link rel="stylesheet" type="text/css" href="status/css/estilocomun.css">
+    {%block estilos %}
+
+    <link rel="stylesheet" type="text/css" href="status/css/portada.css">
+    {% endblock %}
+</head>
+
+<body>
+    <!-- Cabecera -->
+    <header>
+        <div id="container-logo">
+            <img id="logo" src=".\status\image\switch.png">
+        </div>
+        <div id="container-title-menu">
+            <div id="titulo">
+                <h1 id="tituloweb"><a id="enlaceformato" href=".\portada.html">SWITCHERS</a></h1>
+            </div>
+            <ul id="menu">
+                <li class="oculto"><a class="enlaces" href=".\portada.html">Inicio</a> </li>
+                <li class="oculto"><a class="enlaces" href=".\contacto.html">Contacto</a> </li>
+                <li class="oculto"><a class="enlaces" href="ruta">Login</a> </li>
+                <li class="oculto"><a class="enlaces" href="ruta">Registro</a> </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        {% block central %}
+        Zona común
+        {% endblock %}
+
+    </main>
+
+    <!-- Sección Lateral -->
+    <aside>
+        <div id="redesgrid">
+            <div class="box a"><a href=https://www.instagram.com target="_blank"><img class="redes"
+                        src=".\status\image\instagram.jpg"></a></div>
+            <div class="box b"><a href=https://twitter.com target="_blank"><img class="redes"
+                        src=".\status\image\twitter.png"></a>
+            </div>
+            <div class="box d"><a href=https://es-es.facebook.com target="_blank"><img class="redes"
+                        src=".\status\image\facebook.png"></a></div>
+            <div class="box e"><a href=https://www.tiktok.com/es target="_blank"><img class="redes"
+                        src=".\status\image\tiktok.png"></a>
+            </div>
+        </div>
+        <div id="oferta">
+            <img id="ofertajuego" src=".\status\image\espada.jpg">
+            <div id="textooferta">
+                <p id="cartel">¡OFERTA!</p>
+                <p id="precio">39,99€ <del id="tachado">59,99€</del></p>
+            </div>
+            <div class="divwebof">
+                <p class="weboficialp"><a class="weboficial" href=https://swordshield.pokemon.com/es-es/
+                        target="_blank">Web Oficial</a></p>
+            </div>
+            <div class="divwebof">
+                <p class="weboficialp"><a class="weboficial"
+                        href=https://www.nintendo.es/Juegos/Nintendo-Switch/Pokemon-Espada-1522111.html
+                        target="_blank">Más Info</a></p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Pie de página -->
+    <footer>
+        <br />
+        <ul id="pie">
+            <li class="footers"><a class="textofooters" href="#">Política de cookies</a></li>
+            <li class="footers"><a class="textofooters" href="#">Aviso legal</a></li>
+            <li class="footers"><a class="textofooters" href="#">Privacidad web</a></li>
+            <li class="footers"><a class="textofooters" href="#">Accesibilidad</a></li>
+        </ul>
+        <p class="copyright">Teléfono de Contacto: +34 666555444 | Calle Periodista Daniel Saucedo Aranda s/n</p>
+        <p class="copyright">© Switcheros 2022. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
