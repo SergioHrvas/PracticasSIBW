@@ -275,6 +275,7 @@ td {
     display: block;
 }
 
+
 #botoncomentarios {
     background-color: rgb(255, 77, 77);
     width: 30%;
@@ -289,9 +290,7 @@ td {
 }
 
 #botoncomentarios:hover {
-
     opacity: .8;
-
 }
 
 #cajacomentarios {
@@ -315,6 +314,7 @@ label {
     max-height: 400px;
 }
 
+<<<<<<< HEAD
 #comentarios {
     margin: 0;
     padding: 0;
@@ -338,6 +338,8 @@ label {
 
 }
 
+=======
+>>>>>>> a80124e (Ultimo)
 .comentario {
     margin: 0;
     padding: 0;
@@ -351,6 +353,19 @@ label {
     padding-top: 5px;
     padding-left: 5px;
     padding-bottom: 5px;
+}
+
+#comentarios {
+    margin: 0;
+    padding: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+#enviar {
+    margin-top: 3%;
 }
 
 .cabeceracomentario {

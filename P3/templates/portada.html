@@ -1,4 +1,5 @@
 {% extends "padre.html" %}
+<<<<<<< HEAD
 
     {%block central %}
     <!-- Contenido principal -->
@@ -12,6 +13,21 @@
                 <div class="divnombreproducto">
                     <p class="nombreproducto">Pokemon Diamante Brillante</p>
                 </div>
+=======
+{% block estilos %}
+<!--LINKS CSS-->
+<link rel="stylesheet" type="text/css" href="status/css/portada.css">
+{% endblock %}
+{%block central %}
+<!-- Contenido principal -->
+<section id="panel">
+    <!-- Iteramos por todos los comentarios-->
+    {% for i in 0..8 %}
+    <div class="caja"><a href=".\evento\{{evento[i]['link']}}"><img class="juego"
+                src=".\status\image\portadas\{{evento[i]['portada']}}">
+            <div class="divnombreproducto">
+                <p class="nombreproducto">{{evento[i]['titulo']}}</p>
+>>>>>>> a80124e (Ultimo)
             </div>
             <div class="caja"><img class="juego" src=".\status\image\odissey.jpg">
                 <div class="divnombreproducto">

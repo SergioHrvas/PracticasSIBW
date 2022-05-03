@@ -21,10 +21,23 @@ if(isset($_GET['ev'])){
 else{
     $idEv = -1;
 }
+<<<<<<< HEAD
 
 $evento = getEvento($idEv);
 
 echo $twig->render('arceus.html', ['evento' => $evento]);
+=======
+$mysqli = new Database();
+
+$mysqli->identificarse();
+$idEv=$mysqli->getId($idEv);
+$evento = $mysqli->getEvento($idEv);
+$comentarios = $mysqli->getComentarios($idEv);
+$imagenes = $mysqli->getGaleria($idEv);
+
+$evento['descripcion'] = nl2br($evento['descripcion']);
+echo $twig->render('producto.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes]); //Pasamos información completa de un juego a la plantilla
+>>>>>>> a80124e (Ultimo)
 
 ?>
 

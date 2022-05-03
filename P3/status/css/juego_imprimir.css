@@ -185,7 +185,7 @@ main {
 }
 
 /* Imagen*/
-#imagendiv {
+.imagendiv {
     margin: auto;
     width: 500px;
     max-width: 80%;
@@ -215,7 +215,7 @@ main {
     font-weight: bold;
 }
 
-#dropdown {
+.dropdown {
     /* Imagen ampliada */
     position: absolute;
     display: none;
@@ -341,13 +341,42 @@ td {
 }
 
 /* COMENTARIOS*/
-#comentarios {
-    margin: 0;
-    padding: 0;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: 20px;
+.formulario {
+    display: block;
+}
+
+
+#botoncomentarios {
+    background-color: rgb(255, 255, 255);
+    width: 30%;
+    padding: auto;
+    margin: auto;
+    text-align: center;
+    outline: 1px;
+    box-shadow: 0px 1px 2px #000;
+    cursor: pointer;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+}
+
+#botoncomentarios:hover {
+    opacity: .8;
+}
+
+#cajacomentarios {
+    transition: height .4s;
+    display: none;
+    max-height: 5%;
+}
+
+
+input {
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+label {
+    margin-bottom: 1%;
 }
 
 .comentario {
@@ -365,9 +394,28 @@ td {
     padding-bottom: 5px;
 }
 
+#comentario {
+    width: 100%;
+    resize: vertical;
+    max-height: 400px;
+}
+
+#comentarios {
+    margin: 0;
+    padding: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
 .cabeceracomentario {
     display: grid;
     grid-template-columns: 40% 60%;
+}
+
+#enviar {
+    margin-top: 3%;
 }
 
 .perfil {
@@ -431,6 +479,11 @@ td {
     max-width: 100%;
 }
 
+.fecha {
+    color: #777676;
+    font-size: 13px;
+}
+
 .textoopinion {
     padding: 0;
     margin: 0;
@@ -452,6 +505,17 @@ td {
     padding: 0;
     margin: 0;
     display: block;
+}
+
+.error {
+    background-color: #cfcfcf;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+}
+
+#multimedia {
+    width: 100%;
+
 }
 
 #titulocomentarios {
@@ -476,6 +540,14 @@ aside {
     outline-color: rgb(0, 0, 0);
     outline-style: solid;
     margin-left: 76%;
+    display: none;
+}
+
+#bombilla{
+    display:none;
+}
+
+.formulario{
     display: none;
 }
 
@@ -504,4 +576,54 @@ footer {
 .textofooters {
     color: rgb(0, 0, 0);
     text-decoration: none;
+}
+
+
+.galeria {
+    justify-content: center;
+    width: 90%;
+    margin: auto;
+
+    outline: 1px;
+    outline-color: rgb(86, 86, 86);
+    outline-style: solid;
+    margin-bottom: 5%;
+    border-radius: 5px;
+    background-color: #777676;
+
+}
+
+.items_galeria {
+    justify-content: center;
+
+    display: grid;
+    margin: auto;
+    grid-template-columns: 23% 23% 23% 23%;
+}
+
+.item_galeria {
+    display: grid;
+
+    margin: 2%;
+}
+
+.imagen_galeria {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    width: 100%;
+    border-radius: 5px;
+
+}
+
+.botonslider {
+    width: 15%;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.flecha {
+    width: 25%;
+    margin: auto;
+
 }

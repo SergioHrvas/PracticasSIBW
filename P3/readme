@@ -1,0 +1,8 @@
+Comentarios:
+- La base de datos está compuesta por 4 tablas: comentarios, juegos, imagenes y censuradas.
+- En la portada se ha implementado la funcionalidad de ir pasando de página para tener más de 9 videojuegos en esta. (Por tanto, si vas a la página 2, los videojuegos rotarán). La rotación de los videojuegos se hará de tal forma que tras el último juego de la lista, volverán a aparecer los primeros.
+- Los comentarios aparecerán siempre que haya alguno disponible. Para esto, en esta práctica he tenido que "escribir" el código HTML dentro del propio script de javascript para poder insertar un comentario ya que, en aquellos juegos donde aún no hay comentarios, no se podían agregar al usar el método clone.
+- La galería se ha realizado mediante un slider de forma muy parecida a la funcionalidad del segundo punto: cuando acabe la lista de imágenes, volverá a comenzar desde el principio.
+- Se han añadido 11 juegos en total con sus respectivas imágenes. Solo dos de ellos tienen comentarios añadidos previamente.
+- Se ha implementado el código para dejar urls limpias. Se ha tenido que modificar htaccess con expresiones regulares y algún que otro código de PHP y Javascript para pasar la url bonita a id en la base de datos. Además, se añadió una columna nueva al juego que especificase dicha url.
+- Se ha realizado la conexión con la base de datos mediante la creación de una clase que almacene dicha conexión abierta, de tal forma que por cada petición HTTP se solicitará la conexión una sola vez.

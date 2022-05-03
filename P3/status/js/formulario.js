@@ -13,11 +13,29 @@ let opacidad_form = 0, opacidad_coments = 0;
 let altura = 0, id = 0;
 let modoOscuro = false;
 let longitudmax = 1000, longitudrestante = 1000;
+<<<<<<< HEAD
 let portadas = new Array();
 portadas[0] = "espada.jpg"
 portadas[1] = "kirby.jpg"
 portadas[2] = "splatoon.jpg"
 portadas[3] = "sonic.jpg"
+=======
+
+//Obtenemos palabras censuradas
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open("GET", "censura.php", true);
+xmlhttp.send();
+
+//Obtenemos producto
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const idEv = urlParams.get('ev')
+var url = window.location.href;
+url = url.split("/").pop();
+var conexion_img = new XMLHttpRequest();
+conexion_img.open("GET", "galeria.php?ev=" + url, true);
+conexion_img.send();
+>>>>>>> a80124e (Ultimo)
 
 //llamamos a la función para activar el contador de comentarios.
 contar();
@@ -170,6 +188,7 @@ function revisarTitulo() {
 
 //Revisamos si el formato del correo electrónico es correcto (loquesea@loquesea)
 function revisarCorreo() {
+    correo_bien = false;
     let correo = document.getElementById("correo_electronico").value;
     let re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (correo.length <= 0) {
@@ -181,9 +200,11 @@ function revisarCorreo() {
             document.getElementsByClassName("error").item(3).innerHTML = "Rellena el campo 'email' correctamente!";
             correo_bien = false;
         }
-        else
+        else{
             document.getElementsByClassName("error").item(3).innerHTML = "";
-        correo_bien = true;
+            correo_bien = true;
+
+        }
     }
     return false;
 }
