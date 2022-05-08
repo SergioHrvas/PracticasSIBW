@@ -1,22 +1,4 @@
 <?php
-<<<<<<< HEAD
-function getEvento($idEv)
-{
-    $mysqli = new mysqli("mysql", "sergiohcobo", "smpahc13", "SIBW");
-    if ($mysqli->connect_errno) {
-        echo("Fallo al conectar: " . $mysqli->connect_error);
-    }
-    $res = $mysqli->query("SELECT titulo, descripcion, portada, imagen FROM eventos WHERE id=" . $idEv);
-    $evento = array('titulo' => 'Not Found', 'descripcion' => 'Not Found', 'portada' => 'Not Found', 'imagen' => 'Not Found');
-    if ($res->num_rows > 0) {
-        $row = $res->fetch_assoc();
-        $evento = array('titulo' => $row['titulo'], 'descripcion' => $row['descripcion'], 'portada' => $row['portada'], 'imagen' => $row['imagen']);
-
-    }
-    return $evento;
-}
-?>
-=======
 class Database
 {
     private $mysqli;
@@ -47,16 +29,13 @@ public function getJuegos($idEv)
     $num =  $num["COUNT(*)"];
     $menor = (($idEv - 1)*9 + 1);
     if($menor > $num){
-        $menor=$menor%$num;
+        $menor=$menor%$num+1;
     }
     $mayor = ($menor+8);
     if($mayor > $num){
          $mayor = $mayor%$num;
     }
-    if($menor==0){
-       $menor+=1;
-       $mayor+=1;
-    }
+
     if($mayor<$menor){
         $res = $this->mysqli->query("SELECT id, titulo, portada, link FROM juegos WHERE id >= " . $menor . " UNION SELECT id,titulo,portada,link FROM juegos WHERE id <= " . $mayor);
     }
@@ -144,4 +123,3 @@ public function getGaleria($idEv){
 
 ?>
 
->>>>>>> a80124e (Ultimo)

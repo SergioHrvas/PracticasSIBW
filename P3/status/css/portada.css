@@ -91,17 +91,20 @@ main {
 }
 
 .numpag {
-    color: black;
-    text-decoration: none;
-    font-size: 20px;
-    margin: auto;
-    padding: auto;
-}
-
-.pag {
     display: grid;
     outline: 1px;
     outline-color: black;
     outline-style: solid;
     background-color: #b1bdc5;
+    text-decoration: none; /* no underline */
+    cursor:pointer;
+    user-select: none;
+}
+
+.pag {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    margin: auto;
+    padding: auto;
 }

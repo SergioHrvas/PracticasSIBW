@@ -280,3 +280,13 @@ footer {
     color: rgb(0, 0, 0);
     text-decoration: none;
 }
+
+
+#bombillaimg {
+    position: absolute;
+    width: 30px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+
+}

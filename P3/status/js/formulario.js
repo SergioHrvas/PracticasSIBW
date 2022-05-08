@@ -3,7 +3,11 @@ document.getElementById("botoncomentarios").addEventListener("click", function (
 document.getElementById("enviar").addEventListener("click", function () { enviar() });
 document.getElementById("comentario").addEventListener("keyup", function () { evaluarComent() });
 document.getElementById("bombilla").addEventListener("click", function () { cambiarModo() });
-document.addEventListener('DOMContentLoaded', function () { juegoRandom() }, false);
+for (let i = 0; i < 4; i++) {
+    document.getElementsByClassName("item_galeria").item(i).addEventListener("click", function () { cambiarImagen(i) });
+}
+document.getElementsByClassName("flecha").item(0).addEventListener("click", function () { rotarImagenes(0) });
+document.getElementsByClassName("flecha").item(1).addEventListener("click", function () { rotarImagenes(1) });
 
 //Declaramos variables
 let nombre_bien = new Boolean("true"), apellidos_bien = new Boolean("true"),
@@ -13,13 +17,6 @@ let opacidad_form = 0, opacidad_coments = 0;
 let altura = 0, id = 0;
 let modoOscuro = false;
 let longitudmax = 1000, longitudrestante = 1000;
-<<<<<<< HEAD
-let portadas = new Array();
-portadas[0] = "espada.jpg"
-portadas[1] = "kirby.jpg"
-portadas[2] = "splatoon.jpg"
-portadas[3] = "sonic.jpg"
-=======
 
 //Obtenemos palabras censuradas
 var xmlhttp = new XMLHttpRequest();
@@ -35,7 +32,6 @@ url = url.split("/").pop();
 var conexion_img = new XMLHttpRequest();
 conexion_img.open("GET", "galeria.php?ev=" + url, true);
 conexion_img.send();
->>>>>>> a80124e (Ultimo)
 
 //llamamos a la función para activar el contador de comentarios.
 contar();
@@ -50,7 +46,7 @@ function evaluarComent() {
 function juegoRandom() {
     var rand = Math.floor(Math.random() * portadas.length);
     let juego = portadas[rand];
-    let url = ".\\status\\image\\" + juego;
+    let url = ".\\status\\image\\portadas\\" + juego;
     document.getElementById("ofertajuego").src = url;
 }
 
@@ -108,31 +104,33 @@ function enviar() {
     const d = new Date();
     let dia = calcularDiaSemana(d);
     if (nombre_bien && apellidos_bien && correo_bien && comentario_bien) {
-        var comentariodiv = document.getElementsByClassName('comentario').item(0);
-        var comentarioclonado = comentariodiv.cloneNode(true);
-        comentarioclonado.getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
-        comentarioclonado.getElementsByClassName("textoopinion").item(0).innerHTML = titulo;
-        comentarioclonado.getElementsByClassName("opinion").item(0).innerHTML = comentario;
-        var minutos = revisarNumero(d.getMinutes());
-        var horas = revisarNumero(d.getHours());
-        comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${horas}:${minutos} `
-        //alert(""+comentarioclonado.children[1].innerHTML);
+            var codigo = "<div class=\"comentario\"><div class=\"cabeceracomentario\"><div class=\"perfil\"><div class=\"imagenperfil\"><img class=\"avatar\" src=\"./status/image/avatar.png\"></div><div class=\"nombreusuario\">{{coment['nombreyapellidos']}}</div></div><div class=\"titulocomentario\"><h4 class=\"textoopinion\">{{coment['titulo']}}</h4><span class=\"fecha\">{{coment['fecha']}}</span></div></div><div class=\"opinion\">{{coment['descripcion']}}</div></div>";
+            (document.getElementsByClassName("formulario")).item(0).insertAdjacentHTML('afterend', codigo);
 
-        comentariodiv.insertAdjacentHTML("beforebegin", "<div class=\"comentario\">" + comentarioclonado.innerHTML + "</div>");
-        comentarioclonado = document.getElementsByClassName('comentario').item(0);
-        let opacidad = 0.0;
-        comentarioclonado.style.opacity = opacidad;
-        let id = 0;
-        clearInterval(id);
-        id = setInterval(frame, 10);
-        function frame() {
-            if (opacidad <= 1) {
-                opacidad += 0.01;
-                comentarioclonado.style.opacity = opacidad;
+            var comentarioclonado = document.getElementsByClassName("comentario").item(0);
+            comentarioclonado.getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
+            comentarioclonado.getElementsByClassName("textoopinion").item(0).innerHTML = titulo;
+            comentarioclonado.getElementsByClassName("opinion").item(0).innerHTML = comentario;
+            var minutos = revisarNumero(d.getMinutes());
+            var horas = revisarNumero(d.getHours());
+            comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${horas}:${minutos} `
+            //alert(""+comentarioclonado.children[1].innerHTML);
+
+            //comentariodiv.insertAdjacentHTML("beforebegin", "<div class=\"comentario\">" + comentarioclonado.innerHTML + "</div>");
+            //comentarioclonado = document.getElementsByClassName('comentario').item(0);
+            let opacidad = 0.0;
+            comentarioclonado.style.opacity = opacidad;
+            let id = 0;
+            clearInterval(id);
+            id = setInterval(frame, 10);
+            function frame() {
+                if (opacidad <= 1) {
+                    opacidad += 0.01;
+                    comentarioclonado.style.opacity = opacidad;
+                }
+
             }
-
-        }
-
+    
     }
     return false;
 }
@@ -228,15 +226,21 @@ function revisarComentario() {
 function censurar() {
     comentario = document.getElementById("comentario").value;
 
-    let censuradas = [];
-    censuradas.push("xbox", "playsation", "mierda", "coño", "steam", "polla", "puta", "puto", "maricon", "cabron");
-    for (let i = 0; i < censuradas.length; i++) {
-        let indice = comentario.indexOf(censuradas[i]);
-        if (indice != -1) {
-            comentario = comentario.replace(censuradas[i], '****');
-            document.getElementById("comentario").value = comentario;
+    let censuradas;
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        censuradas = JSON.parse(xmlhttp.responseText);
+
+        for (let i = 0; i < censuradas.length; i++) {
+            let indice = comentario.indexOf(censuradas[i]['palabra']);
+            if (indice != -1) {
+                comentario = comentario.replace(censuradas[i]['palabra'], '****');
+                document.getElementById("comentario").value = comentario;
+            }
         }
+
     }
+
+
     return false;
 }
 
@@ -318,5 +322,74 @@ function cambiarModo() {
             document.getElementsByClassName("fecha").item(i).style.color = "white";
         }
         modoOscuro = true;
+    }
+}
+let rot = 0;
+
+let anterior = 1;
+let primeravez = true;
+function cambiarImagen(i) {
+    var imagenes;
+    console.log(conexion_img.readyState);
+    console.log(conexion_img.status);
+    if (conexion_img.readyState == 4 && conexion_img.status == 200) {
+        console.log(conexion_img.responseText);
+        imagenes = JSON.parse(conexion_img.responseText);
+        console.log(imagenes);
+    }
+    var opacidad = 0;
+    document.getElementsByClassName("imagen").item(0).style.opacity = opacidad;
+
+    let id = 0;
+    clearInterval(id);
+    id = setInterval(frame, 10);
+    function frame() {
+        if (opacidad <= 1) {
+            opacidad += 0.01;
+            document.getElementsByClassName("imagen").item(0).style.opacity = opacidad;
+        }
+
+    }
+    document.getElementsByClassName("imagen").item(0).src = document.getElementsByClassName("imagen_galeria").item(i).src;
+    document.getElementsByClassName("imagen").item(1).src = document.getElementsByClassName("imagen_galeria").item(i).src;
+    document.getElementsByClassName("imagen_galeria").item(i).style.outline = "1px";
+    document.getElementsByClassName("imagen_galeria").item(i).style.outlineColor = "black";
+    document.getElementsByClassName("imagen_galeria").item(i).style.outlineStyle = "solid";
+    if (!primeravez) {
+        document.getElementsByClassName("imagen_galeria").item(anterior).style.outline = "0px";
+        document.getElementsByClassName("imagen_galeria").item(anterior).style.outlineColor = "black";
+        document.getElementsByClassName("imagen_galeria").item(anterior).style.outlineStyle = "solid";
+    }
+    var posicion = (i + 4 * rot) % imagenes.length;
+    if (posicion < 0) {
+        posicion += imagenes.length;
+    }
+    document.getElementsByClassName("pieimg").item(0).innerHTML = imagenes[posicion]['descripcion'];
+    document.getElementsByClassName("pieimg").item(1).innerHTML = imagenes[posicion]['descripcion'];
+    anterior = i;
+    if (primeravez) {
+        primeravez = false;
+    }
+
+}
+
+//Función que rota las imágenes de la galería de un producto a la derecha o a la izquierda.
+function rotarImagenes(direccion) {
+    var imagenes;
+    if (direccion == 1)
+        rot++;
+    else
+        rot--;
+    if (conexion_img.readyState == 4 && conexion_img.status == 200) {
+        imagenes = JSON.parse(conexion_img.responseText);
+    }
+    console.log(imagenes[0]['img']);
+    for (let i = 0; i < 4; i++) {
+        var posicion = (i + 4 * rot) % imagenes.length;
+        if (posicion < 0) {
+            posicion += imagenes.length;
+        }
+        document.getElementsByClassName("imagen_galeria").item(i).src = "./status/image/juegos/" + imagenes[posicion]['img'];
+
     }
 }

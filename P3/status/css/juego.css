@@ -98,7 +98,7 @@ main {
 }
 
 /* Imagen */
-#imagendiv {
+.imagendiv {
     margin: auto;
     width: 500px;
     max-width: 80%;
@@ -125,7 +125,7 @@ main {
     font-weight: bold;
 }
 
-#dropdown {
+.dropdown {
     /* Imagen ampliada */
     position: absolute;
     display: none;
@@ -140,7 +140,7 @@ main {
     border-radius: 5px;
 }
 
-#imagendiv:hover #dropdown {
+.imagendiv:hover .dropdown {
     display: block;
     /* Para mostrar la imagen ampliada */
 }
@@ -314,32 +314,6 @@ label {
     max-height: 400px;
 }
 
-<<<<<<< HEAD
-#comentarios {
-    margin: 0;
-    padding: 0;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: 20px;
-}
-
-#enviar {
-    margin-top: 3%;
-}
-
-
-#bombillaimg {
-    position: absolute;
-    width: 30px;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-
-}
-
-=======
->>>>>>> a80124e (Ultimo)
 .comentario {
     margin: 0;
     padding: 0;
@@ -459,6 +433,11 @@ label {
     font-size: 12px;
 }
 
+#multimedia {
+    width: 100%;
+
+}
+
 .textoopinion {
     padding: 0;
     margin: 0;
@@ -471,4 +450,51 @@ label {
     outline-color: rgb(0, 0, 0);
     outline-style: solid;
     padding-left: 5px;
+}
+
+.galeria {
+    justify-content: center;
+    width: 90%;
+    margin: auto;
+
+    outline: 1px;
+    outline-color: rgb(86, 86, 86);
+    outline-style: solid;
+    margin-bottom: 5%;
+    border-radius: 5px;
+    background-color: #777676;
+
+}
+
+.items_galeria {
+    justify-content: center;
+
+    display: grid;
+    margin: auto;
+    grid-template-columns: 23% 23% 23% 23%;
+}
+
+.item_galeria {
+    display: grid;
+
+    margin: 2%;
+}
+
+.imagen_galeria {
+    width: 100%;
+    border-radius: 5px;
+
+}
+
+.botonslider {
+    width: 15%;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.flecha {
+    width: 25%;
+    margin: auto;
+
 }

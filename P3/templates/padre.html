@@ -5,18 +5,19 @@
 
     <!--favicon-->
     <link rel="icon" href=".\status\image\favic.ico" type="image/ico" />
-
+    <base href="/" />
     <!--LINKS CSS-->
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredoka:wght@500&display=swap">
     <link rel="stylesheet" type="text/css" href="status/css/estilocomun.css">
     {%block estilos %}
 
-    <link rel="stylesheet" type="text/css" href="status/css/portada.css">
     {% endblock %}
 </head>
 
 <body>
+    <div id="bombilla"><img id="bombillaimg" src=".\status\image\off.png" /></div>
+
     <!-- Cabecera -->
     <header>
         <div id="container-logo">
@@ -24,11 +25,11 @@
         </div>
         <div id="container-title-menu">
             <div id="titulo">
-                <h1 id="tituloweb"><a id="enlaceformato" href=".\portada.html">SWITCHERS</a></h1>
+                <h1 id="tituloweb"><a id="enlaceformato" href=".\index.php">SWITCHERS</a></h1>
             </div>
             <ul id="menu">
-                <li class="oculto"><a class="enlaces" href=".\portada.html">Inicio</a> </li>
-                <li class="oculto"><a class="enlaces" href=".\contacto.html">Contacto</a> </li>
+                <li class="oculto"><a class="enlaces" href=".\index.php">Inicio</a> </li>
+                <li class="oculto"><a class="enlaces" href=".\contacto.php">Contacto</a> </li>
                 <li class="oculto"><a class="enlaces" href="ruta">Login</a> </li>
                 <li class="oculto"><a class="enlaces" href="ruta">Registro</a> </li>
             </ul>
@@ -58,7 +59,7 @@
             </div>
         </div>
         <div id="oferta">
-            <img id="ofertajuego" src=".\status\image\espada.jpg">
+            <img id="ofertajuego" src=".\status\image\portadas\espada.jpg">
             <div id="textooferta">
                 <p id="cartel">¡OFERTA!</p>
                 <p id="precio">39,99€ <del id="tachado">59,99€</del></p>
@@ -88,5 +89,10 @@
         <p class="copyright">© Switcheros 2022. Todos los derechos reservados.</p>
     </footer>
 </body>
+
+{% block script %}
+script
+{% endblock %}
+<script type="text/javascript" src="status/js/comun.js"></script>
 
 </html>

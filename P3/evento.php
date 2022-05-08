@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -11,22 +12,12 @@ $twig = new \Twig\Environment($loader);
 // Busco en la base de datos la información del producto y lo
 // almaceno en las variables $productoNombre, $productoMarca, $productoFoto...
 
-$nombreEvento = "Nombre por defecto";
-$descripcionEvento = "Descipcion por defecto";
-$portadaEvento = "Portada por defecto";
-$imagenEvento = "Imagen por defecto";
-if(isset($_GET['ev'])){
+if (isset($_GET['ev'])) {
     $idEv = $_GET['ev'];
 }
-else{
-    $idEv = -1;
+else {
+     $idEv = "leyendas";
 }
-<<<<<<< HEAD
-
-$evento = getEvento($idEv);
-
-echo $twig->render('arceus.html', ['evento' => $evento]);
-=======
 $mysqli = new Database();
 
 $mysqli->identificarse();
@@ -37,7 +28,6 @@ $imagenes = $mysqli->getGaleria($idEv);
 
 $evento['descripcion'] = nl2br($evento['descripcion']);
 echo $twig->render('producto.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes]); //Pasamos información completa de un juego a la plantilla
->>>>>>> a80124e (Ultimo)
 
 ?>
 
