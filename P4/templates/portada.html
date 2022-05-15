@@ -1,0 +1,32 @@
+{% extends "padre.html" %}
+{% block estilos %}
+<!--LINKS CSS-->
+<link rel="stylesheet" type="text/css" href="status/css/portada.css">
+{% endblock %}
+{%block central %}
+<!-- Contenido principal -->
+<section id="panel">
+    <!-- Iteramos por todos los comentarios-->
+    {% for i in 0..8 %}
+    <div class="caja"><a href=".\evento\{{evento[i]['link']}}"><img class="juego"
+                src=".\status\image\portadas\{{evento[i]['portada']}}">
+            <div class="divnombreproducto">
+                <p class="nombreproducto">{{evento[i]['titulo']}}</p>
+            </div>
+        </a>
+    </div>
+        {% endfor %}
+
+</section>
+<div id="paginas">
+    <a class="numpag" ><div class="pag">&laquo;</div></a>
+    {% for i in 1..6 %}
+    <a class="numpag" href=".\index.php?ev={{i}}"><div class="pag">{{i}}</div></a>
+        {% endfor %}
+        <a class="numpag" ><div class="pag">&raquo;</div></a>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="status/js/portada.js"></script>
+{% endblock %}

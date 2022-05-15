@@ -1,0 +1,110 @@
+
+main {
+    width: 75%;
+    height: auto;
+    background-color: #343434;
+
+    float: left;
+
+    padding-top: 10px;
+    border-radius: 5px;
+
+    /*División del contenido en tres columnas*/
+}
+
+#panel{
+    grid-template-columns: 33% 33% 33%;
+    display: grid;
+    background-color: #343434;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.caja {
+    width: 95%;
+    position: relative;
+    outline: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #ce0000;
+    background-image: url(../image/logo.jpg);
+    background-repeat: no-repeat;
+    background-size: 120%;
+}
+
+.divnombreproducto {
+    border-radius: 0;
+    margin-left: 0;
+    margin-right: auto;
+    height: min(10%, 3vw);
+    border-radius: 5px;
+    top: min(82%, 10vw);
+    position: absolute;
+    /*Pie de imagen por encima de la imagen*/
+    width: 100%;
+    color: #fff;
+    background-color: #000;
+    padding: 2px 0px;
+    opacity: 0.7;
+    overflow: hidden;
+}
+
+.nombreproducto {
+    padding: auto;
+    margin: auto;
+    font-size: min(16px, 1.8vw);
+    text-align: center;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.juego {
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    transition: transform .2s;
+    overflow: visible;
+}
+
+.juego:hover {
+    transform: scale(1.1);
+    /*Zoom al pasar el ratón*/
+}
+
+#paginas {
+    display: grid;
+    margin:auto;
+    padding: auto;
+    margin-bottom: 20px;
+    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+    /* DIVIDIMOS LOS NÚMEROS DE LAS PÁGINAS A PARTES IGUALES */
+    height: 4%;
+    width: 70%;
+}
+
+.numpag {
+    display: grid;
+    outline: 1px;
+    outline-color: black;
+    outline-style: solid;
+    background-color: #b1bdc5;
+    text-decoration: none; /* no underline */
+    cursor:pointer;
+    user-select: none;
+}
+
+.pag {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    margin: auto;
+    padding: auto;
+}

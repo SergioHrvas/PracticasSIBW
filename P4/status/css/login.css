@@ -1,0 +1,76 @@
+
+
+main {
+    width: 75%;
+    padding: 0;
+    margin: 0;
+    float: left;
+    background-color: rgb(148, 148, 148);
+    border-radius: 5px;
+    outline: 1px;
+    outline-color: black;
+    outline-style: solid;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+}
+
+/* CONTENIDO FIJO DEL PRODUCTO */
+.tituloseccion {
+    font-size: 45px;
+    margin: 1%;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+
+/* COMENTARIOS */
+.formulario {
+    width: 50%;
+    text-align: center;
+    display: block;
+    padding: 2%;
+    background-color: rgb(236, 107, 107);
+    border-radius: 5px;
+    outline: 1px;
+    outline-color: black;
+    outline-style: solid;
+    margin-left:auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+}
+
+.etiqueta {
+    margin-bottom: 0.5%;
+    text-align: center;
+    font-weight: 400;
+    display:block;
+
+}
+
+.check{
+    margin: auto;
+    text-align: center;
+}
+
+.inputtext {
+    width:30%;
+    margin-bottom: 3%;
+    display:block;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+
+#activar {
+    margin-bottom: 3%;
+    margin-left:auto;
+    margin-right: auto;
+    margin-right: 1%;
+}
+
+
+#enviar {
+    margin-top: 3%;
+}
