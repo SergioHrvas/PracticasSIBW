@@ -292,22 +292,30 @@ footer {
 }
 
 #perfilimg{
-    width: 28px;
+    position:absolute;
+    width: 34px;
     height: 34px;
     justify-items: center;
+    margin: auto;
+    padding:auto;
+    top:0;
+    bottom: 0;
+    right:0;
+    left:0;
 
 }
 
 #perfil {
     position: absolute;
-    width: 40px;
+    width: 50px;
     text-align: center;
-    height: 40px;
+    height: 50px;
     top: 15px;
     right: 60px;
     border-radius: 80px;
     background-color: #4879a4;
     border-width: 2px;
     border-color: #292929;
+
 }
 

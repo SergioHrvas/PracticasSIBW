@@ -157,7 +157,45 @@ public function logearUsuario($valores)
         }
 
 }
+
+
+public function getDatosUsuario($nombreusuario){
+    $res = $this->mysqli->prepare('SELECT username,nombre, apellidos, telefono,correo, pais, imagen_perfil, twitter, facebook, instagram, moderador, gestor, super FROM usuarios WHERE username=?');
+    $res->bind_param('s', $nombreusuario);
+    $res->execute();
+    $res = $res->get_result();
+    $row = array('username' => 'Not Found', 'nombre' => 'Not Found', 'apellidos' => 'Not Found', 'telefono' => 'Not Found', 'correo' => 'Not Found', 'pais' => 'Not Found', 'imagen_perfil' => 'Not Found', 'twitter' => 'Not Found', 'facebook' => 'Not Found', 'instagram' => 'Not Found', 'moderador' => 'Not Found', 'gestor' => 'Not Found', 'super' => 'Not Found');
+    if ($res->num_rows > 0) {
+        $rows = array();
+        while ($row = $res->fetch_assoc()) {
+            $rows[] = array('username' => $row['username'], 'nombre' => $row['nombre'], 'apellidos' => $row['apellidos'], 'telefono' => $row['telefono'], 'correo' => $row['correo'], 'pais' => $row['pais'], 'imagen_perfil' => $row['imagen_perfil'], 'twitter'=>$row['twitter'], 'facebook' => $row['facebook'], 'instagram' => $row['instagram'], 'moderador' => $row['moderador'], 'gestor' => $row['gestor'], 'super'=> $row['super']);
+        }
+    }
+
+    return $rows;
 }
 
-?>
+public function cambiarImagenPerfil($nombre, $usuario){
+    $res = $this->mysqli->prepare('UPDATE usuarios SET imagen_perfil=? WHERE username=?');
+    $res->bind_param('ss',$nombre, $usuario);
+    $res->execute();
+}
 
+public function getPais($numero){
+    $res = $this->mysqli->prepare('SELECT * FROM paises WHERE id=?');
+    $res->bind_param('i',$numero);
+    $res->execute();
+    $res = $res->get_result();
+    $row = array('id' => 'Not Found', 'alpha_2' => 'Not Found', 'alpha_3' => 'Not Found', 'name' => 'Not Found');
+    if ($res->num_rows > 0) {
+        $rows = array();
+        while ($row = $res->fetch_assoc()) {
+            $rows[] = array('id' => $row['id'], 'alpha_2' => $row['alpha_2'], 'alpha_3' => $row['alpha_3'], 'name' => $row['name']);
+        }
+    }
+    return $rows;
+}
+}
+
+
+?>

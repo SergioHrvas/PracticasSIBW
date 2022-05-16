@@ -18,6 +18,13 @@ if (isset($_GET['ev'])) {
 else {
      $idEv = "leyendas";
 }
+
+session_start();
+if(isset($_SESSION['nickUsuario'])){
+    print($_SESSION['nickUsuario']);
+ 
+ }
+
 $mysqli = new Database();
 
 $mysqli->identificarse();
@@ -30,4 +37,3 @@ $evento['descripcion'] = nl2br($evento['descripcion']);
 echo $twig->render('producto.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes]); //Pasamos información completa de un juego a la plantilla
 
 ?>
-

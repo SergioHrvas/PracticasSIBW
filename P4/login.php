@@ -16,27 +16,20 @@ $mysqli->identificarse();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valores = $_POST;
-    print($valores['username']);
-    print($valores['password']);
 
     $v = $mysqli->logearUsuario($valores);
-    if($v){
-        print("Usuario registrado con éxito");
-    }
-    else{
-        print("Usuario no registrado con exito");
-    }
-  /*
-    if (checkLogin($nick, $pass)) {
+
+    if ($v) {
       session_start();
-      
-      $_SESSION['nickUsuario'] = $nick;  // guardo en la sesión el nick del usuario que se ha logueado
+     // print($valores['username']);
+      $_SESSION['nickUsuario'] = $valores['username'];  // guardo en la sesión el nick del usuario que se ha logueado
     }
     
-    header("Location: unaPaginaCualquiera.php");*/
+    header("Location: index.php");
+   // exit();
     }
-
+else{
 
 echo $twig->render('login.html'); //Pasamos información de juegos para la portada a la plantilla 
-
+}
 ?>

@@ -25,14 +25,12 @@
             <label for="pais" class="etiqueta">País</label> <span class="error"></span>
             <select id="pais" class="inputtext" name="pais">
             
-            {% for pais in paises %}
-                {% if pais['nombre'] == "España" %}
-                <option value="{{pais['id']}}" selected>{{ pais['nombre'] }}</option>
-             {%else %}
-                <option value="{{pais['id']}}">{{ pais['nombre'] }}</option>
-
-                {% endif %}
-                {% endfor %}
+                <option value="none" selected disabled hidden>Seleccione un país</option>
+                {% for pais in paises %}
+    
+                    <option value="{{pais['id']}}">{{ pais['nombre'] }}</option>
+    
+                    {% endfor %}
             </select>
             <label for="telefono" class="etiqueta">Número de Teléfono</label> <span class="error"></span>
             <input id="telefono" class="inputtext" name="telefono">

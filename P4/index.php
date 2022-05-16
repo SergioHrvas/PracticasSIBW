@@ -11,12 +11,19 @@ $twig = new \Twig\Environment($loader);
 // Busco en la base de datos la información del producto y lo
 // almaceno en las variables $productoNombre, $productoMarca, $productoFoto...
 $idEv = 1;
+global $mysqli;
+
 if (isset($_GET['ev'])) {
     $idEv = $_GET['ev'];
 }
 else {
     $idEv = 1;
 }
+session_start();
+if(isset($_SESSION['nickUsuario'])){
+    print($_SESSION['nickUsuario']);
+ 
+ }
 $mysqli = new Database();
 
 $mysqli->identificarse();
