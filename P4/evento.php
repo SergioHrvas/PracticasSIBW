@@ -20,20 +20,22 @@ else {
 }
 
 session_start();
-if(isset($_SESSION['nickUsuario'])){
-    print($_SESSION['nickUsuario']);
- 
- }
+
 
 $mysqli = new Database();
 
 $mysqli->identificarse();
+if(isset($_SESSION['nickUsuario'])){
+    $nombreUsuario = $_SESSION['nickUsuario'];
+    $usuario = $mysqli->getDatosBasicos($nombreUsuario);
+ }
+
 $idEv=$mysqli->getId($idEv);
 $evento = $mysqli->getEvento($idEv);
 $comentarios = $mysqli->getComentarios($idEv);
 $imagenes = $mysqli->getGaleria($idEv);
 
 $evento['descripcion'] = nl2br($evento['descripcion']);
-echo $twig->render('producto.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes]); //Pasamos información completa de un juego a la plantilla
+echo $twig->render('producto.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes, 'usuario' => $usuario]); //Pasamos información completa de un juego a la plantilla
 
 ?>

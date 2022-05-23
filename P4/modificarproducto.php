@@ -17,18 +17,28 @@ session_start();
 
 if(isset($_SESSION['nickUsuario'])){
   $nombreUsuario = $_SESSION['nickUsuario'];
-  $usuario = $mysqli->getDatosUsuario($nombreUsuario);
+  $usuario = $mysqli->getDatosBasicos($nombreUsuario);
 }
 
+if (isset($_GET['ev'])) {
+  $idEv = $_GET['ev'];
+}
+else {
+   $idEv = "leyendas";
+}
+
+$idjuego = $mysqli->getId($idEv);
+$juego = $mysqli->getEvento($idjuego);
+
+if($usuario[0]['gestor']==1){
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(isset($_FILES['imagenperfil'])){
-      
+  if(isset($_FILES['portada'])){
       $errors= array();
-      $file_name = $_FILES['imagenperfil']['name'];
-      $file_size = $_FILES['imagenperfil']['size'];
-      $file_tmp = $_FILES['imagenperfil']['tmp_name'];
-      $file_type = $_FILES['imagenperfil']['type'];
-      $file_ext = strtolower(end(explode('.',$_FILES['imagenperfil']['name'])));
+      $file_name = $_FILES['portada']['name'];
+      $file_size = $_FILES['portada']['size'];
+      $file_tmp = $_FILES['portada']['tmp_name'];
+      $file_type = $_FILES['portada']['type'];
+      $file_ext = strtolower(end(explode('.',$_FILES['portada']['name'])));
 
       $extensions= array("jpeg","jpg","png");
       
@@ -45,54 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $varsParaTwig['imagenperfil'] = "./status/image/" . $file_name;
       }
-
-
-
+      
       if (sizeof($errors) > 0) {
         $varsParaTwig['errores'] = $errors;
       }
-
-
-      $_POST['username'] = $usuario[0]['username'];
-      $_POST['imagenperfil'] = $file_name;
-      if($_POST['imagenperfil']==""){
-      $_POST['imagenperfil'] = $usuario[0]['imagen_perfil'];  
-    }
-
-    if($_POST['telefono']==""){
-      $_POST['telefono'] = $usuario[0]['telefono'];
-   
-    }
-
-    if($_POST['nombre']==""){
-      $_POST['nombre'] = $usuario[0]['nombre'];
-
-    }
-    if($_POST['apellidos']==""){
-      $_POST['apellidos'] = $usuario[0]['apellidos'];
-
-    }
-    if($_POST['pais']==""){
-      $_POST['pais'] = $usuario[0]['pais'];
-
-    }
-    if($_POST['correo']==""){
-      $_POST['correo'] = $usuario[0]['correo'];
-
-    }
-    if($_POST['twitter']==""){
-      $_POST['twitter'] = $usuario[0]['twitter'];
-    }
-
-    if($_POST['facebook']==""){
-      $_POST['facebook'] = $usuario[0]['facebook'];
-    }
-
-    if($_POST['instagram']==""){
-      $_POST['instagram'] = $usuario[0]['instagram'];
-    }
-    
-    $mysqli->modificarPerfil($_POST, $nombreUsuario);
 
     if(isset($_SESSION['nickUsuario'])){
       $nombreUsuario = $_SESSION['nickUsuario'];
@@ -112,14 +78,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     header("Location: unaPaginaCualquiera.php");*/
 
-
-
-    $paises = $mysqli->getPaises();
     
     
-    echo $twig->render('modificarperfil.html',['paises' => $paises, 'usuario'=>$usuario]); //Pasamos información de juegos para la portada a la plantilla 
+    echo $twig->render('modificarproducto.html',['usuario'=>$usuario, 'producto' => $producto]); //Pasamos información de juegos para la portada a la plantilla 
     
+  }
+  else{
+    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
+  }
 
 
 

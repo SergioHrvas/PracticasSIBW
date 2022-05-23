@@ -16,7 +16,7 @@
             <input type="file" class="inputtext" name="imagenperfil">
 
             <label for="nombre" class="etiqueta">Nombre de usuario</label> <span class="error"></span>
-            <input id="user_name" class="inputtext" name="username" value="{{usuario[0]['username']}}">
+            <input id="username" class="inputtext" name="username" value="{{usuario[0]['username']}}">
             <label for="correo" class="etiqueta">Correo Electrónico</label> <span class="error"></span>
             <input id="correo" class="inputtext" name="correo" value="{{usuario[0]['correo']}}"">
             <label for="contraseña" class="etiqueta">Nueva Contraseña</label> <span class="error"></span>
@@ -57,4 +57,6 @@
 
 {% block script %}
 <script type="text/javascript" src="status/js/login.js"></script>
+<script type="text/javascript" src="status/js/login2.js"></script>
+
 {% endblock %}

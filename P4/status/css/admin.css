@@ -1,0 +1,100 @@
+.caja{
+    width:100%;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: black;
+    background-color: gainsboro;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    gap:1%;
+}
+
+main {
+    width: 75%;
+    padding: 0;
+    margin: 0;
+    float: left;
+    background-color: rgb(148, 148, 148);
+    border-radius: 5px;
+    outline: 1px;
+    outline-color: black;
+    outline-style: solid;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+}
+
+.juegos{
+    display: block;
+}
+
+.portada{
+    
+    display: grid;
+}
+
+.juego{
+    width: 100%;
+}
+
+
+.datosproducto{
+    display: grid;
+    height: 100%;
+}
+
+.nombreproducto{
+    font-size: 34px;
+    word-wrap: break-word;
+    font-weight: bold;
+    font-family: Tahoma;
+}
+
+.herramientasgestor{
+    background-color: cornflowerblue;
+    width: auto;
+
+    margin:auto;
+    padding: 1%;
+}
+
+
+#paginas {
+    display: grid;
+    margin:auto;
+    padding: auto;
+    margin-bottom: 20px;
+    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+    /* DIVIDIMOS LOS NÚMEROS DE LAS PÁGINAS A PARTES IGUALES */
+    height: 4%;
+    width: 70%;
+}
+
+.numpag {
+    display: grid;
+    outline: 1px;
+    outline-color: black;
+    outline-style: solid;
+    background-color: #b1bdc5;
+    text-decoration: none; /* no underline */
+    cursor:pointer;
+    user-select: none;
+}
+
+.pag {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    margin: auto;
+    padding: auto;
+}
+
+.anadir{
+    text-align: center;
+    width: auto;
+    margin: auto;
+    padding: 1%;
+    margin-top: 1%;
+    margin-bottom: 3%;
+    background-color: #b1bdc5;
+
+}

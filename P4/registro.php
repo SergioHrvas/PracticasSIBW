@@ -16,6 +16,7 @@ $mysqli->identificarse();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valores = $_POST;
     $mysqli->nuevoUsuario($valores);
+    print($mysqli->error);
   /*
     if (checkLogin($nick, $pass)) {
       session_start();

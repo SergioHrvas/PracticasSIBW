@@ -20,18 +20,18 @@ class Database
 }
 
 //Obtener información del juego para la portada
-public function getJuegos($idEv)
+public function getJuegos($idEv, $num)
 {   
     $numproductos = $this->mysqli->query("SELECT COUNT(*) FROM juegos");
     $num = $numproductos->fetch_assoc();
 
     //Rotacion de juegos
     $num =  $num["COUNT(*)"];
-    $menor = (($idEv - 1)*9 + 1);
+    $menor = (($idEv - 1)*$num + 1);
     if($menor > $num){
         $menor=$menor%$num+1;
     }
-    $mayor = ($menor+8);
+    $mayor = ($menor+$num-1);
     if($mayor > $num){
          $mayor = $mayor%$num;
     }
@@ -135,11 +135,11 @@ public function getPaises()
 }
 
 public function nuevoUsuario($valores)
-{
-    $res = $this->mysqli->prepare('INSERT INTO usuarios (username, password,nombre,apellidos, telefono, correo, pais) VALUES (?, ?, ?, ?, ?, ?, ?)');
+{   
+    $res = $this->mysqli->prepare('INSERT INTO usuarios(username, password, nombre, apellidos, telefono, correo, pais) VALUES (?, ?, ?, ?, ?, ?, ?)');
     $valores['password'] = password_hash($valores['password'], PASSWORD_DEFAULT);
-    $res->bind_param('ssssssi',$valores['username'],$valores['password'],$valores['nombre'],$valores['apellidos'],$valores['telefono'],$valores['correo'],$valores['pais']);
-    $res->execute();   
+    $res->bind_param('ssssssi',$valores['user_name'],$valores['password'],$valores['nombre'],$valores['apellidos'],$valores['telefono'],$valores['correo'],$valores['pais']);
+    $res->execute(); 
 }
 
 public function logearUsuario($valores)
@@ -171,10 +171,25 @@ public function getDatosUsuario($nombreusuario){
             $rows[] = array('username' => $row['username'], 'nombre' => $row['nombre'], 'apellidos' => $row['apellidos'], 'telefono' => $row['telefono'], 'correo' => $row['correo'], 'pais' => $row['pais'], 'imagen_perfil' => $row['imagen_perfil'], 'twitter'=>$row['twitter'], 'facebook' => $row['facebook'], 'instagram' => $row['instagram'], 'moderador' => $row['moderador'], 'gestor' => $row['gestor'], 'super'=> $row['super']);
         }
     }
-
     return $rows;
 }
 
+
+public function getDatosBasicos($nombreusuario){
+    $res = $this->mysqli->prepare('SELECT imagen_perfil, moderador, gestor, super FROM usuarios WHERE username=?');
+    $res->bind_param('s', $nombreusuario);
+    $res->execute();
+    $res = $res->get_result();
+    $row = array('imagen_perfil' => 'Not Found','moderador' => 'Not Found', 'gestor' => 'Not Found', 'super' => 'Not Found');
+    if ($res->num_rows > 0) {
+        $rows = array();
+        while ($row = $res->fetch_assoc()) {
+            $rows[] = array('imagen_perfil' => $row['imagen_perfil'], 'moderador' => $row['moderador'], 'gestor' => $row['gestor'], 'super'=> $row['super']);
+        }
+    }
+
+    return $rows;
+}
 public function cambiarImagenPerfil($nombre, $usuario){
     $res = $this->mysqli->prepare('UPDATE usuarios SET imagen_perfil=? WHERE username=?');
     $res->bind_param('ss',$nombre, $usuario);
@@ -195,6 +210,21 @@ public function getPais($numero){
     }
     return $rows;
 }
+
+public function modificarPerfil($datos){
+    $res = $this->mysqli->prepare('UPDATE usuarios SET nombre=?, apellidos=?, imagen_perfil = ?, telefono=?, correo=?, pais=?, twitter=?, facebook=?, instagram=? WHERE username=?');
+    $res->bind_param('sssssissss', $datos['nombre'], $datos['apellidos'], $datos['imagenperfil'], $datos['telefono'], $datos['correo'], $datos['pais'], $datos['twitter'], $datos['facebook'], $datos['instagram'], $datos['username']);
+    $res->execute();
+
+}
+
+public function crearProducto($valores)
+{   
+    $res = $this->mysqli->prepare('INSERT INTO juegos(titulo, descripcion, portada, desarrollador, precio, video, fecha, genero, plataforma, puntuacion, web, masinfo, facebook, twitter, instagram, link)) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $res->bind_param('sssssssssissssss',$valores['titulo'],$valores['descripcion'],$valores['portada'],$valores['desarrollador'],$valores['precio'],$valores['video'],$valores['fecha'],$valores['genero'],$valores['plataforma'],$valores['puntuacion'],$valores['web'],$valores['masinfo'],$valores['facebook'],$valores['twitter'],$valores['instagram'],$valores['link']);
+    $res->execute(); 
+}
+
 }
 
 

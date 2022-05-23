@@ -1,12 +1,15 @@
 <html>
 
 <head>
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <title>SWITCHERS - La mejor tienda de videojuegos de Nintendo Switch!</title>
 
     <!--favicon-->
     <link rel="icon" href=".\status\image\favic.ico" type="image/ico" />
     <base href="/" />
+
+
+    <script src="https://kit.fontawesome.com/4b3671e02a.js" crossorigin="anonymous"></script>
     <!--LINKS CSS-->
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredoka:wght@500&display=swap">
@@ -18,7 +21,8 @@
 
 <body>
     <div id="bombilla"><img id="bombillaimg" src=".\status\image\off.png" /></div>
-    <div id="perfil"><a href="miperfil.php"><img id="perfilimg" src=".\status\image\{{usuario[0]['imagen_perfil']}}"/></a></div>
+    <div id="perfil"><a href="miperfil.php"><img id="perfilimg"
+                src=".\status\image\{{usuario[0]['imagen_perfil']}}" /></a></div>
     <!-- Cabecera -->
     <header>
         <div id="container-logo">
@@ -31,8 +35,16 @@
             <ul id="menu">
                 <li class="oculto"><a class="enlaces" href=".\index.php">Inicio</a> </li>
                 <li class="oculto"><a class="enlaces" href=".\contacto.php">Contacto</a> </li>
-                <li class="oculto"><a class="enlaces" href=".\login.php">Login</a> </li>
+                {% if usuario|length == 0 %}<li class="oculto"><a class="enlaces" href=".\login.php">Login</a> </li>
                 <li class="oculto"><a class="enlaces" href=".\registro.php">Registro</a> </li>
+                {% else %}
+                    {% if usuario[0]['gestor'] == true %}
+                        <li class="oculto"><a class="enlaces" href=".\listaproductos.php">Productos</a> </li>
+{% endif %}
+                <li class="oculto"><a class="enlaces" href=".\miperfil.php">Perfil</a> </li>
+                <li class="oculto"><a class="enlaces" href=".\cerrarsesion.php">Cerrar Sesión</a> </li>
+
+                {% endif %}
             </ul>
         </div>
     </header>

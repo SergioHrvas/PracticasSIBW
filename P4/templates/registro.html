@@ -10,13 +10,13 @@
     <h1 class="tituloseccion">Registro</h1>
     <div class="formulario">
         <form id="formulariocomentarios" action="registro.php" method="post">
-            <label for="nombre" class="etiqueta">Nombre de usuario</label> <span class="error"></span>
-            <input id="user_name" class="inputtext" name="username">
+            <label for="user_name" class="etiqueta">Nombre de usuario</label> <span class="error"></span>
+            <input id="user_name" class="inputtext" name="user_name">
             <label for="correo" class="etiqueta">Correo Electrónico</label> <span class="error"></span>
             <input id="correo" class="inputtext" name="correo">
-            <label for="contraseña" class="etiqueta">Contraseña</label> <span class="error"></span>
+            <label for="password" class="etiqueta">Contraseña</label> <span class="error"></span>
             <input id="password" class="inputtext" name="password">
-            <div class="check" class="inputtext">
+            <div class="check">
             <input type="checkbox" id="activar"><label for="activar">Mostrar contraseña</label></div>
             <label for="nombre" class="etiqueta">Nombre</label> <span class="error"></span>
             <input id="nombre" class="inputtext" name="nombre">
@@ -24,7 +24,6 @@
             <input id="apellidos" class="inputtext" name="apellidos">
             <label for="pais" class="etiqueta">País</label> <span class="error"></span>
             <select id="pais" class="inputtext" name="pais">
-            
                 <option value="none" selected disabled hidden>Seleccione un país</option>
                 {% for pais in paises %}
     
