@@ -9,15 +9,15 @@
 <section class="principal">
     <h1 class="tituloseccion">Añadir Producto</h1>
     <div class="formulario">
-        <form id="formulariocomentarios" action="modificarperfil.php" method="post" enctype="multipart/form-data">
+        <form id="formulariocomentarios" action="crearproducto.php" method="post" enctype="multipart/form-data">
             
-            <label for="imagenperfil" class="etiqueta">Imagen de portada</label> <span class="error"></span>
-            <input type="file" class="inputtext" name="imagenperfil">
+            <label for="portada" class="etiqueta">Imagen de portada</label> <span class="error"></span>
+            <input type="file" class="inputtext" name="portada">
 
             <label for="titulojuego" class="etiqueta">Título del juego</label> <span class="error"></span>
             <input id="titulojuego" class="inputtext" name="titulojuego">
             <label for="descripcion" class="etiqueta">Descripción</label> <span class="error"></span>
-            <input id="descripcion" class="inputtext" name="descripcion""">
+            <textarea id="descripcion" class="inputtext" name="descripcion"""></textarea>
             <label for="preciojuego" class="etiqueta">Precio</label> <span class="error"></span>
             <input id="preciojuego" class="inputtext" name="preciojuego">
             <label for="video" class="etiqueta">Vídeo</label> <span class="error"></span>

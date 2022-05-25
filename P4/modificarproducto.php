@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -13,13 +14,6 @@ $twig = new \Twig\Environment($loader);
 $mysqli = new Database();
 
 $mysqli->identificarse();
-session_start();
-
-if(isset($_SESSION['nickUsuario'])){
-  $nombreUsuario = $_SESSION['nickUsuario'];
-  $usuario = $mysqli->getDatosBasicos($nombreUsuario);
-}
-
 if (isset($_GET['ev'])) {
   $idEv = $_GET['ev'];
 }
@@ -27,9 +21,18 @@ else {
    $idEv = "leyendas";
 }
 
-$idjuego = $mysqli->getId($idEv);
-$juego = $mysqli->getEvento($idjuego);
 
+if(isset($_SESSION['nickUsuario'])){
+  $nombreUsuario = $_SESSION['nickUsuario'];
+  $usuario = $mysqli->getDatosBasicos($nombreUsuario);
+}
+
+print($idEv);
+print("<br/>");
+$idjuego = $mysqli->getId($idEv);
+print($idjuego);
+print("<br/>");
+$juego = $mysqli->getEvento($idjuego);
 if($usuario[0]['gestor']==1){
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if(isset($_FILES['portada'])){
@@ -51,20 +54,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
       
       if (empty($errors)==true) {
-        move_uploaded_file($file_tmp, "./status/image/" . $file_name);
+        move_uploaded_file($file_tmp, "./status/image/portadas/" . $file_name);
         
-        $varsParaTwig['imagenperfil'] = "./status/image/" . $file_name;
+        $varsParaTwig['portada'] = "./status/image/portadas/" . $file_name;
       }
       
       if (sizeof($errors) > 0) {
         $varsParaTwig['errores'] = $errors;
       }
 
-    if(isset($_SESSION['nickUsuario'])){
-      $nombreUsuario = $_SESSION['nickUsuario'];
-      $usuario = $mysqli->getDatosUsuario($nombreUsuario);
-    }
-    
+      $valores = $_POST;
+      $valores['portadajuego'] = $file_name;
+
+      
+      if($valores['titulojuego']==""){
+        $valores['titulojuego'] = $juego['titulo'];
+      }
+      if($valores['descripcion']==""){
+        $valores['descripcion'] = $juego['descripcion'];
+      }
+      if($valores['portadajuego']==""){
+        $valores['portadajuego'] = $juego['portada'];
+      }
+      if($valores['desarrollador']==""){
+        $valores['desarrollador'] = $juego['desarrollador'];
+      }
+      if($valores['preciojuego']==""){
+        $valores['preciojuego'] = $juego['precio'];
+      }
+      if($valores['video']==""){
+        $valores['video'] = $juego['video'];
+      }
+      if($valores['fecha']==""){
+        $valores['fecha'] = $juego['fecha'];
+      }
+      if($valores['genero']==""){
+        $valores['genero'] = $juego['genero'];
+      }
+      if($valores['plataforma']==""){
+        $valores['plataforma'] = $juego['plataforma'];
+      }
+      if($valores['puntuacion']==""){
+        $valores['puntuacion'] = $juego['puntuacion'];
+      }
+      if($valores['web']==""){
+        $valores['web'] = $juego['web'];
+      }
+      if($valores['masinfo']==""){
+        $valores['masinfo'] = $juego['masinfo'];
+      }
+      if($valores['facebook']==""){
+        $valores['facebook'] = $juego['facebook'];
+      }
+      if($valores['twitter']==""){
+        $valores['twitter'] = $juego['twitter'];
+      }
+      if($valores['instagram']==""){
+        $valores['instagram'] = $juego['instagram'];
+      }
+      if($valores['link']==""){
+        $valores['link'] = $juego['link'];
+      }
+      $valores['id'] = $idjuego;
+      $mysqli->modificarProducto($valores);
   }
 }
 
@@ -78,9 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     header("Location: unaPaginaCualquiera.php");*/
 
-    
-    
-    echo $twig->render('modificarproducto.html',['usuario'=>$usuario, 'producto' => $producto]); //Pasamos información de juegos para la portada a la plantilla 
+    print($juego['link']);
+    echo $twig->render('modificarproducto.html',['usuario'=>$usuario, 'producto' => $juego]); //Pasamos información de juegos para la portada a la plantilla 
     
   }
   else{

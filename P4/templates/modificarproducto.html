@@ -2,7 +2,6 @@
 {% block estilos %}
 <!--LINKS CSS-->
 <link rel="stylesheet" type="text/css" href="status/css/login.css">
-<link rel="stylesheet" type="text/css" href="status/css/perfil.css">
 {% endblock %}
 {%block central %}
 
@@ -10,44 +9,43 @@
 <section class="principal">
     <h1 class="tituloseccion">Modificar Producto</h1>
     <div class="formulario">
-        <form id="formulariocomentarios" action="modificarperfil.php" method="post" enctype="multipart/form-data">
-            <div id="fondoimagen_perfil"><img id="portada" src="./status/image/{{producto[0]['portada']}}"/></div>
-            <label for="imagenperfil" class="etiqueta">Imagen de portada</label> <span class="error"></span>
-            <input type="file" class="inputtext" name="imagenperfil">
+        <form id="formulariocomentarios" action="./modificarproducto/{{producto['link']}}" method="post" enctype="multipart/form-data">
+            
+            <label for="portada" class="etiqueta">Imagen de portada</label> <span class="error"></span>
+            <input type="file" class="inputtext" name="portada">
 
-            <label for="nombre" class="etiqueta">Título del juego</label> <span class="error"></span>
-            <input id="user_name" class="inputtext" name="username" value="{{usuario[0]['username']}}">
-            <label for="correo" class="etiqueta">Descripción</label> <span class="error"></span>
-            <input id="correo" class="inputtext" name="correo" value="{{usuario[0]['correo']}}"">
-            <label for="contraseña" class="etiqueta">Precio</label> <span class="error"></span>
-            <input id="password1" class="inputtext" name="password1">
-            <label for="nombre" class="etiqueta">Vídeo</label> <span class="error"></span>
-            <input id="nombre" class="inputtext" name="nombre" value="{{usuario[0]['nombre']}}"">
-            <label for="apellidos" class="etiqueta">Fecha de lanzamiento</label> <span class="error"></span>
-            <input id="apellidos" class="inputtext" name="apellidos" value="{{usuario[0]['apellidos']}}"">
-            <label for="telefono" class="etiqueta">Género</label> <span class="error"></span>
-            <input id="telefono" class="inputtext" name="telefono" value="{{usuario[0]['telefono']}}"">
-            <label for="twitter" class="etiqueta">Plataforma</label> <span class="error"></span>
-            <input id="twitter" class="inputtext" name="twitter" value="{{usuario[0]['twitter']}}"">
-            <label for="facebook" class="etiqueta">Desarrollador</label> <span class="error"></span>
-            <input id="facebook" class="inputtext" name="facebook" value="{{usuario[0]['facebook']}}">
-            <label for="instagram" class="etiqueta">Puntuación</label> <span class="error"></span>
-            <input id="instagram" class="inputtext" name="instagram" value="{{usuario[0]['instagram']}}"">
-            <label for="instagram" class="etiqueta">Web</label> <span class="error"></span>
-            <input id="instagram" class="inputtext" name="instagram" value="{{usuario[0]['instagram']}}"">
-            <label for="instagram" class="etiqueta">Más Info</label> <span class="error"></span>
-            <input id="instagram" class="inputtext" name="instagram" value="{{usuario[0]['instagram']}}"">
-            <label for="instagram" class="etiqueta">Facebook</label> <span class="error"></span>
-            <input id="instagram" class="inputtext" name="instagram" value="{{usuario[0]['instagram']}}"">
-            <label for="instagram" class="etiqueta">Twitte</label> <span class="error"></span>
-            <input id="instagram" class="inputtext" name="instagram" value="{{usuario[0]['instagram']}}"">
+            <label for="titulojuego" class="etiqueta">Título del juego</label> <span class="error"></span>
+            <input id="titulojuego" class="inputtext" name="titulojuego">
+            <label for="descripcion" class="etiqueta">Descripción</label> <span class="error"></span>
+            <textarea id="descripcion" class="inputtext" name="descripcion"""></textarea>
+            <label for="preciojuego" class="etiqueta">Precio</label> <span class="error"></span>
+            <input id="preciojuego" class="inputtext" name="preciojuego">
+            <label for="video" class="etiqueta">Vídeo</label> <span class="error"></span>
+            <input id="video" class="inputtext" name="video">
+            <label for="fecha" class="etiqueta">Fecha de lanzamiento</label> <span class="error"></span>
+            <input id="fecha" class="inputtext" name="fecha">
+            <label for="genero" class="etiqueta">Género</label> <span class="error"></span>
+            <input id="genero" class="inputtext" name="genero">
+            <label for="plataforma" class="etiqueta">Plataforma</label> <span class="error"></span>
+            <input id="plataforma" class="inputtext" name="plataforma">
+            <label for="desarrollador" class="etiqueta">Desarrollador</label> <span class="error"></span>
+            <input id="desarrollador" class="inputtext" name="desarrollador">
+            <label for="puntuacion" class="etiqueta">Puntuación</label> <span class="error"></span>
+            <input id="puntuacion" class="inputtext" name="puntuacion">
+            <label for="web" class="etiqueta">Web</label> <span class="error"></span>
+            <input id="web" class="inputtext" name="web">
+            <label for="masinfo" class="etiqueta">Más Info</label> <span class="error"></span>
+            <input id="masinfo" class="inputtext" name="masinfo">
+            <label for="facebook" class="etiqueta">Facebook</label> <span class="error"></span>
+            <input id="facebook" class="inputtext" name="facebook">
+            <label for="twitter" class="etiqueta">Twitter</label> <span class="error"></span>
+            <input id="twitter" class="inputtext" name="twitter">
             <label for="instagram" class="etiqueta">Instagram</label> <span class="error"></span>
-            <input id="instagram" class="inputtext" name="instagram" value="{{usuario[0]['instagram']}}"">
-            <label for="instagram" class="etiqueta">Link</label> <span class="error"></span>
-            <input id="instagram" class="inputtext" name="instagram" value="{{usuario[0]['instagram']}}"">
-
-            <label for="contraseña" class="etiqueta">Inserta su contraseña anterior</label> <span class="error"></span>
-            <input id="password2" class="inputtext" name="password2">
+            <input id="instagram" class="inputtext" name="instagram">
+            <label for="link" class="etiqueta">Link</label> <span class="error"></span>
+            <input id="link" class="inputtext" name="link">
+            <label for="password" class="etiqueta">Inserta su contraseña anterior</label> <span class="error"></span>
+            <input id="password" class="inputtext" name="password">
             <div class="check" class="inputtext">
             <input type="checkbox" id="activar2"><label for="activar2">Mostrar contraseña</label></div>
 

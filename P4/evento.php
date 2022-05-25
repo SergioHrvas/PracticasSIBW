@@ -19,7 +19,6 @@ else {
      $idEv = "leyendas";
 }
 
-session_start();
 
 
 $mysqli = new Database();
@@ -31,6 +30,7 @@ if(isset($_SESSION['nickUsuario'])){
  }
 
 $idEv=$mysqli->getId($idEv);
+
 $evento = $mysqli->getEvento($idEv);
 $comentarios = $mysqli->getComentarios($idEv);
 $imagenes = $mysqli->getGaleria($idEv);

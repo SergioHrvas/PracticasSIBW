@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (empty($errors)==true) {
         move_uploaded_file($file_tmp, "./status/image/" . $file_name);
         
-        $varsParaTwig['imagenperfil'] = "./status/image/" . $file_name;
+        $varsParaTwig['portada'] = "./status/image/" . $file_name;
       }
       
       if (sizeof($errors) > 0) {

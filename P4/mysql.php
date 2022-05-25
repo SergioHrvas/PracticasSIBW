@@ -55,7 +55,7 @@ public function getJuegos($idEv, $num)
 
 //Obtener el id de un juego por el nombre
 public function getId($idEv){
-    $res = $this->mysqli->query("SELECT id FROM juegos WHERE link = '$idEv'");
+    $res = $this->mysqli->query("SELECT id FROM juegos WHERE link='$idEv'");
     $id = $res->fetch_assoc();
     $num = $id['id'];
     return $num;
@@ -220,8 +220,49 @@ public function modificarPerfil($datos){
 
 public function crearProducto($valores)
 {   
-    $res = $this->mysqli->prepare('INSERT INTO juegos(titulo, descripcion, portada, desarrollador, precio, video, fecha, genero, plataforma, puntuacion, web, masinfo, facebook, twitter, instagram, link)) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $res->bind_param('sssssssssissssss',$valores['titulo'],$valores['descripcion'],$valores['portada'],$valores['desarrollador'],$valores['precio'],$valores['video'],$valores['fecha'],$valores['genero'],$valores['plataforma'],$valores['puntuacion'],$valores['web'],$valores['masinfo'],$valores['facebook'],$valores['twitter'],$valores['instagram'],$valores['link']);
+    $res = $this->mysqli->prepare('INSERT INTO juegos(titulo, descripcion, portada, desarrollador, precio, video, fecha, genero, plataforma, puntuacion, web, masinfo, facebook, twitter, instagram, link) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $res->bind_param('ssssdssssissssss',$valores['titulojuego'],$valores['descripcion'],$valores['portada'],$valores['desarrollador'],$valores['preciojuego'],$valores['video'],date($valores['fecha']),$valores['genero'],$valores['plataforma'],$valores['puntuacion'],$valores['web'],$valores['masinfo'],$valores['facebook'],$valores['twitter'],$valores['instagram'],$valores['link']);
+    $res->execute(); 
+}
+
+public function modificarProducto($valores)
+{   
+    print($valores['titulojuego']);
+    print("<br/>");
+    print($valores['descripcion']);
+    print("<br/>");
+    print($valores['portadajuego']);
+    print("<br/>");
+    print($valores['desarrollador']);
+    print("<br/>");
+    print($valores['preciojuego']);
+    print("<br/>");
+    print($valores['video']);
+    print("<br/>");
+    print(date($valores['fecha']));
+    print("<br/>");
+    print($valores['genero']);
+    print("<br/>");
+    print($valores['plataforma']);
+    print("<br/>");
+    print($valores['puntuacion']);
+    print("<br/>");
+    print($valores['web']);
+    print("<br/>");
+    print($valores['masinfo']);
+    print("<br/>");
+    print($valores['facebook']);
+    print("<br/>");
+    print($valores['twitter']);
+    print("<br/>");
+    print($valores['instagram']);
+    print("<br/>");
+    print($valores['link']);
+    print("<br/>");
+    print($valores['id']);
+    print("<br/>");
+    $res = $this->mysqli->prepare('UPDATE juegos SET titulo=?, descripcion=?, portada=?, desarrollador=?, precio=?, video=?, fecha=?, genero=?, plataforma=?, puntuacion=?, web=?, masinfo=?, facebook=?, twitter=?, instagram=?, link=? WHERE id=?');
+    $res->bind_param('ssssdssssissssssi',$valores['titulojuego'],$valores['descripcion'],$valores['portadajuego'],$valores['desarrollador'],$valores['preciojuego'],$valores['video'],$valores['fecha'],$valores['genero'],$valores['plataforma'],$valores['puntuacion'],$valores['web'],$valores['masinfo'],$valores['facebook'],$valores['twitter'],$valores['instagram'],$valores['link'],$valores['id']);
     $res->execute(); 
 }
 
