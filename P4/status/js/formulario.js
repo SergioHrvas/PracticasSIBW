@@ -1,6 +1,6 @@
 //Añadimos los eventos
 document.getElementById("botoncomentarios").addEventListener("click", function () { mostrarComentarios() });
-document.getElementById("enviar").addEventListener("click", function () { enviar() });
+document.getElementById("formulariocomentarios").addEventListener("submit", function () { enviar(); return false;});
 document.getElementById("comentario").addEventListener("keyup", function () { evaluarComent() });
 document.getElementById("bombilla").addEventListener("click", function () { cambiarModo() });
 for (let i = 0; i < 4; i++) {

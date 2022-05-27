@@ -28,10 +28,7 @@ if(isset($_SESSION['nickUsuario'])){
 }
 
 print($idEv);
-print("<br/>");
 $idjuego = $mysqli->getId($idEv);
-print($idjuego);
-print("<br/>");
 $juego = $mysqli->getEvento($idjuego);
 if($usuario[0]['gestor']==1){
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
