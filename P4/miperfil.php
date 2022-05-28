@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -13,7 +14,6 @@ $twig = new \Twig\Environment($loader);
 $mysqli = new Database();
 
 $mysqli->identificarse();
-session_start();
 if(isset($_SESSION['nickUsuario'])){
     $nombreUsuario = $_SESSION['nickUsuario'];
     $usuario = $mysqli->getDatosUsuario($nombreUsuario);

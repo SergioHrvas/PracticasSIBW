@@ -1,4 +1,5 @@
 <?php
+      session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -20,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $v = $mysqli->logearUsuario($valores);
 
     if ($v) {
-      session_start();
      // print($valores['username']);
       $_SESSION['nickUsuario'] = $valores['username'];  // guardo en la sesión el nick del usuario que se ha logueado
     }

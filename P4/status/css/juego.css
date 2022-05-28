@@ -511,3 +511,9 @@ label {
 #iconosgestordiv {
     display: inline-block;
 }
+
+.username{
+    font-size: medium;
+    font-weight: 500;
+    color: #909090;
+}

@@ -1,6 +1,6 @@
 //Añadimos los eventos
 document.getElementById("botoncomentarios").addEventListener("click", function () { mostrarComentarios() });
-document.getElementById("formulariocomentarios").addEventListener("submit", function () { enviar(); return false;});
+document.getElementById("enviar").addEventListener("click", function (event) { enviar(event)});
 document.getElementById("comentario").addEventListener("keyup", function () { evaluarComent() });
 document.getElementById("bombilla").addEventListener("click", function () { cambiarModo() });
 for (let i = 0; i < 4; i++) {
@@ -96,41 +96,43 @@ function mostrarComentarios() {
 };
 
 //Enviamos el formulario y lo insertamos
-function enviar() {
-    revisarNombreYApellidos();
-    revisarCorreo();
+function enviar(event) {
+    console.log("asdasd");
     revisarComentario();
-    revisarTitulo();
+    if(comentario_bien == false){
+        event.preventDefault();
+    }
+   // revisarTitulo();
     const d = new Date();
     let dia = calcularDiaSemana(d);
     if (nombre_bien && apellidos_bien && correo_bien && comentario_bien) {
-            var codigo = "<div class=\"comentario\"><div class=\"cabeceracomentario\"><div class=\"perfil\"><div class=\"imagenperfil\"><img class=\"avatar\" src=\"./status/image/avatar.png\"></div><div class=\"nombreusuario\">{{coment['nombreyapellidos']}}</div></div><div class=\"titulocomentario\"><h4 class=\"textoopinion\">{{coment['titulo']}}</h4><span class=\"fecha\">{{coment['fecha']}}</span></div></div><div class=\"opinion\">{{coment['descripcion']}}</div></div>";
-            (document.getElementsByClassName("formulario")).item(0).insertAdjacentHTML('afterend', codigo);
+        var codigo = "<div class=\"comentario\"><div class=\"cabeceracomentario\"><div class=\"perfil\"><div class=\"imagenperfil\"><img class=\"avatar\" src=\"./status/image/avatar.png\"></div><div class=\"nombreusuario\">{{coment['nombreyapellidos']}}</div></div><div class=\"titulocomentario\"><h4 class=\"textoopinion\">{{coment['titulo']}}</h4><span class=\"fecha\">{{coment['fecha']}}</span></div></div><div class=\"opinion\">{{coment['descripcion']}}</div></div>";
+        (document.getElementsByClassName("formulario")).item(0).insertAdjacentHTML('afterend', codigo);
 
-            var comentarioclonado = document.getElementsByClassName("comentario").item(0);
-            comentarioclonado.getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
-            comentarioclonado.getElementsByClassName("textoopinion").item(0).innerHTML = titulo;
-            comentarioclonado.getElementsByClassName("opinion").item(0).innerHTML = comentario;
-            var minutos = revisarNumero(d.getMinutes());
-            var horas = revisarNumero(d.getHours());
-            comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${horas}:${minutos} `
-            //alert(""+comentarioclonado.children[1].innerHTML);
+        var comentarioclonado = document.getElementsByClassName("comentario").item(0);
+        comentarioclonado.getElementsByClassName("nombreusuario").item(0).innerHTML = `${nombre} ${apellidos}`;
+        comentarioclonado.getElementsByClassName("textoopinion").item(0).innerHTML = titulo;
+        comentarioclonado.getElementsByClassName("opinion").item(0).innerHTML = comentario;
+        var minutos = revisarNumero(d.getMinutes());
+        var horas = revisarNumero(d.getHours());
+        comentarioclonado.getElementsByClassName("fecha").item(0).innerHTML = `${dia}, ${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} | ${horas}:${minutos} `
+        //alert(""+comentarioclonado.children[1].innerHTML);
 
-            //comentariodiv.insertAdjacentHTML("beforebegin", "<div class=\"comentario\">" + comentarioclonado.innerHTML + "</div>");
-            //comentarioclonado = document.getElementsByClassName('comentario').item(0);
-            let opacidad = 0.0;
-            comentarioclonado.style.opacity = opacidad;
-            let id = 0;
-            clearInterval(id);
-            id = setInterval(frame, 10);
-            function frame() {
-                if (opacidad <= 1) {
-                    opacidad += 0.01;
-                    comentarioclonado.style.opacity = opacidad;
-                }
-
+        //comentariodiv.insertAdjacentHTML("beforebegin", "<div class=\"comentario\">" + comentarioclonado.innerHTML + "</div>");
+        //comentarioclonado = document.getElementsByClassName('comentario').item(0);
+        let opacidad = 0.0;
+        comentarioclonado.style.opacity = opacidad;
+        let id = 0;
+        clearInterval(id);
+        id = setInterval(frame, 10);
+        function frame() {
+            if (opacidad <= 1) {
+                opacidad += 0.01;
+                comentarioclonado.style.opacity = opacidad;
             }
-    
+
+        }
+
     }
     return false;
 }
@@ -198,7 +200,7 @@ function revisarCorreo() {
             document.getElementsByClassName("error").item(3).innerHTML = "Rellena el campo 'email' correctamente!";
             correo_bien = false;
         }
-        else{
+        else {
             document.getElementsByClassName("error").item(3).innerHTML = "";
             correo_bien = true;
 
@@ -212,11 +214,11 @@ function revisarComentario() {
     comentario = document.getElementById("comentario").value;
 
     if (comentario <= 0) {
-        document.getElementsByClassName("error").item(4).innerHTML = "Debes rellenar el campo 'Comentarios'!";
+        document.getElementsByClassName("error").item(0).innerHTML = "Debes rellenar el campo 'Comentarios'!";
         comentario_bien = false;
     }
     else {
-        document.getElementsByClassName("error").item(4).innerHTML = "";
+        document.getElementsByClassName("error").item(0).innerHTML = "";
         comentario_bien = true;
     }
     return false;

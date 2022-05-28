@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -18,44 +19,7 @@ else {
      $idEv = "leyendas";
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if(isset($_FILES['portada'])){
-        $errors= array();
-        $file_name = $_FILES['portada']['name'];
-        $file_size = $_FILES['portada']['size'];
-        $file_tmp = $_FILES['portada']['tmp_name'];
-        $file_type = $_FILES['portada']['type'];
-        $file_ext = strtolower(end(explode('.',$_FILES['portada']['name'])));
-  
-        $extensions= array("jpeg","jpg","png");
-        
-        if (in_array($file_ext,$extensions) === false){
-          $errors[] = "Extensión no permitida, elige una imagen JPEG o PNG.";
-        }
-        
-        if ($file_size > 2097152){
-          $errors[] = 'Tamaño del fichero demasiado grande';
-        }
-        
-        if (empty($errors)==true) {
-          move_uploaded_file($file_tmp, "./status/image/" . $file_name);
-          
-          $varsParaTwig['portada'] = "./status/image/" . $file_name;
-        }
-        
-        if (sizeof($errors) > 0) {
-          $varsParaTwig['errores'] = $errors;
-        }
-  
-        $valores = $_POST;
-        
-         
-        $mysqli->crearComentario($valores);
-  
-  
-    }
-  }
-session_start();
+
 $mysqli = new Database();
 $mysqli->identificarse();
 
@@ -68,7 +32,36 @@ $idEv=$mysqli->getId($idEv);
 
 $evento = $mysqli->getEvento($idEv);
 $comentarios = $mysqli->getComentarios($idEv);
+
+//traverse array comentarios
+foreach ($comentarios as $key => $value) {
+  $comentarios[$key]['autor'] = $mysqli->getDatosUsuarioPorId($comentarios[$key]['id_usuario'])[0];
+  print($comentarios[$key]['descripcion']);
+
+}
+
+
+
+
 $imagenes = $mysqli->getGaleria($idEv);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $valores = $_POST;
+        $valores['id_juego'] = $idEv;
+        $valores['id_usuario'] = $usuario[0]['id'];
+        //Print all values in valores
+        foreach ($valores as $key => $value) {
+            print("<br>");
+            print($key . ": " . $value);
+        }
+        print("<br>");
+        print("aaaaaaaaaaaaaaa");
+
+        $mysqli->insertarComentario($valores);
+  
+
+}
+
 
 $evento['descripcion'] = nl2br($evento['descripcion']);
 echo $twig->render('producto.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes, 'usuario' => $usuario]); //Pasamos información completa de un juego a la plantilla

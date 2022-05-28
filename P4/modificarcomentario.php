@@ -12,14 +12,17 @@ $twig = new \Twig\Environment($loader);
 // Busco en la base de datos la información del producto y lo
 // almaceno en las variables $productoNombre, $productoMarca, $productoFoto...
 $mysqli = new Database();
-
 $mysqli->identificarse();
 
 if(isset($_SESSION['nickUsuario'])){
+  print($_SESSION['nickUsuario']);
   $nombreUsuario = $_SESSION['nickUsuario'];
   $usuario = $mysqli->getDatosUsuario($nombreUsuario);
+  print($_SESSION['moderador']);
+
 }
 
+if($usuario[0]['moderador']==1){
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if(isset($_FILES['imagenperfil'])){
       
@@ -117,10 +120,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $paises = $mysqli->getPaises();
     
     
-    echo $twig->render('modificarperfil.html',['paises' => $paises, 'usuario'=>$usuario]); //Pasamos información de juegos para la portada a la plantilla 
+    echo $twig->render('modificarcomentario.html',['usuario'=>$usuario]); //Pasamos información de juegos para la portada a la plantilla 
     
 
 
-
+  }
+  else{
+    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+  }
 
 ?>

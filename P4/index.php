@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -19,7 +20,6 @@ if (isset($_GET['ev'])) {
 else {
     $idEv = 1;
 }
-session_start();
 
 $mysqli = new Database();
 $mysqli->identificarse();
