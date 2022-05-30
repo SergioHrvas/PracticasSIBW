@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -11,45 +10,27 @@ $twig = new \Twig\Environment($loader);
 // porque hemos accedido desde http://localhost/?producto=12
 // Busco en la base de datos la información del producto y lo
 // almaceno en las variables $productoNombre, $productoMarca, $productoFoto...
+$mysqli = new Database();
 
+$mysqli->identificarse();
 if (isset($_GET['ev'])) {
   $idEv = $_GET['ev'];
 }
 else {
-   $idEv = "1";
+   $idEv = "-1";
 }
 
-
-$mysqli = new Database();
-$mysqli->identificarse();
+session_start();
 
 if(isset($_SESSION['nickUsuario'])){
-  print($_SESSION['nickUsuario']);
   $nombreUsuario = $_SESSION['nickUsuario'];
-  $usuario = $mysqli->getDatosUsuario($nombreUsuario);
+  $usuario = $mysqli->getDatosBasicos($nombreUsuario);
 }
-$comentariooriginal = $mysqli->getComentario($idEv);
-
 
 if($usuario[0]['moderador']==1){
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    if($_POST['titulo']==""){
-      $_POST['titulo'] = $comentariooriginal[0]['titulo'];
-    }
-    print($_POST['descripcion']);
-    if($_POST['descripcion']==""){
-      $_POST['descripcion'] = $comentariooriginal[0]['comentario'];
-    }
-    else{
-      $_POST['descripcion'] = $_POST['descripcion'] . "           Editado por: " . $usuario[0]['username'];
-    }
-
-    
-    $mysqli->modificarComentario($_POST, $idEv);
-  
+  $mysqli->eliminarComentario($idEv);
+   echo $twig->render('error.html',['mensaje'=>"Comentario eliminado correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
 }
-
 
     /*
     if (checkLogin($nick, $pass)) {
@@ -57,16 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       
       $_SESSION['nickUsuario'] = $nick;  // guardo en la sesión el nick del usuario que se ha logueado
     }
-    
-    header("Location: unaPaginaCualquiera.php");*/
-
-    echo $twig->render('modificarcomentario.html',['usuario'=>$usuario, 'comentario' => $comentariooriginal]); //Pasamos información de juegos para la portada a la plantilla 
-    
-
-
-  }
+    header("Location: unaPaginaCualquiera.php");*/    
+  
   else{
     echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+
   }
+
+
 
 ?>

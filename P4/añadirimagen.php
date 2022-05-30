@@ -15,6 +15,13 @@ $mysqli = new Database();
 $mysqli->identificarse();
 session_start();
 
+if (isset($_GET['ev'])) {
+  $idEv = $_GET['ev'];
+}
+else {
+   $idEv = "leyendas";
+}
+
 if(isset($_SESSION['nickUsuario'])){
   $nombreUsuario = $_SESSION['nickUsuario'];
   $usuario = $mysqli->getDatosBasicos($nombreUsuario);
@@ -24,35 +31,8 @@ $idjuego = $mysqli->getId($idEv);
 $juego = $mysqli->getEvento($idjuego);
 
 if($usuario[0]['gestor']==1){
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(isset($_FILES['portada'])){
-      $errors= array();
-      $file_name_p = $_FILES['portada']['name'];
-      $file_size = $_FILES['portada']['size'];
-      $file_tmp = $_FILES['portada']['tmp_name'];
-      $file_type = $_FILES['portada']['type'];
-      $file_ext = strtolower(end(explode('.',$_FILES['portada']['name'])));
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-      $extensions= array("jpeg","jpg","png");
-      
-      if (in_array($file_ext,$extensions) === false){
-        $errors[] = "Extensión no permitida, elige una imagen JPEG o PNG.";
-      }
-      
-      if ($file_size > 2097152){
-        $errors[] = 'Tamaño del fichero demasiado grande';
-      }
-      
-      if (empty($errors)==true) {
-        move_uploaded_file($file_tmp, "./status/image/" . $file_name_p);
-        
-        $varsParaTwig['portada'] = "./status/image/" . $file_name_p;
-      }
-      
-      if (sizeof($errors) > 0) {
-        $varsParaTwig['errores'] = $errors;
-      }
-    }
     if(isset($_FILES['imagenes'])){
       $errors= array();
 
@@ -87,38 +67,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
-      $valores = $_POST;
-      if($valores['preciojuego']==""){
-        $valores['preciojuego'] = 999.999;
-
-      }
-      if($valores['fecha']==""){
-        $valores['fecha'] = "2001-01-01";
-
-      }
-      if($valores['puntuacion']==""){
-        $valores['puntuacion'] = 1;
-
-      }
-      $valores['portada'] = $file_name_p;
-      $mysqli->crearProducto($valores);
-
       if(isset($_FILES['imagenes'])){
-      echo $twig->render('añadirdescripcion.html',['imagenes'=>$_FILES['imagenes']['name'], 'link' => $_POST['link']]); 
+      print("dsds" . $juego['link']);
+      echo $twig->render('añadirdescripcion.html',['imagenes'=>$_FILES['imagenes']['name'], 'link' => $juego['link']]); 
       }
       else{
-        echo $twig->render('error.html',['mensaje'=>"Producto creado correctamente"]); 
-
+        echo $twig->render('error.html',['mensaje'=>"No ha seleccionado ninguna imagen"]); //Pasamos información de juegos para la portada a la plantilla 
+    
       }
+  }
+  else{
+    echo $twig->render('añadirimagen.html',['imagenes'=>$_FILES['imagenes']['name'], 'link' => $juego['link']]); 
 
-}
-
-
-    
-    
-    if(!isset($_FILES['imagenes']))
-      echo $twig->render('crearproducto.html',['usuario'=>$usuario, 'producto' => $producto]); //Pasamos información de juegos para la portada a la plantilla 
-    
+  }
+  
   }
   else{
     echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 

@@ -10,7 +10,7 @@
     <h1 class="tituloseccion">Añadir Producto</h1>
     <div class="formulario">
         <form id="formulariocomentarios" action="crearproducto.php" method="post" enctype="multipart/form-data">
-            
+                    
             <label for="portada" class="etiqueta">Imagen de portada</label> <span class="error"></span>
             <input type="file" class="inputtext" name="portada">
 
@@ -44,6 +44,10 @@
             <input id="instagram" class="inputtext" name="instagram">
             <label for="link" class="etiqueta">Link</label> <span class="error"></span>
             <input id="link" class="inputtext" name="link">
+
+            <label for="imagenes" class="etiqueta">Imagenes</label> <span class="error"></span>
+            <input type="file" class="inputtext" name="imagenes[]" multiple="multiple">
+
             <label for="password" class="etiqueta">Inserta su contraseña anterior</label> <span class="error"></span>
             <input id="password" class="inputtext" name="password">
             <div class="check" class="inputtext">

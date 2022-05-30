@@ -28,17 +28,20 @@ if(isset($_SESSION['nickUsuario'])){
     $usuario = $mysqli->getDatosBasicos($nombreUsuario);
  }
 
+
 $idEv=$mysqli->getId($idEv);
 
 $evento = $mysqli->getEvento($idEv);
 $comentarios = $mysqli->getComentarios($idEv);
 
 //traverse array comentarios
-foreach ($comentarios as $key => $value) {
-  $comentarios[$key]['autor'] = $mysqli->getDatosUsuarioPorId($comentarios[$key]['id_usuario'])[0];
-  print($comentarios[$key]['descripcion']);
-
+if($comentarios!=null){
+    foreach ($comentarios as $key => $value) {
+        $comentarios[$key]['autor'] = $mysqli->getDatosUsuarioPorId($comentarios[$key]['id_usuario'])[0];
+      
+      }
 }
+
 
 
 
@@ -49,14 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $valores = $_POST;
         $valores['id_juego'] = $idEv;
         $valores['id_usuario'] = $usuario[0]['id'];
-        //Print all values in valores
-        foreach ($valores as $key => $value) {
-            print("<br>");
-            print($key . ": " . $value);
-        }
-        print("<br>");
-        print("aaaaaaaaaaaaaaa");
 
+    
         $mysqli->insertarComentario($valores);
   
 

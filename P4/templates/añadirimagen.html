@@ -1,0 +1,32 @@
+{% extends "padre.html" %}
+{% block estilos %}
+<!--LINKS CSS-->
+<link rel="stylesheet" type="text/css" href="status/css/login.css">
+{% endblock %}
+{%block central %}
+
+<!-- Contenido principal -->
+<section class="principal">
+    <h1 class="tituloseccion">Añadir Imagen</h1>
+    <div class="formulario">
+        <form id="formulariocomentarios" action="añadirimagen/{{link}}" method="post" enctype="multipart/form-data">
+            <label for="imagenes" class="etiqueta">Imagenes</label> <span class="error"></span>
+            <input type="file" class="inputtext" name="imagenes[]" multiple="multiple">
+
+            <label for="password" class="etiqueta">Inserta su contraseña anterior</label> <span class="error"></span>
+            <input id="password" class="inputtext" name="password">
+            <div class="check" class="inputtext">
+            <input type="checkbox" id="activar"><label for="activar">Mostrar contraseña</label></div>
+
+            <button type="submit" id="enviar">Enviar</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="status/js/login.js"></script>
+
+
+{% endblock %}

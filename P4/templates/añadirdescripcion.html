@@ -1,0 +1,31 @@
+{% extends "padre.html" %}
+{% block estilos %}
+<!--LINKS CSS-->
+<link rel="stylesheet" type="text/css" href="status/css/login.css">
+{% endblock %}
+{%block central %}
+
+<!-- Contenido principal -->
+<section class="principal">
+    <h1 class="tituloseccion">Añadir Descripcion</h1>
+    <div class="formulario">
+        <form id="formulariocomentarios" action="añadirdescripcion/{{link}}" method="post" enctype="multipart/form-data">
+            {% for i in 0..imagenes|length-1 %}
+            <img class="imagenadescribir" src="status/image/juegos/{{imagenes[i]}}"/>
+            <label for="descripcion" class="etiqueta">Descripcion de imagen</label> <span class="error"></span>
+            <input class="inputtext" name="descripcion{{i}}">
+            <input class="inputtext" name="imagen{{i}}" value="{{imagenes[i]}}">
+
+            <br/>
+            {%endfor%}
+
+            <button type="submit" id="enviar">Enviar</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

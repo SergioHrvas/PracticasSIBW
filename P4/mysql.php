@@ -110,11 +110,11 @@
         $res->execute();
         $res = $res->get_result();
         
-        $row = array('img' => 'Not Found', 'id_juego' => 'Not Found', 'descripcion' => 'Not Found');
+        $row = array('id' => 'Not Found', 'img' => 'Not Found', 'id_juego' => 'Not Found', 'descripcion' => 'Not Found');
         if ($res->num_rows > 0) {
             $rows = array();
             while ($row = $res->fetch_assoc()) {
-                $rows[] = array('img' => $row['img'], 'id_juego' => $row['id_juego'], 'descripcion' => $row['descripcion']);
+                $rows[] = array('id' => $row['id'], 'img' => $row['img'], 'id_juego' => $row['id_juego'], 'descripcion' => $row['descripcion']);
             }
         }
         return $rows;
@@ -250,7 +250,6 @@
     }
 
     public function eliminarproducto($valores){
-        print($valores);
         $res = $this->mysqli->prepare('DELETE FROM juegos WHERE id=?');
         $res->bind_param('i',$valores);
         $res->execute(); 
@@ -279,6 +278,22 @@
         return $rows;
     }
 
+    //Obtener comentario
+    public function getComentario($idComentario){
+        $res = $this->mysqli->prepare('SELECT * FROM comentarios WHERE id=?');
+        $res->bind_param('i',$idComentario);
+        $res->execute();
+        $res = $res->get_result();
+        $row = array('id' => 'Not Found', 'titulo' => 'Not Found', 'id_juego' => 'Not Found', 'id_usuario' => 'Not Found', 'comentario' => 'Not Found', 'fecha' => 'Not Found');
+        if ($res->num_rows > 0) {
+            $rows = array();
+            while ($row = $res->fetch_assoc()) {
+                $rows[] = array('id' => $row['id'], 'titulo' => $row['titulo'], 'id_juego' => $row['juego_id'], 'id_usuario' => $row['usuario_id'], 'comentario' => $row['descripcion'], 'fecha' => $row['fecha']);
+            }
+        }
+        return $rows;
+    }
+
     //Eliminar comentario
     public function eliminarComentario($idComentario){
         $res = $this->mysqli->prepare('DELETE FROM comentarios WHERE id=?');
@@ -287,12 +302,25 @@
     }
 
     //Modificar comentario
-    public function modificarComentario($valores){
+    public function modificarComentario($valores, $idComentario){
         $res = $this->mysqli->prepare('UPDATE comentarios SET titulo=?, descripcion=? WHERE id=?');
-        $res->bind_param('ss',$valores['titulocomentario'],$valores['comentario'],$valores['id']);
+        $res->bind_param('ssi',$valores['titulo'],$valores['descripcion'],$idComentario);
         $res->execute(); 
     }
 
+    //Insertar imagen
+    public function insertarImagen($valores){    
+        $res = $this->mysqli->prepare('INSERT INTO imagenes(id_juego, img, descripcion) VALUES (?, ?, ?)');
+        $res->bind_param('iss',$valores['id_juego'],$valores['imagen'], $valores['descripcion']);
+        $res->execute();  
     }
+
+    ///Eliminar imagen
+    public function eliminarImagen($idImagen){
+        $res = $this->mysqli->prepare('DELETE FROM imagenes WHERE id=?');
+        $res->bind_param('i',$idImagen);
+        $res->execute(); 
+    }
+}
 
     ?>

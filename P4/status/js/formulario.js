@@ -332,12 +332,8 @@ let anterior = 1;
 let primeravez = true;
 function cambiarImagen(i) {
     var imagenes;
-    console.log(conexion_img.readyState);
-    console.log(conexion_img.status);
     if (conexion_img.readyState == 4 && conexion_img.status == 200) {
-        console.log(conexion_img.responseText);
         imagenes = JSON.parse(conexion_img.responseText);
-        console.log(imagenes);
     }
     var opacidad = 0;
     document.getElementsByClassName("imagen").item(0).style.opacity = opacidad;
@@ -392,6 +388,7 @@ function rotarImagenes(direccion) {
             posicion += imagenes.length;
         }
         document.getElementsByClassName("imagen_galeria").item(i).src = "./status/image/juegos/" + imagenes[posicion]['img'];
+        document.getElementsByClassName("linkeliminarimg").item(i).href = "./eliminarimagen/" + imagenes[posicion]['id'];
 
     }
 }
