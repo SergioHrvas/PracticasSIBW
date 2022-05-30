@@ -21,7 +21,7 @@
 
 <body>
     <div id="bombilla"><img id="bombillaimg" src=".\status\image\off.png" /></div>
-    <div id="perfil"><a href="miperfil.php"><img id="perfilimg"
+    <div id="perfil"><a href="perfil/{{usuario[0]['username']}}"><img id="perfilimg"
                 src=".\status\image\{{usuario[0]['imagen_perfil']}}" /></a></div>
     <!-- Cabecera -->
     <header>
@@ -38,10 +38,13 @@
                 {% if usuario|length == 0 %}<li class="oculto"><a class="enlaces" href=".\login.php">Login</a> </li>
                 <li class="oculto"><a class="enlaces" href=".\registro.php">Registro</a> </li>
                 {% else %}
-                    {% if usuario[0]['gestor'] == true %}
-                        <li class="oculto"><a class="enlaces" href=".\listaproductos.php">Productos</a> </li>
-{% endif %}
-                <li class="oculto"><a class="enlaces" href=".\miperfil.php">Perfil</a> </li>
+                {% if usuario[0]['gestor'] == true %}
+                <li class="oculto"><a class="enlaces" href=".\listaproductos.php">Productos</a> </li>
+                {% endif %}
+                {% if usuario[0]['moderador'] == true %}
+                <li class="oculto"><a class="enlaces" href=".\listacomentarios.php">Comentarios</a> </li>
+                {% endif %}
+                <li class="oculto"><a class="enlaces" href="./perfil/{{usuario[0]['username']}}">Perfil</a> </li>
                 <li class="oculto"><a class="enlaces" href=".\cerrarsesion.php">Cerrar Sesión</a> </li>
 
                 {% endif %}

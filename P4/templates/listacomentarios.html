@@ -1,0 +1,76 @@
+{% extends "padre.html" %}
+{% block estilos %}
+<!--LINKS CSS-->
+<link rel="stylesheet" type="text/css" href="status/css/admin.css">
+<link rel="stylesheet" type="text/css" href="status/css/comentarios.css">
+
+{% endblock %}
+{%block central %}
+<!-- Contenido principal -->
+<section id="panel">
+    <div class="juegos">
+        <!-- Iteramos por todos los comentarios-->
+        {% for i in 0..comentarios|length-1 %}
+            <div class="gridcoment">
+                <div class="portadajuego">
+                    <img class="juego" src="status/image/portadas/{{comentarios[i]['juego']['portada']}}" />
+                </div>
+                
+                <div class="coment">
+                    <div class="comentario">
+
+                    <div class="cabeceracomentario">
+                        <div class="perfil">
+                            <div class="imagenperfil"><img class="avatar"
+                                    src=".\status\image\{{comentarios[i]['autor']['imagen_perfil']}}"></div>
+                            <div class="nombreusuario">
+                                <div class="nombresapellidos">{{comentarios[i]['autor']['nombre']}}
+                                    {{comentarios[i]['autor']['apellidos']}}
+                                </div>
+                                <div class="username">@{{comentarios[i]['autor']['username']}}</div>
+                            </div>
+                        </div>
+                        <div class="titulocomentario">
+
+                            <h4 class="textoopinion">{{comentarios[i]['titulo']}}</h4>
+                            <span class="fecha">{{comentarios[i]['fecha']}}</span>
+                        </div>
+                    </div>
+                    <div class="opinion">{{comentarios[i]['comentario']}}
+                        {% if usuario[0]['moderador'] == 1 %}
+                        <div class="iconosmoddiv"><a href="./modificarcomentario/{{comentarios[i]['id']}}"><i
+                                    class="fa-solid fa-pencil fa-1x"></i></a>
+                            <a href="./eliminarcomentario/{{comentarios[i]['id']}}"><i
+                                    class="fa-solid fa-eraser fa-1x"></i></a>
+                        </div>
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+<div id="paginas">
+    <a class="numpag">
+        <div class="pag">&laquo;</div>
+    </a>
+    {% for i in 1..6 %}
+    <a class="numpag" href=".\listaproductos.php?ev={{i}}">
+        <div class="pag">{{i}}</div>
+    </a>
+    {% endfor %}
+    <a class="numpag">
+        <div class="pag">&raquo;</div>
+    </a>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="status/js/portada.js"></script>
+{% endblock %}

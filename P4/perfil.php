@@ -14,12 +14,25 @@ $twig = new \Twig\Environment($loader);
 $mysqli = new Database();
 
 $mysqli->identificarse();
+
+
+if (isset($_GET['ev'])) {
+    $idEv = $_GET['ev'];
+}
+else {
+    $idEv = 1;
+}
+
+//$idusuario = $mysqli->getIdUsuario($idEv);
+$user = $mysqli->getDatosUsuario($idEv);
+
 if(isset($_SESSION['nickUsuario'])){
     $nombreUsuario = $_SESSION['nickUsuario'];
     $usuario = $mysqli->getDatosUsuario($nombreUsuario);
- }
+  }
+
 
  $pais = $mysqli->getPais($usuario[0]['pais']);
-echo $twig->render('miperfil.html',['usuario' => $usuario, 'pais' => $pais]); //Pasamos información de juegos para la portada a la plantilla 
+echo $twig->render('perfil.html',['user' => $user, 'pais' => $pais, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
 
 ?>

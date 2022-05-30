@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -20,17 +19,25 @@ if (isset($_GET['ev'])) {
 else {
     $idEv = 1;
 }
+session_start();
 
 $mysqli = new Database();
 $mysqli->identificarse();
 
 if(isset($_SESSION['nickUsuario'])){
     $nombreUsuario = $_SESSION['nickUsuario'];
-    $usuario = $mysqli->getDatosUsuario($nombreUsuario);
+    $usuario = $mysqli->getDatosBasicos($nombreUsuario);
  }
 
-$evento = $mysqli->getJuegos($idEv, 9);
+$comentarios = $mysqli->getTodosComentarios();
 
-echo $twig->render('portada.html', ['evento' => $evento, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
+//iterar comentarios
+if($comentarios!=null){
+    foreach ($comentarios as $key => $value) {
+        $comentarios[$key]['autor'] = $mysqli->getDatosUsuarioPorId($comentarios[$key]['id_usuario'])[0];
+        $comentarios[$key]['juego'] = $mysqli->getEvento($comentarios[$key]['id_juego']);
+      }
+}
+echo $twig->render('listacomentarios.html', ['comentarios' => $comentarios, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
 
 ?>

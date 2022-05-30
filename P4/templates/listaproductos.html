@@ -7,19 +7,21 @@
 <!-- Contenido principal -->
 <section id="panel">
     <div class="juegos">
+        {{juegos|length}}
+
         <!-- Iteramos por todos los comentarios-->
-        {% for i in 0..juego|length-1 %}
+        {% for i in 0..juegos|length-1 %}
         <div class="caja">
             <div class="portada">
-                <a href=".\evento\{{juego[i]['link']}}">
-                    <img class="juego" src=".\status\image\portadas\{{juego[i]['portada']}}" />
+                <a href=".\evento\{{juegos[i]['link']}}">
+                    <img class="juego" src=".\status\image\portadas\{{juegos[i]['portada']}}" />
                 </a>
             </div>
             <div class="datosproducto">
-                <p class="nombreproducto">{{juego[i]['titulo']}}</p>
-                <div class="herramientasgestor"><a href="./modificarproducto/{{juego[i]['link']}}"><i
+                <p class="nombreproducto">{{juegos[i]['titulo']}}</p>
+                <div class="herramientasgestor"><a href="./modificarproducto/{{juegos[i]['link']}}"><i
                             class="fa-solid fa-pencil fa-3x"></i></a>
-                    <a href="./eliminarproducto/{{juego[i]['link']}}"><i class="fa-solid fa-eraser fa-3x"></i></i></a>
+                    <a href="./eliminarproducto/{{juegos[i]['link']}}"><i class="fa-solid fa-eraser fa-3x"></i></i></a>
 
                 </div>
             </div>

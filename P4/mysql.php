@@ -26,7 +26,7 @@
         $num = $numproductos->fetch_assoc();
 
         //Rotacion de juegos
-
+        print($idEv . " - " .  $numjuegos . "<br/>");
         $num =  $num["COUNT(*)"];
         $menor = (($idEv - 1)*$numjuegos + 1);
         if($menor > $num){
@@ -36,7 +36,7 @@
         if($mayor > $num){
             $mayor = $mayor%$num;
         }
-
+        print($menor . " " . $mayor);
         if($mayor<$menor){
             $res = $this->mysqli->query("SELECT id, titulo, portada, link FROM juegos WHERE id >= " . $menor . " UNION SELECT id,titulo,portada,link FROM juegos WHERE id <= " . $mayor);
         }
@@ -61,24 +61,6 @@
         $num = $id['id'];
         return $num;
     }
-
-    //Obtener los comentarios de un juego
-    /* public function getComentarios($idEv)
-    {
-        $res = $this->mysqli->prepare("SELECT * FROM comentarios WHERE juego_id=?");
-        $com = $res->bind_param('i',$idEv);
-        $res->execute();
-        $res = $res->get_result();
-
-        $row = array('titulo' => 'Not Found', 'nombreyapellidos' => 'Not Found', 'descripcion' => 'Not Found', 'fecha' => 'Not Found', 'img' => 'Not Found');
-        if ($res->num_rows > 0) {
-            $rows = array();
-            while ($row = $res->fetch_assoc()) {
-                $rows[] = array('titulo' => $row['titulo'], 'nombreyapellidos' => $row['nombreyapellidos'], 'descripcion' => $row['descripcion'], 'fecha' => $row['fecha'], 'img' => $row['img']);
-            }
-        }
-        return $rows;
-    } */
 
     //Identificarse en la base de datos
     public function identificarse()
@@ -161,16 +143,16 @@
 
 
     public function getDatosUsuario($nombreusuario){
-        $res = $this->mysqli->prepare('SELECT username,nombre, apellidos, telefono,correo, pais, imagen_perfil, twitter, facebook, instagram, moderador, gestor, super FROM usuarios WHERE username=?');
+        $res = $this->mysqli->prepare('SELECT id,username,nombre, apellidos, telefono,correo, pais, imagen_perfil, twitter, facebook, instagram, moderador, gestor, super FROM usuarios WHERE username=?');
         $res->bind_param('s', $nombreusuario);
         $res->execute();
         $res = $res->get_result();
-        $row = array('username' => 'Not Found', 'nombre' => 'Not Found', 'apellidos' => 'Not Found', 'telefono' => 'Not Found', 'correo' => 'Not Found', 'pais' => 'Not Found', 'imagen_perfil' => 'Not Found', 'twitter' => 'Not Found', 'facebook' => 'Not Found', 'instagram' => 'Not Found', 'moderador' => 'Not Found', 'gestor' => 'Not Found', 'super' => 'Not Found');
+        $row = array('id' => 'Not Found', 'username' => 'Not Found', 'nombre' => 'Not Found', 'apellidos' => 'Not Found', 'telefono' => 'Not Found', 'correo' => 'Not Found', 'pais' => 'Not Found', 'imagen_perfil' => 'Not Found', 'twitter' => 'Not Found', 'facebook' => 'Not Found', 'instagram' => 'Not Found', 'moderador' => 'Not Found', 'gestor' => 'Not Found', 'super' => 'Not Found');
         if ($res->num_rows > 0) {
             $rows = array();
             while ($row = $res->fetch_assoc()) {
                 print("b");
-                $rows[] = array('username' => $row['username'], 'nombre' => $row['nombre'], 'apellidos' => $row['apellidos'], 'telefono' => $row['telefono'], 'correo' => $row['correo'], 'pais' => $row['pais'], 'imagen_perfil' => $row['imagen_perfil'], 'twitter'=>$row['twitter'], 'facebook' => $row['facebook'], 'instagram' => $row['instagram'], 'moderador' => $row['moderador'], 'gestor' => $row['gestor'], 'super'=> $row['super']);
+                $rows[] = array('id' => $row['id'], 'username' => $row['username'], 'nombre' => $row['nombre'], 'apellidos' => $row['apellidos'], 'telefono' => $row['telefono'], 'correo' => $row['correo'], 'pais' => $row['pais'], 'imagen_perfil' => $row['imagen_perfil'], 'twitter'=>$row['twitter'], 'facebook' => $row['facebook'], 'instagram' => $row['instagram'], 'moderador' => $row['moderador'], 'gestor' => $row['gestor'], 'super'=> $row['super']);
             }
         }
         return $rows;
@@ -321,6 +303,39 @@
         $res->bind_param('i',$idImagen);
         $res->execute(); 
     }
+
+    //Obtener todos los comentarios
+    public function getTodosComentarios(){
+        $res = $this->mysqli->prepare('SELECT * FROM comentarios ORDER BY fecha');
+        $res->execute();
+        $res = $res->get_result();
+        $row = array('id' => 'Not Found', 'titulo' => 'Not Found', 'id_juego' => 'Not Found', 'id_usuario' => 'Not Found', 'comentario' => 'Not Found', 'fecha' => 'Not Found');
+        if ($res->num_rows > 0) {
+            $rows = array();
+            while ($row = $res->fetch_assoc()) {
+                $rows[] = array('id' => $row['id'], 'titulo' => $row['titulo'], 'id_juego' => $row['juego_id'], 'id_usuario' => $row['usuario_id'], 'comentario' => $row['descripcion'], 'fecha' => $row['fecha']);
+            }
+        }
+        return $rows;
+    } 
+
+    //Obtener id de usuario a partir del username
+    public function getIdUsuario($username){
+        $res = $this->mysqli->prepare('SELECT id FROM usuarios WHERE username=?');
+        $res->bind_param('s',$username);
+        $res->execute();
+        $res = $res->get_result();
+        $row = array('id' => 'Not Found');
+        if ($res->num_rows > 0) {  
+            $rows = array();
+            while ($row = $res->fetch_assoc()) {
+                $rows[] = array('id' => $row['id']);
+            }
+        }
+        return $rows;
+    }
+
+
 }
 
     ?>

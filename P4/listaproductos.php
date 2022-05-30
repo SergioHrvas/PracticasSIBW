@@ -31,6 +31,6 @@ if(isset($_SESSION['nickUsuario'])){
 
 $evento = $mysqli->getJuegos($idEv, 18);
 
-echo $twig->render('listaproductos.html', ['juego' => $evento, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
+echo $twig->render('listaproductos.html', ['juegos' => $evento, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
 
 ?>

@@ -3,6 +3,7 @@
 <!--LINKS CSS-->
 <link rel="stylesheet" type="text/css" href="status/css/juego.css">
 <link rel="stylesheet" type="text/css" href="status/css/admin.css">
+<link rel="stylesheet" type="text/css" href="status/css/comentarios.css">
 {% endblock %}
 {% block central %}
 <!-- Contenido principal -->
@@ -16,7 +17,7 @@
         <h1 id="titulojuego">{{ evento['titulo'] }}</h1>
     </div>
     {% if usuario[0]['gestor'] == 1 %}
-    <div id="iconosgestordiv"><a href="./modificarproducto/{{evento['link']}}"><i
+    <div class="iconosgestordiv"><a href="./modificarproducto/{{evento['link']}}"><i
                 class="fa-solid fa-pencil fa-2x"></i></a>
         <a href="./eliminarproducto/{{evento['link']}}"><i class="fa-solid fa-eraser fa-2x"></i></a>
     </div>
@@ -41,7 +42,7 @@
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[0]['img']}}" alt="" />
                 {% if usuario[0]['gestor'] == 1 %}
-                <div id="iconosgestordiv">
+                <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[0]['id']}}"><i class="fa-solid fa-eraser fa-2x"></i></a>
                 </div>
                 {% endif %}
@@ -49,7 +50,7 @@
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[1]['img']}}" alt="" />
                 {% if usuario[0]['gestor'] == 1 %}
-                <div id="iconosgestordiv">
+                <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[1]['id']}}"><i class="fa-solid fa-eraser fa-2x"></i></a>
                 </div>
                 {% endif %}
@@ -57,7 +58,7 @@
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[2]['img']}}" alt="" />
                 {% if usuario[0]['gestor'] == 1 %}
-                <div id="iconosgestordiv">
+                <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[2]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
                 </div>
@@ -66,7 +67,7 @@
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[3]['img']}}" alt="" />
                 {% if usuario[0]['gestor'] == 1 %}
-                <div id="iconosgestordiv">
+                <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[3]['id']}}"><i class="fa-solid fa-eraser fa-2x"></i></a>
                 </div>
                 {% endif %}
@@ -78,9 +79,10 @@
                 src=".\status\image\flecha_der.png" /></div>
 
         {% if usuario[0]['gestor'] == 1 %}
-        <div id="iconosgestordiv"><a href="./añadirimagen/{{evento['link']}}"><i
+        <div class="divgestorimagen">
+        <div class="iconosgestordiv"><a href="./añadirimagen/{{evento['link']}}"><i
                     class="fa-solid fa-file-circle-plus fa-3x"></i></a>
-        </div>
+        </div></div>
         {% endif %}
     </section>
     <!-- Video -->
@@ -191,7 +193,7 @@
             </div>
             <div class="opinion">{{coment['comentario']}}
                 {% if usuario[0]['moderador'] == 1 %}
-                <div id="iconosmoddiv"><a href="./modificarcomentario/{{coment['id']}}"><i
+                <div class="iconosmoddiv"><a href="./modificarcomentario/{{coment['id']}}"><i
                             class="fa-solid fa-pencil fa-1x"></i></a>
                     <a href="./eliminarcomentario/{{coment['id']}}"><i class="fa-solid fa-eraser fa-1x"></i></a>
                 </div>

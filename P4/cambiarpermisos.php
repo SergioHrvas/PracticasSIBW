@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_POST['instagram'] = $user[0]['instagram'];
     }
     
-    $mysqli->modificarPerfil($_POST, $nombreUsuario);
+    $mysqli->cambiarpermisos($_POST, $nombreUsuario);
 
     if(isset($_SESSION['nickUsuario'])){
       $nombreUsuario = $_SESSION['nickUsuario'];
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $paises = $mysqli->getPaises();
     
     
-    echo $twig->render('modificarperfil.html',['paises' => $paises, 'usuario'=>$usuario, 'user' => $user]); //Pasamos información de juegos para la portada a la plantilla 
+    echo $twig->render('cambiarpermisos.html',['paises' => $paises, 'usuario'=>$usuario, 'user' => $user]); //Pasamos información de juegos para la portada a la plantilla 
     
 
 

@@ -1,0 +1,184 @@
+/* COMENTARIOS */
+.formulario {
+    display: block;
+}
+
+
+#botoncomentarios {
+    background-color: rgb(255, 77, 77);
+    width: 30%;
+    padding: auto;
+    margin: auto;
+    text-align: center;
+    outline: 1px;
+    box-shadow: 0px 1px 2px #000;
+    cursor: pointer;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+}
+
+#botoncomentarios:hover {
+    opacity: .8;
+}
+
+#cajacomentarios {
+    transition: height .4s;
+    display: none;
+    max-height: 5%;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+label {
+    margin-bottom: 1%;
+}
+
+#comentario {
+    width: 100%;
+    resize: vertical;
+    max-height: 400px;
+}
+
+.comentario {
+    margin: 0;
+    padding: 0;
+    background-color: #b6b6b6;
+    height: auto;
+    outline: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    margin-top: 20px;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+#comentarios {
+    margin: 0;
+    padding: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+#enviar {
+    margin-top: 3%;
+}
+
+.cabeceracomentario {
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.perfil {
+    height: auto;
+    width: 98%;
+    outline: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    border-radius: 5px;
+    background-color: #ff8f8f;
+    max-width: 98%;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.imagenperfil {
+    width: 38px;
+    height: 38px;
+    margin-top: 2px;
+    display: grid;
+}
+
+.avatar {
+    width: 95%;
+    height: 95%;
+    margin-left: 5px;
+    border-radius: 20px;
+    outline: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    background-color: #8fc0ff;
+    /* Imagen con fondo */
+}
+
+.nombreusuario {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: grid;
+    margin-left: 20px;
+}
+
+.titulocomentario {
+    display: grid;
+    height: auto;
+    width: 96%;
+    word-break: break-all;
+    word-wrap: break-word;
+    padding-left: 2%;
+    font-size: 20px;
+    outline: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #c2c2c2;
+    max-width: 100%;
+}
+
+.fecha {
+    color: #777676;
+    font-size: 13px;
+}
+
+.textoopinion {
+    padding: 0;
+    margin: 0;
+    padding-top: 2px;
+}
+
+.opinion {
+    margin: 0;
+    padding: 0;
+    width: 99%;
+    margin-right: 5px;
+    margin-top: 5px;
+    display: block;
+    border-radius: 5px;
+}
+
+.error {
+    background-color: #ff5959;
+    color: rgb(150, 0, 0);
+    font-size: 12px;
+}
+
+
+
+.textoopinion {
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+#titulocomentarios {
+    background-color: #808080;
+    outline: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    padding-left: 5px;
+}
+
+.username{
+    font-size: medium;
+    font-weight: 500;
+    color: #909090;
+}

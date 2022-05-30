@@ -1,0 +1,59 @@
+{% extends "padre.html" %}
+{% block estilos %}
+<!--LINKS CSS-->
+<link rel="stylesheet" type="text/css" href="status/css/contacto.css">
+<link rel="stylesheet" type="text/css" href="status/css/perfil.css">
+
+{% endblock %}
+{%block central %}
+
+<!-- Contenido principal -->
+<section class="principal">
+    <h1 class="tituloseccion">Perfil</h1>
+    <div id="fondoimagen_perfil"><img id="imagen_perfil" src="./status/image/{{user[0]['imagen_perfil']}}" /></div>
+    <ul class="descripcion">
+        <li>Nombre de usuario: {{user[0]['username']}}</li>
+        <li>Nombre: {{user[0]['nombre']}}</li>
+        <li>Apellidos: {{user[0]['apellidos']}}</li>
+        {% if usuario[0]['id'] == user[0]['id'] or usuario[0]['super']==1 %}
+        <li>Correo Electrónico: {{user[0]['correo']}}</li>
+        <li>Teléfono: {{user[0]['telefono']}}</li>
+        {% endif %}
+        <li>País: {{pais[0]['name']}}<img id="bandera" src="./status/image/paises/{{pais[0]['alpha_2']}}.png" /></li>
+        <!--*permisos*-->
+    </ul>
+    <div class="redessociales">
+        <div class="redsocial"><a href=https://es-la.facebook.com/{{user[0]['facebook']}} target="_blank"><img
+                    class="iconored" src=".\status\image\facebook.png"></a></div>
+        <div class="redsocial"><a href=https://twitter.com/{{user[0]['twitter']}} target="_blank"><img class="iconored"
+                    src=".\status\image\twitter.png"></a></div>
+        <div class="redsocial"><a href=https://www.instagram.com/{{user[0]['instagram']}} target="_blank"><img
+                    class="iconored" src=".\status\image\instagram.jpg"></a></div>
+    </div>
+    {% if usuario[0]['id'] == user[0]['id'] or usuario[0]['super']==1 %}
+    {% if usuario[0]['id'] == user[0]['id'] %}
+    <div class="botonperfil">Mis compras</div>
+    {%endif %}
+
+    <a href="./modificarperfil/{{user[0]['username']}}">
+        <div class="botonperfil">Editar perfil</div>
+    </a>
+    {% if usuario[0]['id'] == user[0]['id'] %}
+
+    <div class="botonperfil">Cerrar sesión</div>
+    {%endif %}
+
+    {% endif %}
+
+
+    {% if usuario[0]['super']==1 %}
+    <a href="./cambiarpermisos/{{user[0]['username']}}">
+        <div class="botonperfil">Cambiar Permisos</div>
+    </a>
+
+    {%endif%}
+</section>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
