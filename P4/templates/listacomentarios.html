@@ -8,16 +8,25 @@
 {%block central %}
 <!-- Contenido principal -->
 <section id="panel">
+    <div class="formbuscardiv">
+        <form class="formbuscar" action="listacomentarios.php" method="post" enctype="multipart/form-data">
+            <label for="busqueda" class="etiqbuscar">BÚSQUEDA</label>
+            <input type="text" class="busqueda" name="busqueda" placeholder="Buscar...">
+            <button type="submit" class="enviarbusqueda">Enviar</button>
+        </form>
+    </div>
     <div class="juegos">
+        <p id="num_res">Resultados: {{comentarios|length}}</p>
         <!-- Iteramos por todos los comentarios-->
+        {% if comentarios|length > 0 %}
         {% for i in 0..comentarios|length-1 %}
-            <div class="gridcoment">
-                <div class="portadajuego">
-                    <img class="juego" src="status/image/portadas/{{comentarios[i]['juego']['portada']}}" />
-                </div>
-                
-                <div class="coment">
-                    <div class="comentario">
+        <div class="gridcoment">
+            <div class="portadajuego">
+                <img class="juego" src="status/image/portadas/{{comentarios[i]['juego']['portada']}}" />
+            </div>
+
+            <div class="coment">
+                <div class="comentario">
 
                     <div class="cabeceracomentario">
                         <div class="perfil">
@@ -49,26 +58,14 @@
                 </div>
             </div>
         </div>
-        <hr/>
+        <hr />
 
         {% endfor %}
+        {% endif %}
 
     </div>
 
 </section>
-<div id="paginas">
-    <a class="numpag">
-        <div class="pag">&laquo;</div>
-    </a>
-    {% for i in 1..6 %}
-    <a class="numpag" href=".\listaproductos.php?ev={{i}}">
-        <div class="pag">{{i}}</div>
-    </a>
-    {% endfor %}
-    <a class="numpag">
-        <div class="pag">&raquo;</div>
-    </a>
-</div>
 {% endblock %}
 
 {% block script %}

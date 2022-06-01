@@ -29,8 +29,20 @@ if(isset($_SESSION['nickUsuario'])){
     $usuario = $mysqli->getDatosBasicos($nombreUsuario);
  }
 
-$evento = $mysqli->getJuegos($idEv, 18);
+if($usuario[0]['gestor']==1){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $valores = $_POST;
+        $evento = $mysqli->getJuegosContiene($valores['busqueda']);
 
-echo $twig->render('listaproductos.html', ['juegos' => $evento, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
 
+    }
+    else{
+        $evento = $mysqli->getTodosJuegos();
+    }
+    echo $twig->render('listaproductos.html', ['juegos' => $evento, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
+   
+}
+else{
+    echo $twig->render('error.html', ['mensaje' => "No tienes permiso"]);
+}
 ?>

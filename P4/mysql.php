@@ -19,6 +19,23 @@
         return $evento;
     }
 
+    //Obtener informacion de todos los juegos
+    public function getTodosJuegos()
+    {
+        $res = $this->mysqli->prepare("SELECT * FROM juegos ORDER BY titulo");
+        $res->execute();
+        $res = $res->get_result();
+
+        $juegos = array();
+        
+        if ($res->num_rows > 0) {
+            while ($row = $res->fetch_assoc()) {
+                $juegos[] = array('titulo' => $row['titulo'], 'descripcion' => $row['descripcion'], 'portada' => $row['portada'], 'precio' => $row['precio'], 'video' => $row['video'], 'fecha' => $row['fecha'], 'genero' => $row['genero'], 'plataforma' => $row['plataforma'], 'desarrollador' => $row['desarrollador'], 'puntuacion' => $row['puntuacion'], 'web' => $row['web'], 'masinfo' => $row['masinfo'], 'facebook' => $row['facebook'], 'twitter' => $row['twitter'], 'instagram' => $row['instagram'], 'link' => $row['link']);
+            }
+        }
+        return $juegos;
+    }
+
     //Obtener información del juego para la portada
     public function getJuegos($idEv, $numjuegos)
     {   
@@ -26,7 +43,6 @@
         $num = $numproductos->fetch_assoc();
 
         //Rotacion de juegos
-        print($idEv . " - " .  $numjuegos . "<br/>");
         $num =  $num["COUNT(*)"];
         $menor = (($idEv - 1)*$numjuegos + 1);
         if($menor > $num){
@@ -36,7 +52,6 @@
         if($mayor > $num){
             $mayor = $mayor%$num;
         }
-        print($menor . " " . $mayor);
         if($mayor<$menor){
             $res = $this->mysqli->query("SELECT id, titulo, portada, link FROM juegos WHERE id >= " . $menor . " UNION SELECT id,titulo,portada,link FROM juegos WHERE id <= " . $mayor);
         }
@@ -151,7 +166,6 @@
         if ($res->num_rows > 0) {
             $rows = array();
             while ($row = $res->fetch_assoc()) {
-                print("b");
                 $rows[] = array('id' => $row['id'], 'username' => $row['username'], 'nombre' => $row['nombre'], 'apellidos' => $row['apellidos'], 'telefono' => $row['telefono'], 'correo' => $row['correo'], 'pais' => $row['pais'], 'imagen_perfil' => $row['imagen_perfil'], 'twitter'=>$row['twitter'], 'facebook' => $row['facebook'], 'instagram' => $row['instagram'], 'moderador' => $row['moderador'], 'gestor' => $row['gestor'], 'super'=> $row['super']);
             }
         }
@@ -221,7 +235,7 @@
     {   
         $res = $this->mysqli->prepare('INSERT INTO juegos(titulo, descripcion, portada, desarrollador, precio, video, fecha, genero, plataforma, puntuacion, web, masinfo, facebook, twitter, instagram, link) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $res->bind_param('ssssdssssissssss',$valores['titulojuego'],$valores['descripcion'],$valores['portada'],$valores['desarrollador'],$valores['preciojuego'],$valores['video'],date($valores['fecha']),$valores['genero'],$valores['plataforma'],$valores['puntuacion'],$valores['web'],$valores['masinfo'],$valores['facebook'],$valores['twitter'],$valores['instagram'],$valores['link']);
-        $res->execute(); 
+        $res->execute();
     }
 
     public function modificarProducto($valores)
@@ -330,6 +344,85 @@
             $rows = array();
             while ($row = $res->fetch_assoc()) {
                 $rows[] = array('id' => $row['id']);
+            }
+        }
+        return $rows;
+    }
+
+    //Cambiar permisos usuario
+    public function cambiarPermisos($valores, $idUsuario){
+        $res = $this->mysqli->prepare('UPDATE usuarios SET gestor=?, moderador=?, super=? WHERE id=?');
+        $res->bind_param('iiii',$valores['gestor'],$valores['moderador'],$valores['super'],$idUsuario);
+        $res->execute(); 
+    }
+
+    //Añadir etiquetas
+    public function añadirEtiquetas($valor, $idJuego){
+        // print("valor: " . $valor);
+        $res = $this->mysqli->prepare('INSERT INTO etiquetas(texto) VALUES (?)');
+        $res->bind_param('s',$valor);
+        $res->execute(); 
+
+        //Añadir ids a contiene
+        $res = $this->mysqli->prepare('INSERT INTO contiene(id_juego, id_etiqueta) VALUES (?,?)');
+        $res->bind_param('ii',$idJuego,$this->getInsertId());
+        $res->execute();
+    }
+
+        //Get Etiquetas
+    public function getEtiquetas($idJuego){
+        $res = $this->mysqli->prepare('SELECT * FROM etiquetas WHERE id IN (SELECT id_etiqueta FROM contiene WHERE id_juego=?)');
+        $res->bind_param('i',$idJuego);
+        $res->execute();
+        $res = $res->get_result();
+        $row = array('id' => 'Not Found', 'texto' => 'Not Found');
+        if ($res->num_rows > 0) {
+            $rows = array();
+            while ($row = $res->fetch_assoc()) {
+                $rows[] = array('id' => $row['id'], 'texto' => $row['texto']);
+            }
+        }
+        return $rows;
+    }
+    
+    //get insert_id
+    public function getInsertId(){
+        return $this->mysqli->insert_id;
+    }
+
+//Eliminar etiqueta
+    public function eliminarEtiqueta($idEtiqueta){
+        $res = $this->mysqli->prepare('DELETE FROM etiquetas WHERE id=?');
+        $res->bind_param('i',$idEtiqueta);
+        $res->execute(); 
+    }
+
+    //Get comments that contain a string in the middle order by date
+    public function getComentariosContiene($valor){
+        $res = $this->mysqli->prepare('SELECT * FROM comentarios WHERE descripcion LIKE "%'.$valor.'%" ORDER BY fecha');
+        $res->execute();
+        $res = $res->get_result();
+        $row = array('id' => 'Not Found', 'titulo' => 'Not Found', 'id_juego' => 'Not Found', 'id_usuario' => 'Not Found', 'comentario' => 'Not Found', 'fecha' => 'Not Found');
+        if ($res->num_rows > 0) {
+            $rows = array();
+            while ($row = $res->fetch_assoc()) {
+                $rows[] = array('id' => $row['id'], 'titulo' => $row['titulo'], 'id_juego' => $row['juego_id'], 'id_usuario' => $row['usuario_id'], 'comentario' => $row['descripcion'], 'fecha' => $row['fecha']);
+            }
+        }
+        return $rows;
+    }
+
+    //Get juegos that contain a string in the middle of a row order by date
+    public function getJuegosContiene($valor){
+        $res = $this->mysqli->prepare('SELECT * FROM juegos WHERE (titulo LIKE "%'.$valor.'%") OR (descripcion LIKE "%'.$valor.'%") ORDER BY titulo');
+        $res->execute();
+        $res = $res->get_result();
+        $row = array('id' => 'Not Found', 'titulo' => 'Not Found', 'descripcion' => 'Not Found', 'fecha' => 'Not Found');
+        if ($res->num_rows > 0) {
+            $rows = array();
+            while ($row = $res->fetch_assoc()) {
+                $rows[] = array('titulo' => $row['titulo'], 'descripcion' => $row['descripcion'], 'portada' => $row['portada'], 'precio' => $row['precio'], 'video' => $row['video'], 'fecha' => $row['fecha'], 'genero' => $row['genero'], 'plataforma' => $row['plataforma'], 'desarrollador' => $row['desarrollador'], 'puntuacion' => $row['puntuacion'], 'web' => $row['web'], 'masinfo' => $row['masinfo'], 'facebook' => $row['facebook'], 'twitter' => $row['twitter'], 'instagram' => $row['instagram'], 'link' => $row['link']);
+
             }
         }
         return $rows;

@@ -27,97 +27,35 @@ if(isset($_SESSION['nickUsuario'])){
   $nombreUsuario = $_SESSION['nickUsuario'];
   $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
-
 $user = $mysqli->getDatosUsuario($idEv);
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(isset($_FILES['imagenperfil'])){
-      
-      $errors= array();
-      $file_name = $_FILES['imagenperfil']['name'];
-      $file_size = $_FILES['imagenperfil']['size'];
-      $file_tmp = $_FILES['imagenperfil']['tmp_name'];
-      $file_type = $_FILES['imagenperfil']['type'];
-      $file_ext = strtolower(end(explode('.',$_FILES['imagenperfil']['name'])));
+       $valores = $_POST;
 
-      $extensions= array("jpeg","jpg","png");
-      
-      if (in_array($file_ext,$extensions) === false){
-        $errors[] = "Extensión no permitida, elige una imagen JPEG o PNG.";
-      }
-      
-      if ($file_size > 2097152){
-        $errors[] = 'Tamaño del fichero demasiado grande';
-      }
-      
-      if (empty($errors)==true) {
-        move_uploaded_file($file_tmp, "./status/image/" . $file_name);
-        
-        $varsParaTwig['imagenperfil'] = "./status/image/" . $file_name;
-      }
+       //Print $valores
+        if($valores['moderador']==""){
+          $valores['moderador'] = 0;
+        }
+        if($valores['gestor']==""){
+          $valores['gestor'] = 0;
+        }
+        if($valores['super']==""){
+          $valores['super'] = 0;
+        }
 
-
-
-      if (sizeof($errors) > 0) {
-        $varsParaTwig['errores'] = $errors;
-      }
-
-
-      $_POST['username'] = $user[0]['username'];
-      $_POST['imagenperfil'] = $file_name;
-      if($_POST['imagenperfil']==""){
-      $_POST['imagenperfil'] = $user[0]['imagen_perfil'];  
-    }
-
-    if($_POST['telefono']==""){
-      $_POST['telefono'] = $user[0]['telefono'];
-   
-    }
-
-    if($_POST['nombre']==""){
-      $_POST['nombre'] = $user[0]['nombre'];
-
-    }
-    if($_POST['apellidos']==""){
-      $_POST['apellidos'] = $user[0]['apellidos'];
-
-    }
-    if($_POST['pais']==""){
-      $_POST['pais'] = $user[0]['pais'];
-
-    }
-    if($_POST['correo']==""){
-      $_POST['correo'] = $user[0]['correo'];
-
-    }
-    if($_POST['twitter']==""){
-      $_POST['twitter'] = $user[0]['twitter'];
-    }
-
-    if($_POST['facebook']==""){
-      $_POST['facebook'] = $user[0]['facebook'];
-    }
-
-    if($_POST['instagram']==""){
-      $_POST['instagram'] = $user[0]['instagram'];
-    }
+       
     
-    $mysqli->cambiarpermisos($_POST, $nombreUsuario);
+    $mysqli->cambiarPermisos($valores, $user[0]['id']);
 
-    if(isset($_SESSION['nickUsuario'])){
-      $nombreUsuario = $_SESSION['nickUsuario'];
-      $usuario = $mysqli->getDatosUsuario($user[0]['username']);
-    }
     
   }
-}
 
 
-
-    $paises = $mysqli->getPaises();
+  $user = $mysqli->getDatosUsuario($idEv);
     
     
-    echo $twig->render('cambiarpermisos.html',['paises' => $paises, 'usuario'=>$usuario, 'user' => $user]); //Pasamos información de juegos para la portada a la plantilla 
+    echo $twig->render('cambiarpermisos.html',['usuario'=>$usuario, 'user' => $user]); //Pasamos información de juegos para la portada a la plantilla 
     
 
 

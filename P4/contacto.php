@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -12,6 +13,15 @@ $twig = new \Twig\Environment($loader);
 // almaceno en las variables $productoNombre, $productoMarca, $productoFoto...
 
 
-echo $twig->render('contacto.html',); //Pasamos información de juegos para la portada a la plantilla 
+
+$mysqli = new Database();
+$mysqli->identificarse();
+
+if(isset($_SESSION['nickUsuario'])){
+    $nombreUsuario = $_SESSION['nickUsuario'];
+    $usuario = $mysqli->getDatosUsuario($nombreUsuario);
+ }
+
+echo $twig->render('contacto.html',['usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
 
 ?>

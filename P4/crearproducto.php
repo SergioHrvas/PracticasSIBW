@@ -100,11 +100,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $valores['puntuacion'] = 1;
 
       }
+
+
       $valores['portada'] = $file_name_p;
       $mysqli->crearProducto($valores);
+      // print($mysqli->getInsertId());
+      // print("<br/>");
+      $idjuego = $mysqli->getInsertId();
+      //Print all values of $valores['label']
+      foreach($valores['label'] as $key => $value) {
+        // print($valores['label'][$key] . " - " . $idjuego . "<br/>");
+        $mysqli->añadirEtiquetas($valores['label'][$key], $idjuego);
+      }
 
       if(isset($_FILES['imagenes'])){
-      echo $twig->render('añadirdescripcion.html',['imagenes'=>$_FILES['imagenes']['name'], 'link' => $_POST['link']]); 
+      echo $twig->render('añadirdescripcion.html',['usuario'=>$usuario, 'imagenes'=>$_FILES['imagenes']['name'], 'link' => $_POST['link']]); 
       }
       else{
         echo $twig->render('error.html',['mensaje'=>"Producto creado correctamente"]); 
@@ -121,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
   }
   else{
-    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+    echo $twig->render('error.html',['usuario'=>$usuario, 'mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
   }
 

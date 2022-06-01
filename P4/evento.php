@@ -25,7 +25,7 @@ $mysqli->identificarse();
 
 if(isset($_SESSION['nickUsuario'])){
     $nombreUsuario = $_SESSION['nickUsuario'];
-    $usuario = $mysqli->getDatosBasicos($nombreUsuario);
+    $usuario = $mysqli->getDatosUsuario($nombreUsuario);
  }
 
 
@@ -59,7 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
+$etiquetas = $mysqli->getEtiquetas($idEv);
 
 $evento['descripcion'] = nl2br($evento['descripcion']);
-echo $twig->render('producto.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes, 'usuario' => $usuario]); //Pasamos información completa de un juego a la plantilla
+echo $twig->render('producto.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes, 'usuario' => $usuario, 'etiquetas'=>$etiquetas]); //Pasamos información completa de un juego a la plantilla
 ?>

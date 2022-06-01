@@ -27,7 +27,6 @@ if(isset($_SESSION['nickUsuario'])){
   $usuario = $mysqli->getDatosBasicos($nombreUsuario);
 }
 
-print($idEv);
 $idjuego = $mysqli->getId($idEv);
 $juego = $mysqli->getEvento($idjuego);
 if($usuario[0]['gestor']==1){
@@ -127,7 +126,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     header("Location: unaPaginaCualquiera.php");*/
 
-    print($juego['link']);
     echo $twig->render('modificarproducto.html',['usuario'=>$usuario, 'producto' => $juego]); //Pasamos información de juegos para la portada a la plantilla 
     
   }

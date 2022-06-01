@@ -12,11 +12,11 @@
     <div class="formulario">
         <form id="formulariocomentarios" action="cambiarpermisos/{{user[0]['username']}}" method="post" enctype="multipart/form-data">
             <label for="gestor" class="etiqueta">Gestor</label> <span class="error"></span>
-            <input type="checkbox" id="gestor" class="inputtext" name="gestor" value="{{user[0]['gestor']}}">
+            <input type="checkbox" id="gestor" class="inputtext" name="gestor" value="{{user[0]['gestor']}}" {%if user[0]['gestor']==1 %} checked {%endif%}>
             <label for="moderador" class="etiqueta">Moderador</label> <span class="error"></span>
-            <input type="checkbox" id="moderador" class="inputtext" name="moderador" value="{{user[0]['moderador']}}"">
+            <input type="checkbox" id="moderador" class="inputtext" name="moderador" value="{{user[0]['moderador']}}" {%if user[0]['moderador']==1 %} checked {%endif%}>
             <label for="super" class="etiqueta">Superusuario</label> <span class="error"></span>
-            <input type="checkbox"  id="super" class="inputtext" name="super" value="{{user[0]['super']}}"">
+            <input type="checkbox"  id="super" class="inputtext" name="super" value="{{user[0]['super']}}" {%if user[0]['super']==1 %} checked {%endif%}>
 
 
             <label for="contraseña" class="etiqueta">Inserta su contraseña anterior</label> <span class="error"></span>
@@ -33,5 +33,5 @@
 
 {% block script %}
 <script type="text/javascript" src="status/js/login.js"></script>
-
+<script type="text/javascript" src="status/js/permisos.js"></script>
 {% endblock %}

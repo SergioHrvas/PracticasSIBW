@@ -22,7 +22,6 @@ else {
   $idEv = "none";
 }
 
-// print($idEv);
 
 if(isset($_SESSION['nickUsuario'])){
   $nombreUsuario = $_SESSION['nickUsuario'];
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $n++;
       }
 
-        echo $twig->render('error.html',['mensaje'=>"Producto creado correctamente"]); 
+        echo $twig->render('error.html',['usuario'=>$usuario, 'mensaje'=>"Producto creado correctamente"]); 
 
 
 }
@@ -60,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   }
   else{
-    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+    echo $twig->render('error.html',['usuario'=>$usuario, 'mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
   }
 

@@ -29,8 +29,17 @@ if(isset($_SESSION['nickUsuario'])){
     $usuario = $mysqli->getDatosBasicos($nombreUsuario);
  }
 
-$comentarios = $mysqli->getTodosComentarios();
+ if($usuario[0]['moderador']==1){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $valores = $_POST;
+        $comentarios = $mysqli->getComentariosContiene($valores['busqueda']);
 
+
+    }
+    else{
+
+        $comentarios = $mysqli->getTodosComentarios();
+    }
 //iterar comentarios
 if($comentarios!=null){
     foreach ($comentarios as $key => $value) {
@@ -39,5 +48,7 @@ if($comentarios!=null){
       }
 }
 echo $twig->render('listacomentarios.html', ['comentarios' => $comentarios, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
+
+}
 
 ?>

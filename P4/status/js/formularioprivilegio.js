@@ -1,5 +1,7 @@
+
 document.getElementsByClassName("flecha").item(0).addEventListener("click", function () { rotarImagenes(0) });
 document.getElementsByClassName("flecha").item(1).addEventListener("click", function () { rotarImagenes(1) });
+
 
 
 
@@ -20,6 +22,7 @@ function rotarImagenes(direccion) {
         }
         console.log(i);
         document.getElementsByClassName("imagen_galeria").item(i).src = "./status/image/juegos/" + imagenes[posicion]['img'];
+        document.getElementsByClassName("linkeliminarimg").item(i).href = "./eliminarimagen/" + imagenes[posicion]['id'];
 
     }
 }
