@@ -16,21 +16,19 @@ global $mysqli;
 
 if (isset($_GET['ev'])) {
     $idEv = $_GET['ev'];
-}
-else {
+} else {
     $idEv = 1;
 }
 
 $mysqli = new Database();
 $mysqli->identificarse();
 
-if(isset($_SESSION['nickUsuario'])){
+if (isset($_SESSION['nickUsuario'])) {
     $nombreUsuario = $_SESSION['nickUsuario'];
     $usuario = $mysqli->getDatosUsuario($nombreUsuario);
- }
+}
 
-$evento = $mysqli->getJuegos($idEv, 9);
+$evento = $mysqli->getNextJuegos($idEv);
 
 echo $twig->render('portada.html', ['evento' => $evento, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
-
 ?>

@@ -16,7 +16,7 @@
         </form>
     </div>
     <div class="juegos">
-        <p id="num_res">Resultados: {{comentarios|length}}</p>
+        <p class="num_res">Resultados: {{comentarios|length}}</p>
         <!-- Iteramos por todos los comentarios-->
         {% if comentarios|length > 0 %}
         {% for i in 0..comentarios|length-1 %}
@@ -45,7 +45,8 @@
                             <span class="fecha">{{comentarios[i]['fecha']}}</span>
                         </div>
                     </div>
-                    <div class="opinion">{{comentarios[i]['comentario']}}
+                    <div class="opinion">{{comentarios[i]['comentario']|replace({(valor): '<b>'~valor~'</b>'})|raw }}</p>
+
                         {% if usuario[0]['moderador'] == 1 %}
                         <div class="iconosmoddiv"><a href="./modificarcomentario/{{comentarios[i]['id']}}"><i
                                     class="fa-solid fa-pencil fa-1x"></i></a>
@@ -66,8 +67,4 @@
     </div>
 
 </section>
-{% endblock %}
-
-{% block script %}
-<script type="text/javascript" src="status/js/portada.js"></script>
 {% endblock %}

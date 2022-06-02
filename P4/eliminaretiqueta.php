@@ -15,42 +15,34 @@ $mysqli = new Database();
 $mysqli->identificarse();
 if (isset($_GET['ev'])) {
   $idEv = $_GET['ev'];
+} else {
+  $idEv = "-1";
 }
-else {
-   $idEv = "-1";
+
+if (isset($_GET['et'])) {
+  $idEt = $_GET['et'];
+} else {
+  $idEt = "-1";
 }
+
 
 session_start();
 
-if(isset($_SESSION['nickUsuario'])){
+$linkjuego = $mysqli->getLinkJuego($idEv)[0]['link'];
+$link = "evento/" . $linkjuego;
+
+if (isset($_SESSION['nickUsuario'])) {
   $nombreUsuario = $_SESSION['nickUsuario'];
-  $usuario = $mysqli->getDatosBasicos($nombreUsuario);
+  $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
 
-if($usuario[0]['gestor']==1){
+if ($usuario[0]['gestor'] == 1) {
+  $mysqli->eliminarEtiqueta($idEt);
+  echo $twig->render('mensaje.html', ['link' => $link, 'tipo' => ':)', 'mensaje' => "Etiqueta eliminada correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
 
-  $mysqli->eliminarEtiqueta($idEv);
-   echo $twig->render('error.html',['mensaje'=>"Etiqueta eliminada correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
-
-}
-
-    /*
-    if (checkLogin($nick, $pass)) {
-      session_start();
-      
-      $_SESSION['nickUsuario'] = $nick;  // guardo en la sesión el nick del usuario que se ha logueado
-    }
-    
-    header("Location: unaPaginaCualquiera.php");*/
-
-    
-    
+} else {
+  echo $twig->render('mensaje.html', ['link' => $link, 'tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
   
-  else{
-    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
-
-  }
-
-
+}
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Inicializamos el motor de plantillas
 require_once '/usr/local/lib/php/vendor/autoload.php';
@@ -6,51 +7,32 @@ include "mysql.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
-// Averiguo que la página que se quiere mostrar es la del producto 12,
-// porque hemos accedido desde http://localhost/?producto=12
-// Busco en la base de datos la información del producto y lo
-// almaceno en las variables $productoNombre, $productoMarca, $productoFoto...
-$mysqli = new Database();
 
+$mysqli = new Database();
 $mysqli->identificarse();
+
 if (isset($_GET['ev'])) {
   $idEv = $_GET['ev'];
+} else {
+  $idEv = "-1";
 }
-else {
-   $idEv = "-1";
-}
+print($idEv);
+$linkjuego = $mysqli->getLinkJuegoFromImagen($idEv)[0]['link'];
+$link = "evento/" . $linkjuego;
 
-session_start();
 
-if(isset($_SESSION['nickUsuario'])){
+if (isset($_SESSION['nickUsuario'])) {
   $nombreUsuario = $_SESSION['nickUsuario'];
-  $usuario = $mysqli->getDatosBasicos($nombreUsuario);
+  $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
 
-if($usuario[0]['gestor']==1){
+if ($usuario[0]['gestor'] == 1) {
 
   $mysqli->eliminarImagen($idEv);
-   echo $twig->render('error.html',['mensaje'=>"Imagen eliminada correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['link' => $link,'tipo'=>':)','mensaje' => "Imagen eliminada correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
+
+} else {
+  echo $twig->render('mensaje.html', ['link' => $link,'tipo'=>'Error','mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
 }
-
-    /*
-    if (checkLogin($nick, $pass)) {
-      session_start();
-      
-      $_SESSION['nickUsuario'] = $nick;  // guardo en la sesión el nick del usuario que se ha logueado
-    }
-    
-    header("Location: unaPaginaCualquiera.php");*/
-
-    
-    
-  
-  else{
-    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
-
-  }
-
-
-
 ?>

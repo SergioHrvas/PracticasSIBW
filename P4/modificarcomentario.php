@@ -14,59 +14,47 @@ $twig = new \Twig\Environment($loader);
 
 if (isset($_GET['ev'])) {
   $idEv = $_GET['ev'];
-}
-else {
-   $idEv = "1";
+} else {
+  $idEv = "1";
 }
 
 
 $mysqli = new Database();
 $mysqli->identificarse();
 
-if(isset($_SESSION['nickUsuario'])){
-  print($_SESSION['nickUsuario']);
+if (isset($_SESSION['nickUsuario'])) {
   $nombreUsuario = $_SESSION['nickUsuario'];
   $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
 $comentariooriginal = $mysqli->getComentario($idEv);
 
+$autor = $mysqli->getAutor($idEv);
 
-if($usuario[0]['moderador']==1){
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($usuario[0]['moderador'] == 1 || $usuario[0]['username'] == $autor[0]['username']) {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if($_POST['titulo']==""){
+    if ($_POST['titulo'] == "") {
       $_POST['titulo'] = $comentariooriginal[0]['titulo'];
     }
-    print($_POST['descripcion']);
-    if($_POST['descripcion']==""){
+    if ($_POST['descripcion'] == "") {
       $_POST['descripcion'] = $comentariooriginal[0]['comentario'];
-    }
-    else{
-      $_POST['descripcion'] = $_POST['descripcion'] . "           Editado por: " . $usuario[0]['username'];
+    } else {
+      if ($usuario[0]['moderador'] == 1) {
+        $_POST['descripcion'] = $_POST['descripcion'] . "           Editado por: " . $usuario[0]['username'];
+      } else {
+        $_POST['descripcion'] = $_POST['descripcion'] . "           Editado";
+      }
     }
 
-    
+    $link = "../evento/".$mysqli->getLinkJuegoFromComentario($idEv)[0]['link'];
     $mysqli->modificarComentario($_POST, $idEv);
-  
+    header("Location: ".$link);
+  } else {
+    echo $twig->render('modificarcomentario.html', ['usuario' => $usuario, 'comentario' => $comentariooriginal]); //Pasamos información de juegos para la portada a la plantilla 
+  }
+} else {
+  $linkjuego = $mysqli->getLinkJuegoFromComentario($idEv)[0]['link'];
+  $link = "evento/" . $linkjuego;
+
+  echo $twig->render('mensaje.html', ['link' => $link, 'tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 }
-
-
-    /*
-    if (checkLogin($nick, $pass)) {
-      session_start();
-      
-      $_SESSION['nickUsuario'] = $nick;  // guardo en la sesión el nick del usuario que se ha logueado
-    }
-    
-    header("Location: unaPaginaCualquiera.php");*/
-
-    echo $twig->render('modificarcomentario.html',['usuario'=>$usuario, 'comentario' => $comentariooriginal]); //Pasamos información de juegos para la portada a la plantilla 
-    
-
-
-  }
-  else{
-    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
-  }
-
-?>

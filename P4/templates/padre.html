@@ -21,8 +21,10 @@
 
 <body>
     <div id="bombilla"><img id="bombillaimg" src=".\status\image\off.png" /></div>
+    {% if usuario is not null %}
     <div id="perfil"><a href="perfil/{{usuario[0]['username']}}"><img id="perfilimg"
                 src=".\status\image\{{usuario[0]['imagen_perfil']}}" /></a></div>
+    {% endif %}
     <!-- Cabecera -->
     <header>
         <div id="container-logo">
@@ -44,7 +46,7 @@
                 {% if usuario[0]['moderador'] == true %}
                 <li class="oculto"><a class="enlaces" href=".\listacomentarios.php">Comentarios</a> </li>
                 {% endif %}
-                <li class="oculto"><a class="enlaces" href="./perfil/{{usuario[0]['username']}}">Perfil</a> </li>
+                <li class="oculto"><a class="enlaces" href="perfil/{{usuario[0]['username']}}">Perfil</a> </li>
                 <li class="oculto"><a class="enlaces" href=".\cerrarsesion.php">Cerrar Sesión</a> </li>
 
                 {% endif %}

@@ -10,7 +10,9 @@
 <!-- Contenido principal -->
 <section id="principal">
     <div id="lateraljuego">
-        <img id="juego" src=".\status\image\portadas\{{evento['portada']}}" />
+        {% if evento['portada'] != "" %}
+        <img id="juego" src=".\status\image\portadas\{{evento['portada']}}" /> {% endif %}
+
         <div id="preciojuego">{{evento['precio']}}€</div>
         <div id="botoncomprar">COMPRAR</div>
     </div>
@@ -39,8 +41,9 @@
     <div id="etiquetasdiv2">
         <ul>
             {% for i in 0..etiquetas|length-1 %}
-            <li class="etiqlista">{{etiquetas[i]['texto']}} <a id="eliminaretiq"
-                    href="./eliminaretiqueta/{{etiquetas[i]['id']}}"><i class="fa-solid fa-circle-minus fa-1x"></i></a>
+            <li class="etiqlista"><a href="busquedaetiqueta/{{etiquetas[i]['id']}}">{{etiquetas[i]['texto']}}</a> <a id="eliminaretiq"
+                    href="./eliminaretiqueta/{{evento['id']}}/{{etiquetas[i]['id']}}"><i
+                        class="fa-solid fa-circle-minus fa-1x"></i></a>
             </li>
             {% endfor %}
         </ul>
@@ -55,17 +58,19 @@
 
 
 <section id="multimedia">
+    {% if imagenes|length > 0 %}
     <div class="imagendiv"><img class="imagen" src=".\status\image\juegos\{{imagenes[0]['img']}}">
         <div class="pieimg">{{imagenes[0]['descripcion']}}</div>
         <div class="dropdown"><img class="imagen" src=".\status\image\juegos\{{imagenes[0]['img']}}">
             <div class="pieimg">{{imagenes[0]['descripcion']}}</div>
         </div>
     </div>
+    {% endif %}
     <section class="galeria">
         <div class="items_galeria">
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[0]['img']}}" alt="" />
-                {% if usuario[0]['gestor'] == 1 %}
+                {% if usuario[0]['gestor'] == 1 and imagenes[0] != null%}
                 <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[0]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
@@ -74,7 +79,7 @@
             </div>
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[1]['img']}}" alt="" />
-                {% if usuario[0]['gestor'] == 1 %}
+                {% if usuario[0]['gestor'] == 1 and imagenes[1] != null%}
                 <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[1]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
@@ -83,7 +88,7 @@
             </div>
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[2]['img']}}" alt="" />
-                {% if usuario[0]['gestor'] == 1 %}
+                {% if usuario[0]['gestor'] == 1 and imagenes[2] != null%}
                 <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[2]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
@@ -92,7 +97,7 @@
             </div>
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[3]['img']}}" alt="" />
-                {% if usuario[0]['gestor'] == 1 %}
+                {% if usuario[0]['gestor'] == 1 and imagenes[3] != null%}
                 <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[3]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
@@ -224,7 +229,7 @@
                 </div>
             </div>
             <div class="opinion">{{coment['comentario']}}
-                {% if usuario[0]['moderador'] == 1 %}
+                {% if usuario[0]['moderador'] == 1 or usuario[0]['id'] == coment['autor']['id']%}
                 <div class="iconosmoddiv"><a href="./modificarcomentario/{{coment['id']}}"><i
                             class="fa-solid fa-pencil fa-1x"></i></a>
                     <a href="./eliminarcomentario/{{coment['id']}}"><i class="fa-solid fa-eraser fa-1x"></i></a>

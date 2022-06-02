@@ -25,6 +25,3 @@ $imagenes = $mysqli->getGaleria($idEv);
 
 $evento['descripcion'] = nl2br($evento['descripcion']);
 echo $twig->render('producto_imprimir.html', ['evento' => $evento, 'comentarios' => $comentarios, 'imagenes' => $imagenes]); //Pasamos información de un juego a la plantilla -> Modo imprimir
-
-?>
-

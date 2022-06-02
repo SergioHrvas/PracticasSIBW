@@ -18,47 +18,44 @@ $mysqli->identificarse();
 
 if (isset($_GET['ev'])) {
   $idEv = $_GET['ev'];
-}
-else {
+} else {
   $idEv = 1;
 }
 
-if(isset($_SESSION['nickUsuario'])){
+if (isset($_SESSION['nickUsuario'])) {
   $nombreUsuario = $_SESSION['nickUsuario'];
   $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
 $user = $mysqli->getDatosUsuario($idEv);
 
+//Si usuario es super
+if ($usuario['super']) {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $valores = $_POST;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-       $valores = $_POST;
+    //Print $valores
+    if ($valores['moderador'] == "") {
+      $valores['moderador'] = 0;
+    }
+    if ($valores['gestor'] == "") {
+      $valores['gestor'] = 0;
+    }
+    if ($valores['super'] == "") {
+      $valores['super'] = 0;
+    }
 
-       //Print $valores
-        if($valores['moderador']==""){
-          $valores['moderador'] = 0;
-        }
-        if($valores['gestor']==""){
-          $valores['gestor'] = 0;
-        }
-        if($valores['super']==""){
-          $valores['super'] = 0;
-        }
-
-       
-    
     $mysqli->cambiarPermisos($valores, $user[0]['id']);
+    echo $twig->render('mensaje.html', ['tipo' => ':)', 'usuario' => $usuario, 'mensaje' => "Permisos modificados correctamente"]);
+  } else {
 
-    
+
+    $user = $mysqli->getDatosUsuario($idEv);
+
+
+    echo $twig->render('cambiarpermisos.html', ['usuario' => $usuario, 'user' => $user]); //Pasamos información de juegos para la portada a la plantilla 
   }
+} else {
 
-
-  $user = $mysqli->getDatosUsuario($idEv);
-    
-    
-    echo $twig->render('cambiarpermisos.html',['usuario'=>$usuario, 'user' => $user]); //Pasamos información de juegos para la portada a la plantilla 
-    
-
-
-
-
+  echo $twig->render('mensaje.html', ['tipo' => 'Error', 'usuario' => $usuario, 'mensaje' => "No tiene acceso a esta información"]);
+}
 ?>

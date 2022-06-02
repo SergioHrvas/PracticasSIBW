@@ -7,32 +7,29 @@ include "mysql.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
-// Averiguo que la página que se quiere mostrar es la del producto 12,
-// porque hemos accedido desde http://localhost/?producto=12
-// Busco en la base de datos la información del producto y lo
-// almaceno en las variables $productoNombre, $productoMarca, $productoFoto...
+
 $mysqli = new Database();
-
 $mysqli->identificarse();
-
 
 if (isset($_GET['ev'])) {
     $idEv = $_GET['ev'];
-}
-else {
+} else {
     $idEv = 1;
 }
 
 //$idusuario = $mysqli->getIdUsuario($idEv);
 $user = $mysqli->getDatosUsuario($idEv);
 
-if(isset($_SESSION['nickUsuario'])){
+if (isset($_SESSION['nickUsuario'])) {
     $nombreUsuario = $_SESSION['nickUsuario'];
     $usuario = $mysqli->getDatosUsuario($nombreUsuario);
-  }
+}
 
-
- $pais = $mysqli->getPais($usuario[0]['pais']);
-echo $twig->render('perfil.html',['user' => $user, 'pais' => $pais, 'usuario' => $usuario]); //Pasamos información de juegos para la portada a la plantilla 
-
+//Si usuario no es nulo
+if ($usuario != null) {
+    $pais = $mysqli->getPais($usuario[0]['pais']);
+    echo $twig->render('perfil.html', ['user' => $user, 'pais' => $pais, 'usuario' => $usuario]);
+} else {
+    echo $twig->render('error.html', ['tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]);
+}
 ?>

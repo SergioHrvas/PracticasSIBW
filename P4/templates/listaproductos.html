@@ -6,6 +6,8 @@
 {%block central %}
 <!-- Contenido principal -->
 <section id="panel">
+    {% if etiq %}
+    <h1 class="tituloseccion">Lista de juegos</h1>
     <div class="formbuscardiv">
         <form class="formbuscar" action="listaproductos.php" method="post" enctype="multipart/form-data">
             <label for="busqueda" class="etiqbuscar">BÚSQUEDA</label>
@@ -13,8 +15,15 @@
             <button type="submit" class="enviarbusqueda">Enviar</button>
         </form>
     </div>
+    {% else %}
+    <h1 class="tituloseccion">Etiqueta: {{textoetiqueta}}</h1>
+
+    {% endif %}
     <div class="juegos">
+        <p class="num_res">Resultados: {{juegos|length}}</p>
+
         <!-- Iteramos por todos los comentarios-->
+        {% if juegos|length > 0 %}
         {% for i in 0..juegos|length-1 %}
         <div class="caja">
             <div class="portada">
@@ -24,9 +33,12 @@
             </div>
             <div class="datosproducto">
                 <p class="nombreproducto">{{juegos[i]['titulo']}}</p>
+                <p class="descripcionproducto">
+                    {{ juegos[i]['descripcion']|replace({(valor): '<b>'~valor~'</b>'})|raw }}</p>
+
                 <div class="herramientasgestor"><a href="./modificarproducto/{{juegos[i]['link']}}"><i
-                            class="fa-solid fa-pencil fa-3x"></i></a>
-                    <a href="./eliminarproducto/{{juegos[i]['link']}}"><i class="fa-solid fa-eraser fa-3x"></i></i></a>
+                            class="fa-solid fa-pencil fa-2x"></i></a>
+                    <a href="./eliminarproducto/{{juegos[i]['link']}}"><i class="fa-solid fa-eraser fa-2x"></i></i></a>
 
                 </div>
             </div>
@@ -34,6 +46,7 @@
 
 
         {% endfor %}
+        {% endif %}
         <div class="anadir"><a href="./crearproducto.php"><i class="fa-solid fa-file-circle-plus fa-3x"></i></a></div>
 
     </div>
@@ -52,8 +65,4 @@
         <div class="pag">&raquo;</div>
     </a>
 </div>
-{% endblock %}
-
-{% block script %}
-<script type="text/javascript" src="status/js/portada.js"></script>
 {% endblock %}

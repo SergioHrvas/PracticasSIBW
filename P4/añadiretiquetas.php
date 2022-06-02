@@ -17,35 +17,30 @@ session_start();
 
 if (isset($_GET['ev'])) {
   $idEv = $_GET['ev'];
-}
-else {
-   $idEv = "leyendas";
+} else {
+  $idEv = "leyendas";
 }
 
-if(isset($_SESSION['nickUsuario'])){
+if (isset($_SESSION['nickUsuario'])) {
   $nombreUsuario = $_SESSION['nickUsuario'];
-  $usuario = $mysqli->getDatosBasicos($nombreUsuario);
+  $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
 
 $idjuego = $mysqli->getId($idEv);
 $juego = $mysqli->getEvento($idjuego);
 
-if($usuario[0]['gestor']==1){
+if ($usuario[0]['gestor'] == 1) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valores = $_POST;
-    foreach($valores['label'] as $key => $value) {
+    foreach ($valores['label'] as $key => $value) {
       $mysqli->añadirEtiquetas($valores['label'][$key], $idjuego);
     }
-
+    echo $twig->render('mensaje.html', ['tipo' => ':)', 'usuario' => $usuario, 'mensaje' => "Producto creado correctamente"]);
+  } else {
+    echo $twig->render('añadiretiquetas.html', ['usuario' => $usuario, 'link' => $juego['link']]);
   }
-  echo $twig->render('añadiretiquetas.html',['usuario'=>$usuario, 'link' => $juego['link']]); 
+} else {
+  echo $twig->render('mensaje.html', ['tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
-  }
-  else{
-    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
-
-  }
-
-
-
+}
 ?>

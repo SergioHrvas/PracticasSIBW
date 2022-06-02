@@ -6,45 +6,28 @@ include "mysql.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
-// Averiguo que la página que se quiere mostrar es la del producto 12,
-// porque hemos accedido desde http://localhost/?producto=12
-// Busco en la base de datos la información del producto y lo
-// almaceno en las variables $productoNombre, $productoMarca, $productoFoto...
+
 $mysqli = new Database();
 
 $mysqli->identificarse();
 if (isset($_GET['ev'])) {
   $idEv = $_GET['ev'];
-}
-else {
-   $idEv = "-1";
+} else {
+  $idEv = "-1";
 }
 
 session_start();
-
-if(isset($_SESSION['nickUsuario'])){
+$linkjuego = $mysqli->getLinkJuegoFromComentario($idEv)[0]['link'];
+$link = "evento/" . $linkjuego;
+if (isset($_SESSION['nickUsuario'])) {
   $nombreUsuario = $_SESSION['nickUsuario'];
-  $usuario = $mysqli->getDatosBasicos($nombreUsuario);
+  $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
-
-if($usuario[0]['moderador']==1){
+$autor = $mysqli->getAutor($idEv);
+if ($usuario[0]['moderador'] == 1 || $autor[0]['username'] == $usuario[0]['username']) {
   $mysqli->eliminarComentario($idEv);
-   echo $twig->render('error.html',['mensaje'=>"Comentario eliminado correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['link' => $link,'tipo'=>':)','mensaje' => "Comentario eliminado correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
+} else {
+  echo $twig->render('mensaje.html', ['link' => $link,'tipo'=>'Error','mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 }
-
-    /*
-    if (checkLogin($nick, $pass)) {
-      session_start();
-      
-      $_SESSION['nickUsuario'] = $nick;  // guardo en la sesión el nick del usuario que se ha logueado
-    }
-    header("Location: unaPaginaCualquiera.php");*/    
-  
-  else{
-    echo $twig->render('error.html',['mensaje'=>"No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
-
-  }
-
-
-
 ?>
