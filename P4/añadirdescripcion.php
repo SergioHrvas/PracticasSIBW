@@ -32,7 +32,7 @@ $juego = $mysqli->getEvento($idjuego);
 
 $link = "evento/" . $idEv;
 
-if ($usuario[0]['gestor'] == 1) {
+if ($usuario[0]['gestor'] == 1 or $usuario[0]['super'] == 1) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valores = $_POST;
     $n = 0;

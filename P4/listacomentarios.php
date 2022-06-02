@@ -26,7 +26,7 @@ if (isset($_SESSION['nickUsuario'])) {
     $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
 
-if ($usuario[0]['moderador'] == 1) {
+if ($usuario[0]['moderador'] == 1 or $usuario[0]['super'] == 1) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $valores = $_POST;
         $comentarios = $mysqli->getComentariosContiene($valores['busqueda']);
@@ -44,6 +44,6 @@ if ($usuario[0]['moderador'] == 1) {
     echo $twig->render('listacomentarios.html', ['comentarios' => $comentarios, 'usuario' => $usuario, 'valor' => $valores['busqueda']]); //Pasamos información de juegos para la portada a la plantilla 
 
 } else {
-    echo $twig->render('mensaje.html', ['tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]);
+    echo $twig->render('mensaje.html', ['tipo' => 'Error', 'usuario' => $usuario, 'mensaje' => "No tiene acceso a esta información"]);
 }
 ?>

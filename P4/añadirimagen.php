@@ -27,7 +27,7 @@ $idjuego = $mysqli->getId($idEv);
 $juego = $mysqli->getEvento($idjuego);
 
 $link = "evento/" . $idEv;
-if ($usuario[0]['gestor'] == 1) {
+if ($usuario[0]['gestor'] == 1 or $usuario[0]['super'] == 1) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['imagenes'])) {
       $errors = array();
@@ -73,7 +73,7 @@ if ($usuario[0]['gestor'] == 1) {
     echo $twig->render('añadirimagen.html', ['usuario' => $usuario, 'link' =>$juego['link']]);
   }
 } else {
-  echo $twig->render('mensaje.html', ['link'=>$link, 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['link'=>$link, 'usuario' => $usuario, 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
 }
 ?>

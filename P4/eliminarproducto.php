@@ -24,12 +24,12 @@ if (isset($_SESSION['nickUsuario'])) {
 }
 
 $idjuego = $mysqli->getId($idEv);
-if ($usuario[0]['gestor'] == 1) {
+if ($usuario[0]['gestor'] == 1 or $usuario[0]['super'] == 1) {
   $mysqli->eliminarProducto($idjuego);
-  echo $twig->render('mensaje.html', ['tipo'=>':)','mensaje' => "Producto eliminado correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['tipo'=>':)','usuario' => $usuario,'mensaje' => "Producto eliminado correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
 
 } else {
-  echo $twig->render('mensaje.html', ['tipo'=>'Error','mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['tipo'=>'Error','usuario' => $usuario,'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
 }
 ?>

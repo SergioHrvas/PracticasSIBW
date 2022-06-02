@@ -25,7 +25,7 @@ if (isset($_SESSION['nickUsuario'])) {
 $link="evento/".$idEv;
 $idjuego = $mysqli->getId($idEv);
 $juego = $mysqli->getEvento($idjuego);
-if ($usuario[0]['gestor'] == 1) {
+if ($usuario[0]['gestor'] == 1 or $usuario[0]['super'] == 1) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['portada'])) {
       $errors = array();
@@ -109,12 +109,12 @@ if ($usuario[0]['gestor'] == 1) {
       $valores['id'] = $idjuego;
       $mysqli->modificarProducto($valores);
     }
-    echo $twig->render('mensaje.html', ['link'=>$link,'tipo' => ":)", 'mensaje' => "Producto modificado correctamente"]);
+    echo $twig->render('mensaje.html', ['link'=>$link,'usuario' => $usuario, 'tipo' => ":)", 'mensaje' => "Producto modificado correctamente"]);
   } else {
     echo $twig->render('modificarproducto.html', ['usuario' => $usuario, 'producto' => $juego]);
   }
 } else {
   
-  echo $twig->render('mensaje.html', ['link'=>$link,'tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]);
+  echo $twig->render('mensaje.html', ['link'=>$link,'usuario' => $usuario, 'tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]);
 }
 ?>

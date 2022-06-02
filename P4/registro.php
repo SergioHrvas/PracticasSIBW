@@ -17,5 +17,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $paises = $mysqli->getPaises();
 
-echo $twig->render('registro.html', ['paises' => $paises]); //Pasamos información de juegos para la portada a la plantilla 
+echo $twig->render('registro.html', ['usuario' => $usuario, 'paises' => $paises]); //Pasamos información de juegos para la portada a la plantilla 
 ?>

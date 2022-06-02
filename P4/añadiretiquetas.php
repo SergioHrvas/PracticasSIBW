@@ -29,7 +29,7 @@ if (isset($_SESSION['nickUsuario'])) {
 $idjuego = $mysqli->getId($idEv);
 $juego = $mysqli->getEvento($idjuego);
 
-if ($usuario[0]['gestor'] == 1) {
+if ($usuario[0]['gestor'] == 1 or $usuario[0]['super'] == 1) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valores = $_POST;
     foreach ($valores['label'] as $key => $value) {
@@ -40,7 +40,7 @@ if ($usuario[0]['gestor'] == 1) {
     echo $twig->render('añadiretiquetas.html', ['usuario' => $usuario, 'link' => $juego['link']]);
   }
 } else {
-  echo $twig->render('mensaje.html', ['tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['tipo' => 'Error','usuario' => $usuario, 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
 }
 ?>

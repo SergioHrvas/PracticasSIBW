@@ -197,11 +197,11 @@ class Database
         $res->bind_param('i', $id);
         $res->execute();
         $res = $res->get_result();
-        $row = array('id'=>'Not Found', 'username' => 'Not Found', 'nombre' => 'Not Found', 'apellidos' => 'Not Found', 'telefono' => 'Not Found', 'correo' => 'Not Found', 'pais' => 'Not Found', 'imagen_perfil' => 'Not Found', 'twitter' => 'Not Found', 'facebook' => 'Not Found', 'instagram' => 'Not Found', 'moderador' => 'Not Found', 'gestor' => 'Not Found', 'super' => 'Not Found');
+        $row = array('id' => 'Not Found', 'username' => 'Not Found', 'nombre' => 'Not Found', 'apellidos' => 'Not Found', 'telefono' => 'Not Found', 'correo' => 'Not Found', 'pais' => 'Not Found', 'imagen_perfil' => 'Not Found', 'twitter' => 'Not Found', 'facebook' => 'Not Found', 'instagram' => 'Not Found', 'moderador' => 'Not Found', 'gestor' => 'Not Found', 'super' => 'Not Found');
         if ($res->num_rows > 0) {
             $rows = array();
             while ($row = $res->fetch_assoc()) {
-                $rows[] = array('id' => $row['id'],'username' => $row['username'], 'nombre' => $row['nombre'], 'apellidos' => $row['apellidos'], 'telefono' => $row['telefono'], 'correo' => $row['correo'], 'pais' => $row['pais'], 'imagen_perfil' => $row['imagen_perfil'], 'twitter' => $row['twitter'], 'facebook' => $row['facebook'], 'instagram' => $row['instagram'], 'moderador' => $row['moderador'], 'gestor' => $row['gestor'], 'super' => $row['super']);
+                $rows[] = array('id' => $row['id'], 'username' => $row['username'], 'nombre' => $row['nombre'], 'apellidos' => $row['apellidos'], 'telefono' => $row['telefono'], 'correo' => $row['correo'], 'pais' => $row['pais'], 'imagen_perfil' => $row['imagen_perfil'], 'twitter' => $row['twitter'], 'facebook' => $row['facebook'], 'instagram' => $row['instagram'], 'moderador' => $row['moderador'], 'gestor' => $row['gestor'], 'super' => $row['super']);
             }
         }
         return $rows;
@@ -393,7 +393,7 @@ class Database
     //Añadir etiquetas
     public function añadirEtiquetas($valor, $idJuego)
     {
-        if(!$this->existeEtiqueta($valor, $idJuego)){
+        if (!$this->existeEtiqueta($valor, $idJuego)) {
             $res = $this->mysqli->prepare('INSERT INTO etiquetas(texto) VALUES (?)');
             $res->bind_param('s', $valor);
             $res->execute();
@@ -421,8 +421,9 @@ class Database
         }
         return $rows;
     }
-    
-    public function existeEtiqueta($valor, $idJuego){
+
+    public function existeEtiqueta($valor, $idJuego)
+    {
         $res = $this->mysqli->prepare('SELECT * FROM etiquetas WHERE texto=?');
         $res->bind_param('s', $valor);
         $res->execute();
@@ -434,7 +435,15 @@ class Database
                 $rows[] = array('id' => $row['id']);
             }
         }
-        return count($rows)>0;
+        if ($rows != null) {
+            if (count($rows) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     //Get Etiquetas
@@ -460,7 +469,8 @@ class Database
         return $this->mysqli->insert_id;
     }
 
-    public function getEtiqueta($id){
+    public function getEtiqueta($id)
+    {
         $res = $this->mysqli->prepare('SELECT * FROM etiquetas WHERE id=?');
         $res->bind_param('i', $id);
         $res->execute();
@@ -485,7 +495,7 @@ class Database
     //Get comments that contain a string in the middle order by date
     public function getComentariosContiene($valor)
     {
-        $res = $this->mysqli->prepare('SELECT * FROM comentarios WHERE descripcion LIKE "%' . $valor . '%" ORDER BY fecha');
+        $res = $this->mysqli->prepare('SELECT * FROM comentarios WHERE (descripcion LIKE "%' . $valor . '%") OR (titulo LIKE "%' . $valor . '%") ORDER BY fecha');
         $res->execute();
         $res = $res->get_result();
         $row = array('id' => 'Not Found', 'titulo' => 'Not Found', 'id_juego' => 'Not Found', 'id_usuario' => 'Not Found', 'comentario' => 'Not Found', 'fecha' => 'Not Found');
@@ -551,8 +561,6 @@ class Database
     //obtener link del juego de una imagen
     public function getLinkJuegoFromImagen($idImagen)
     {
-
-        print($idImagen);
         $res = $this->mysqli->prepare('SELECT juegos.link FROM juegos, imagenes WHERE imagenes.id=? AND imagenes.id_juego=juegos.id');
         $res->bind_param('i', $idImagen);
         $res->execute();
@@ -566,7 +574,7 @@ class Database
         }
         return $rows;
     }
-    
+
 
     //OBtener el link de un juego
     public function getLinkJuego($idJuego)

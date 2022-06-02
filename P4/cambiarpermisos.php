@@ -29,7 +29,7 @@ if (isset($_SESSION['nickUsuario'])) {
 $user = $mysqli->getDatosUsuario($idEv);
 
 //Si usuario es super
-if ($usuario['super']) {
+if ($usuario['super'] == 1) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valores = $_POST;
 

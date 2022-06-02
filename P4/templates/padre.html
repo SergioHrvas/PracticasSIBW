@@ -40,10 +40,10 @@
                 {% if usuario|length == 0 %}<li class="oculto"><a class="enlaces" href=".\login.php">Login</a> </li>
                 <li class="oculto"><a class="enlaces" href=".\registro.php">Registro</a> </li>
                 {% else %}
-                {% if usuario[0]['gestor'] == true %}
+                {% if usuario[0]['gestor'] == true  or usuario[0]['super'] == 1  %}
                 <li class="oculto"><a class="enlaces" href=".\listaproductos.php">Productos</a> </li>
                 {% endif %}
-                {% if usuario[0]['moderador'] == true %}
+                {% if usuario[0]['moderador'] == 1 or usuario[0]['super'] == 1 %}
                 <li class="oculto"><a class="enlaces" href=".\listacomentarios.php">Comentarios</a> </li>
                 {% endif %}
                 <li class="oculto"><a class="enlaces" href="perfil/{{usuario[0]['username']}}">Perfil</a> </li>

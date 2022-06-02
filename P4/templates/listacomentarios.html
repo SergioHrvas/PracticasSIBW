@@ -22,7 +22,7 @@
         {% for i in 0..comentarios|length-1 %}
         <div class="gridcoment">
             <div class="portadajuego">
-                <img class="juego" src="status/image/portadas/{{comentarios[i]['juego']['portada']}}" />
+                <a href="evento/{{comentarios[i]['juego']['link']}}"><img class="juego" src="status/image/portadas/{{comentarios[i]['juego']['portada']}}" /></a>
             </div>
 
             <div class="coment">

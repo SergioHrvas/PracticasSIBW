@@ -26,13 +26,13 @@ if (isset($_SESSION['nickUsuario'])) {
   $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
 
-if ($usuario[0]['gestor'] == 1) {
+if ($usuario[0]['gestor'] == 1 or $usuario[0]['super'] == 1) {
 
   $mysqli->eliminarImagen($idEv);
-  echo $twig->render('mensaje.html', ['link' => $link,'tipo'=>':)','mensaje' => "Imagen eliminada correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['link' => $link,'usuario' => $usuario,'tipo'=>':)','mensaje' => "Imagen eliminada correctamente"]); //Pasamos información de juegos para la portada a la plantilla 
 
 } else {
-  echo $twig->render('mensaje.html', ['link' => $link,'tipo'=>'Error','mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['link' => $link,'usuario' => $usuario,'tipo'=>'Error','mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
 }
 ?>

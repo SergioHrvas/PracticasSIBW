@@ -12,26 +12,15 @@
     <h1 class="tituloseccion">Modificar Comentario</h1>
     <div class="formulario">
         <form id="formulariocomentarios" action="modificarcomentario/{{comentario[0]['id']}}" method="post">
-            <label for="titulo" class="etiqueta">Título</label> <span class="error"></span>
+            <label for="titulo" class="etiqueta">Título</label>
             <input id="username" class="inputtext" name="titulo" value="{{comentario[0]['titulo']}}">
-            <label for="comentario" class="etiqueta">Comentario</label> <span class="error"></span>
+            <label for="comentario" class="etiqueta">Comentario</label>
             <textarea id="descripcion" maxlength="1000" name="descripcion">{{comentario[0]['comentario']}}</textarea>
-            <span id="contador"></span><span class="error"></span>
-            <br />
-            <label for="contraseña" class="etiqueta">Inserta su contraseña</label> <span class="error"></span>
-            <input id="password" class="inputtext" name="password">
-            <div class="check" class="inputtext">
-                <input type="checkbox" id="activar"><label for="activar">Mostrar contraseña</label>
-            </div>
+            <span id="contador"></span>
 
             <button type="submit" id="enviar">Enviar</button>
         </form>
     </div>
 </section>
-
-{% endblock %}
-
-{% block script %}
-<script type="text/javascript" src="status/js/login.js"></script>
 
 {% endblock %}

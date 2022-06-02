@@ -30,7 +30,7 @@ $comentariooriginal = $mysqli->getComentario($idEv);
 
 $autor = $mysqli->getAutor($idEv);
 
-if ($usuario[0]['moderador'] == 1 || $usuario[0]['username'] == $autor[0]['username']) {
+if ($usuario[0]['moderador'] == 1 or $usuario[0]['super'] == 1 || $usuario[0]['username'] == $autor[0]['username']) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($_POST['titulo'] == "") {
@@ -56,5 +56,5 @@ if ($usuario[0]['moderador'] == 1 || $usuario[0]['username'] == $autor[0]['usern
   $linkjuego = $mysqli->getLinkJuegoFromComentario($idEv)[0]['link'];
   $link = "evento/" . $linkjuego;
 
-  echo $twig->render('mensaje.html', ['link' => $link, 'tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['link' => $link,'usuario' => $usuario,  'tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 }

@@ -168,3 +168,11 @@ main {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     
 }
+
+.portadamodificar{
+    width:20%;
+    display: grid;
+    border-radius: 5px;
+    margin:auto;
+    margin-bottom: 1%;
+}

@@ -23,7 +23,7 @@ if (isset($_SESSION['nickUsuario'])) {
 $idjuego = $mysqli->getId($idEv);
 $juego = $mysqli->getEvento($idjuego);
 
-if ($usuario[0]['gestor'] == 1) {
+if ($usuario[0]['gestor'] == 1 or $usuario[0]['super'] == 1) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['portada'])) {
       $errors = array();

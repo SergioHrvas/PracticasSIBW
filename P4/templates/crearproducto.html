@@ -11,51 +11,46 @@
     <div class="formulario">
         <form id="formulariocomentarios" action="crearproducto.php" method="post" enctype="multipart/form-data">
                     
-            <label for="portada" class="etiqueta">Imagen de portada</label> <span class="error"></span>
+            <label for="portada" class="etiqueta">Imagen de portada</label>
             <input type="file" class="inputtext" name="portada">
 
-            <label for="titulojuego" class="etiqueta">Título del juego</label> <span class="error"></span>
+            <label for="titulojuego" class="etiqueta">Título del juego</label>
             <input id="titulojuego" class="inputtext" name="titulojuego">
-            <label for="descripcion" class="etiqueta">Descripción</label> <span class="error"></span>
+            <label for="descripcion" class="etiqueta">Descripción</label> 
             <textarea id="descripcion" class="inputtext" name="descripcion"""></textarea>
-            <label for="preciojuego" class="etiqueta">Precio</label> <span class="error"></span>
+            <label for="preciojuego" class="etiqueta">Precio</label> 
             <input id="preciojuego" class="inputtext" name="preciojuego">
-            <label for="video" class="etiqueta">Vídeo</label> <span class="error"></span>
+            <label for="video" class="etiqueta">Vídeo</label> 
             <input id="video" class="inputtext" name="video">
-            <label for="fecha" class="etiqueta">Fecha de lanzamiento</label> <span class="error"></span>
+            <label for="fecha" class="etiqueta">Fecha de lanzamiento</label> 
             <input id="fecha" class="inputtext" name="fecha">
-            <label for="genero" class="etiqueta">Género</label> <span class="error"></span>
+            <label for="genero" class="etiqueta">Género</label>
             <input id="genero" class="inputtext" name="genero">
-            <label for="plataforma" class="etiqueta">Plataforma</label> <span class="error"></span>
+            <label for="plataforma" class="etiqueta">Plataforma</label> 
             <input id="plataforma" class="inputtext" name="plataforma">
-            <label for="desarrollador" class="etiqueta">Desarrollador</label> <span class="error"></span>
+            <label for="desarrollador" class="etiqueta">Desarrollador</label> 
             <input id="desarrollador" class="inputtext" name="desarrollador">
-            <label for="puntuacion" class="etiqueta">Puntuación</label> <span class="error"></span>
+            <label for="puntuacion" class="etiqueta">Puntuación</label> 
             <input id="puntuacion" class="inputtext" name="puntuacion">
-            <label for="web" class="etiqueta">Web</label> <span class="error"></span>
+            <label for="web" class="etiqueta">Web</label> 
             <input id="web" class="inputtext" name="web">
-            <label for="masinfo" class="etiqueta">Más Info</label> <span class="error"></span>
+            <label for="masinfo" class="etiqueta">Más Info</label>
             <input id="masinfo" class="inputtext" name="masinfo">
-            <label for="facebook" class="etiqueta">Facebook</label> <span class="error"></span>
+            <label for="facebook" class="etiqueta">Facebook</label> 
             <input id="facebook" class="inputtext" name="facebook">
-            <label for="twitter" class="etiqueta">Twitter</label> <span class="error"></span>
+            <label for="twitter" class="etiqueta">Twitter</label>
             <input id="twitter" class="inputtext" name="twitter">
-            <label for="instagram" class="etiqueta">Instagram</label> <span class="error"></span>
+            <label for="instagram" class="etiqueta">Instagram</label>
             <input id="instagram" class="inputtext" name="instagram">
-            <label for="link" class="etiqueta">Link</label> <span class="error"></span>
+            <label for="link" class="etiqueta">Link</label>
             <input id="link" class="inputtext" name="link">
 
-            <label for="imagenes" class="etiqueta">Imagenes</label> <span class="error"></span>
+            <label for="imagenes" class="etiqueta">Imagenes</label>
             <input type="file" class="inputtext" name="imagenes[]" multiple="multiple">
 
-            <label for="label" id="labeletiq" class="etiqueta">Etiqueta #1</label> <span class="error"></span>
+            <label for="label" id="labeletiq" class="etiqueta">Etiqueta #1</label>
             <input class="inputtext" id="labelinput" name="label[]">
             <button type="button" id="addlabel">Añadir otra etiqueta</button>
-
-            <label for="password" class="etiqueta">Inserta su contraseña anterior</label> <span class="error"></span>
-            <input id="password" class="inputtext" name="password">
-            <div class="check" class="inputtext">
-            <input type="checkbox" id="activar"><label for="activar">Mostrar contraseña</label></div>
 
             <button type="submit" id="enviar">Enviar</button>
         </form>
@@ -65,7 +60,6 @@
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" src="status/js/login.js"></script>
 <script type="text/javascript" src="status/js/etiquetas.js"></script>
 
 {% endblock %}

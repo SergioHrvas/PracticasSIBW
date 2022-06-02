@@ -30,6 +30,6 @@ if ($usuario != null) {
     $pais = $mysqli->getPais($usuario[0]['pais']);
     echo $twig->render('perfil.html', ['user' => $user, 'pais' => $pais, 'usuario' => $usuario]);
 } else {
-    echo $twig->render('error.html', ['tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]);
+    echo $twig->render('error.html', ['tipo' => 'Error', 'usuario' => $usuario, 'mensaje' => "No tiene acceso a esta información"]);
 }
 ?>

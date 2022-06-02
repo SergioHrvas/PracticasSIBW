@@ -12,7 +12,7 @@
         <form id="formulariocomentarios" action="añadirdescripcion/{{link}}" method="post" enctype="multipart/form-data">
             {% for i in 0..imagenes|length-1 %}
             <img class="imagenadescribir" src="status/image/juegos/{{imagenes[i]}}"/>
-            <label for="descripcion" class="etiqueta">Descripcion de imagen</label> <span class="error"></span>
+            <label for="descripcion" class="etiqueta">Descripcion de imagen</label>
             <input class="inputtext" name="descripcion{{i}}">
             <input class="inputtext" name="imagen{{i}}" value="{{imagenes[i]}}" readonly>
 

@@ -24,7 +24,7 @@ if (isset($_SESSION['nickUsuario'])) {
 
 $user = $mysqli->getDatosUsuario($idEv);
 
-if (($user[0]['id'] == $usuario[0]['id'] || $usuario[0]['super'] == 1)&& $usuario != null) {
+if (($user[0]['id'] == $usuario[0]['id'] or $usuario[0]['super'] == 1 || $usuario[0]['super'] == 1)&& $usuario != null) {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['imagenperfil'])) {
 
@@ -94,7 +94,7 @@ if (($user[0]['id'] == $usuario[0]['id'] || $usuario[0]['super'] == 1)&& $usuari
   echo $twig->render('modificarperfil.html', ['paises' => $paises, 'usuario' => $usuario, 'user' => $user]); //Pasamos información de juegos para la portada a la plantilla 
 } else {
   $link="perfil/".$user[0]['username'];
-  echo $twig->render('mensaje.html', ['link'=>$link,'tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
+  echo $twig->render('mensaje.html', ['link'=>$link,'usuario' => $usuario, 'tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]); //Pasamos información de juegos para la portada a la plantilla 
 
 }
 ?>

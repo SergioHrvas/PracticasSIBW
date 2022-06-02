@@ -24,7 +24,7 @@ if (isset($_SESSION['nickUsuario'])) {
     $usuario = $mysqli->getDatosUsuario($nombreUsuario);
 }
 
-if ($usuario[0]['gestor'] == 1) {
+if ($usuario[0]['gestor'] == 1 or $usuario[0]['super'] == 1) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $valores = $_POST;
         $evento = $mysqli->getJuegosContiene($valores['busqueda']);
@@ -40,8 +40,8 @@ if ($usuario[0]['gestor'] == 1) {
             $evento[$key]['descripcion'] = $evento[$key]['descripcion'] . "...";
         }
     }
-    echo $twig->render('listaproductos.html', ['juegos' => $evento, 'usuario' => $usuario, 'valor' => $valores['busqueda']]); ç
+    echo $twig->render('listaproductos.html', ['juegos' => $evento, 'usuario' => $usuario, 'valor' => $valores['busqueda'], 'etiq'=>true]);
 } else {
-    echo $twig->render('mensaje.html', ['tipo' => 'Error', 'mensaje' => "No tiene acceso a esta información"]);
+    echo $twig->render('mensaje.html', ['tipo' => 'Error','usuario' => $usuario,  'mensaje' => "No tiene acceso a esta información"]);
 }
 ?>

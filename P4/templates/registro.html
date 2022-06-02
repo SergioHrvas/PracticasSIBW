@@ -10,19 +10,19 @@
     <h1 class="tituloseccion">Registro</h1>
     <div class="formulario">
         <form id="formulariocomentarios" action="registro.php" method="post">
-            <label for="user_name" class="etiqueta">Nombre de usuario</label> <span class="error"></span>
+            <label for="user_name" class="etiqueta">Nombre de usuario</label> 
             <input id="user_name" class="inputtext" name="user_name">
-            <label for="correo" class="etiqueta">Correo Electrónico</label> <span class="error"></span>
+            <label for="correo" class="etiqueta">Correo Electrónico</label>
             <input id="correo" class="inputtext" name="correo">
-            <label for="password" class="etiqueta">Contraseña</label> <span class="error"></span>
+            <label for="password" class="etiqueta">Contraseña</label>
             <input id="password" class="inputtext" name="password">
             <div class="check">
             <input type="checkbox" id="activar"><label for="activar">Mostrar contraseña</label></div>
-            <label for="nombre" class="etiqueta">Nombre</label> <span class="error"></span>
+            <label for="nombre" class="etiqueta">Nombre</label>
             <input id="nombre" class="inputtext" name="nombre">
-            <label for="apellidos" class="etiqueta">Apellidos</label> <span class="error"></span>
+            <label for="apellidos" class="etiqueta">Apellidos</label>
             <input id="apellidos" class="inputtext" name="apellidos">
-            <label for="pais" class="etiqueta">País</label> <span class="error"></span>
+            <label for="pais" class="etiqueta">País</label>
             <select id="pais" class="inputtext" name="pais">
                 <option value="none" selected disabled hidden>Seleccione un país</option>
                 {% for pais in paises %}
@@ -31,7 +31,7 @@
     
                     {% endfor %}
             </select>
-            <label for="telefono" class="etiqueta">Número de Teléfono</label> <span class="error"></span>
+            <label for="telefono" class="etiqueta">Número de Teléfono</label>
             <input id="telefono" class="inputtext" name="telefono">
             <button type="submit" id="enviar">Enviar</button>
         </form>

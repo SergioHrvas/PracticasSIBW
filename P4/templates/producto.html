@@ -19,7 +19,7 @@
     <div id="titulojuegodiv">
         <h1 id="titulojuego">{{ evento['titulo'] }}</h1>
     </div>
-    {% if usuario[0]['gestor'] == 1 %}
+    {% if usuario[0]['gestor'] == 1 or usuario[0]['super'] == 1  %}
     <div class="iconosgestordiv"><a href="./modificarproducto/{{evento['link']}}"><i
                 class="fa-solid fa-pencil fa-2x"></i></a>
         <a href="./eliminarproducto/{{evento['link']}}"><i class="fa-solid fa-eraser fa-2x"></i></a>
@@ -33,7 +33,7 @@
         <p class="desc">{{ evento['descripcion'] | striptags('<br />,<br>')|raw}}</p>
     </div>
 </section>
-{% if usuario[0]['gestor'] == 1%}
+{% if usuario[0]['gestor'] == 1  or usuario[0]['super'] == 1 %}
 <!-- recorrer etiquetas -->
 <div id="etiquetas">
     <h2 id="etiquetastitulo">Etiquetas</h2>
@@ -70,7 +70,7 @@
         <div class="items_galeria">
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[0]['img']}}" alt="" />
-                {% if usuario[0]['gestor'] == 1 and imagenes[0] != null%}
+                {% if (usuario[0]['gestor'] == 1  or usuario[0]['super'] == 1) and (imagenes[0] != null) %}
                 <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[0]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
@@ -79,7 +79,7 @@
             </div>
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[1]['img']}}" alt="" />
-                {% if usuario[0]['gestor'] == 1 and imagenes[1] != null%}
+                {% if (usuario[0]['gestor'] == 1  or usuario[0]['super'] == 1) and imagenes[1] != null%}
                 <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[1]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
@@ -88,7 +88,7 @@
             </div>
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[2]['img']}}" alt="" />
-                {% if usuario[0]['gestor'] == 1 and imagenes[2] != null%}
+                {% if (usuario[0]['gestor'] == 1  or usuario[0]['super'] == 1) and imagenes[2] != null%}
                 <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[2]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
@@ -97,7 +97,7 @@
             </div>
             <div class="item_galeria">
                 <img class="imagen_galeria" src=".\status\image\juegos\{{imagenes[3]['img']}}" alt="" />
-                {% if usuario[0]['gestor'] == 1 and imagenes[3] != null%}
+                {% if (usuario[0]['gestor'] == 1  or usuario[0]['super'] == 1) and imagenes[3] != null%}
                 <div class="iconosgestordiv">
                     <a class="linkeliminarimg" href="./eliminarimagen/{{imagenes[3]['id']}}"><i
                             class="fa-solid fa-eraser fa-2x"></i></a>
@@ -110,7 +110,7 @@
         <div class="botonslider"><img class=flecha src=".\status\image\flecha_izq.png" /><img class=flecha
                 src=".\status\image\flecha_der.png" /></div>
 
-        {% if usuario[0]['gestor'] == 1 %}
+        {% if usuario[0]['gestor'] == 1  or usuario[0]['super'] == 1 %}
         <div class="divgestorimagen">
             <div class="iconosgestordiv"><a href="./añadirimagen/{{evento['link']}}"><i
                         class="fa-solid fa-file-circle-plus fa-3x"></i></a>
@@ -214,8 +214,8 @@
         <div class="comentario">
             <div class="cabeceracomentario">
                 <div class="perfil">
-                    <div class="imagenperfil"><img class="avatar"
-                            src=".\status\image\{{coment['autor']['imagen_perfil']}}"></div>
+                    <div class="imagenperfil"><a href="perfil/{{coment['autor']['username']}}"><img class="avatar"
+                            src=".\status\image\{{coment['autor']['imagen_perfil']}}"></a></div>
                     <div class="nombreusuario">
                         <div class="nombresapellidos">{{coment['autor']['nombre']}} {{coment['autor']['apellidos']}}
                         </div>
@@ -229,7 +229,7 @@
                 </div>
             </div>
             <div class="opinion">{{coment['comentario']}}
-                {% if usuario[0]['moderador'] == 1 or usuario[0]['id'] == coment['autor']['id']%}
+                {% if usuario[0]['moderador'] == 1 or usuario[0]['super'] == 1 or usuario[0]['id'] == coment['autor']['id']%}
                 <div class="iconosmoddiv"><a href="./modificarcomentario/{{coment['id']}}"><i
                             class="fa-solid fa-pencil fa-1x"></i></a>
                     <a href="./eliminarcomentario/{{coment['id']}}"><i class="fa-solid fa-eraser fa-1x"></i></a>
